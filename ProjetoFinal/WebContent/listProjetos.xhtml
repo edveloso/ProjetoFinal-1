@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:decorate template="/template/template.xhtml">
+    	<ui:define name="title">
+    		Projetos
+    	</ui:define>
+        <ui:define name="conteudo">
+            <p:commandButton value="Novo" onclick="modalNovoProjeto.show();" type="button" />
+
+			<br />
+			<br />
+
+			<h:form id="formLista">
+				<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:800px">
+					<f:facet name="header">  
+			            Projetos  
+			        </f:facet> 
+					<p:column headerText="Nome" style="width:80%">
+						<h:outputText value="#{projeto.nome}" />
+					</p:column>
+					<p:column style="width:10%">
+						<h:outputText value="alterar" />
+					</p:column>
+					<p:column style="width:10%">
+						<h:outputText value="remover" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+			<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto">
+				<h:form id="formProjeto">
+	            	<p:panelGrid columns="2">
+	
+	            		<p:outputLabel value="Nome" />
+	            		<p:inputText value="" size="60" />
+	            		
+	            		<f:facet name="footer">
+		            		<p:commandButton value="Gravar" action="#{projetoMB.salvar}"  />
+		            		<p:commandButton value="Limpar" />
+	            		</f:facet>
+	            	
+	            	</p:panelGrid>
+            	</h:form>
+			</p:dialog>
+
+        </ui:define>
+    </ui:decorate>
+</html>

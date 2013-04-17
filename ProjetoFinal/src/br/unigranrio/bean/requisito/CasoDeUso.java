@@ -9,7 +9,7 @@ public class CasoDeUso {
 
 	private Long id;
 	private Projeto projeto;
-	private Integer codigo;
+	private String codigo;
 	private String nome;
 	private String objetivo;
 	private TipoCasoDeUso tipo;
@@ -42,11 +42,11 @@ public class CasoDeUso {
 		this.projeto = projeto;
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

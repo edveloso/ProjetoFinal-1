@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:decorate template="/template/template.xhtml">
+    	<ui:define name="title">
+    		Casos de Uso
+    	</ui:define>
+        <ui:define name="conteudo">
+           
+            <h:form id="formCaso">
+	            <p:fieldset legend="Dados do Caso de Uso">
+	            	 <h:panelGrid columns="2">
+			            <p:outputLabel value="Código" />
+	            		<p:inputText value="" size="10" />
+	            		<p:outputLabel value="Nome" />
+	            		<p:inputText value="" size="30" />
+	            		<p:outputLabel value="Objetivo" />
+	            		<p:inputTextarea cols="32" rows="5" autoResize="false" />
+	            	</h:panelGrid>
+	            	<p:commandButton value="Gravar" action="#{casoDeUsoMB.salvar}" />
+	            	<p:commandButton value="Limpar" />
+	            </p:fieldset>
+            </h:form>
+            
+            
+            <p:fieldset legend="Detalhes do Caso de Uso">
+            	<p:tabView>
+            	
+            		<p:tab title="Atores">
+            	
+            			<h:form id="formInfoCaso1">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Nome" />
+	            				<p:selectOneMenu value="#{atorMB.ator}">
+	            					<f:selectItems value="#{atorMB.atores}" />
+	            				</p:selectOneMenu>
+	            				<p:outputLabel value="Tipo de Ator" />
+	            				<p:selectOneMenu value="">
+	            					<f:selectItems value="" />
+	            				</p:selectOneMenu>
+	            				<p:commandButton value="Gravar" />
+	            			</h:panelGrid>
+	            		</h:form>
+            	
+            			<h:form id="listaAtores">
+							<p:dataTable var="ator" value="" style="width:500px">
+								<f:facet name="header">  
+						            Atores  
+						        </f:facet> 
+								<p:column headerText="Nome" style="width:45%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Tipo" style="width:45%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column style="width:10%">
+									<h:outputText value="remover" />
+								</p:column>
+							</p:dataTable>
+	            		</h:form>
+            		</p:tab>
+            	
+            	
+            		<p:tab title="Pré-Condições">
+            	
+            			<h:form id="formInfoCaso2">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Pré-Condição" />
+	            				<p:inputText value="" />
+	            				<p:commandButton value="Gravar" />
+	            			</h:panelGrid>
+	            		</h:form>
+	            
+	            		<h:form>
+	            			<p:dataTable var="precondicao" value="" style="width:500px">
+	            				<f:facet name="header">
+	            					Pré-Condições
+	            				</f:facet>
+	            				<p:column headerText="Número" style="width:15%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Pré-Condição" style="width:75%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column style="width:10%">
+									<h:outputText value="remover" />
+								</p:column>
+	            			</p:dataTable>
+	            		</h:form>
+            	
+            		</p:tab>
+            	
+            	
+            		<p:tab title="Pós-Condições">
+            	
+            			<h:form id="formInfoCaso3">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Pós-Condição" />
+	            				<p:inputText value="" />
+	            				<p:commandButton value="Gravar" />
+	            			</h:panelGrid>
+	            		</h:form>
+	            
+	            		<h:form>
+	            			<p:dataTable var="poscondicao" value="" style="width:500px">
+	            				<f:facet name="header">
+	            					Pós-Condições
+	            				</f:facet>
+	            				<p:column headerText="Número" style="width:15%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Pós-Condição" style="width:75%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column style="width:10%">
+									<h:outputText value="remover" />
+								</p:column>
+	            			</p:dataTable>
+	            		</h:form>
+            	
+            		</p:tab>
+            	
+            	
+            		<p:tab title="Regras de Negócio">
+            	
+            			<h:form id="formInfoCaso4">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Regra de Negócio" />
+	            				<p:inputText value="" />
+	            				<p:commandButton value="Gravar" />
+	            			</h:panelGrid>
+	            		</h:form>
+	            
+	            		<h:form>
+	            			<p:dataTable var="regra" value="" style="width:500px">
+	            				<f:facet name="header">
+	            					Regras de Negócio
+	            				</f:facet>
+	            				<p:column headerText="Número" style="width:15%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Regra de Negócio" style="width:75%">
+									<h:outputText value="" />
+								</p:column>
+								<p:column style="width:10%">
+									<h:outputText value="remover" />
+								</p:column>
+	            			</p:dataTable>
+	            		</h:form>
+            	
+            		</p:tab>
+            		
+            	
+            		<p:tab title="Fluxo Principal">
+            	
+            			<h:form id="formInfoCaso5">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Ator" />
+	            				<p:selectOneMenu value="#{atorMB.ator}">
+	            					<f:selectItems value="#{atorMB.atores}" />
+	            				</p:selectOneMenu>
+	            				<p:outputLabel value="Ação" />
+	            				<p:autoComplete value="" />
+	            				<p:outputLabel value="Complemento" />
+	            				<p:inputText value="" />
+	            				<p:commandButton value="Gravar" />
+	            			</h:panelGrid>
+	            		</h:form>
+            	
+            			<h:form>
+            				<p:dataTable var="fluxop" value="" style="width:600px">
+	            				<f:facet name="header">
+	            					Passos
+	            				</f:facet>
+            					<p:column headerText="Código" style="width:10%">
+            						<h:outputText value="" />
+            					</p:column>
+            					<p:column headerText="Ator" style="width:20%">
+            						<h:outputText value="" />
+            					</p:column>
+            					<p:column headerText="Ação" style="width:20%">
+            						<h:outputText value="" />
+            					</p:column>
+            					<p:column headerText="Complemento" style="width:30%">
+            						<h:outputText value="" />
+            					</p:column>
+            					<p:column style="width:10%">
+            						<h:outputText value="editar" />
+            					</p:column>
+            					<p:column style="width:10%">
+            						<h:outputText value="remover" />
+            					</p:column>
+            				</p:dataTable>
+            			</h:form>
+            		
+            		</p:tab>
+            	</p:tabView>
+            </p:fieldset>  
+           
+        </ui:define>
+    </ui:decorate>
+</html>

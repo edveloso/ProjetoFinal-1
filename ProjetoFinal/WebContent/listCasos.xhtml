@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:decorate template="/template/template.xhtml">
+    	<ui:define name="title">
+    		Casos de Uso
+    	</ui:define>
+        <ui:define name="conteudo">
+            <p:commandButton value="Novo" action="#{casoDeUsoMB.addCaso}" />
+
+			<br />
+			<br />
+
+			<h:form id="formLista">
+				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
+					<f:facet name="header">  
+			            Casos de Uso  
+			        </f:facet>
+			        <p:column headerText="Código" style="width:20%">
+						<h:outputText value="#{caso.codigo}" />
+					</p:column>
+					<p:column headerText="Nome" style="width:60%">
+						<h:outputText value="#{caso.nome}" />
+					</p:column>
+					<p:column style="width:10%">
+						<h:outputText value="alterar" />
+					</p:column>
+					<p:column style="width:10%">
+						<h:outputText value="remover" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+        </ui:define>
+    </ui:decorate>
+</html>
