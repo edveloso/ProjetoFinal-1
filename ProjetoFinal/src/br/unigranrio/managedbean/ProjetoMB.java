@@ -5,6 +5,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.dao.impl.ProjetoDAO;
 
 @ManagedBean
 @SessionScoped
@@ -12,13 +13,23 @@ public class ProjetoMB {
 	
 	private Projeto projeto = new Projeto();
 	private ListDataModel<Projeto> projetos = new ListDataModel<Projeto>();
+	ProjetoDAO dao = new ProjetoDAO();
 	
-	public String addProjeto(){
-		return "addProjetos";
+	@SuppressWarnings("unchecked")
+	public String salvar(Projeto projeto){
+		dao.gravar(projeto);
+		projeto = new Projeto();
+		return "listProjetos";
 	}
 	
-	public String salvar(Projeto projeto){
-		return "listProjetos";
+	public String remover(){
+		projeto = projetos.getRowData();
+		dao.removerPorId(projeto.getId());
+		return "listProjetos";		
+	}
+	
+	public void limpar(){
+		
 	}
 	
 	public ProjetoMB() {

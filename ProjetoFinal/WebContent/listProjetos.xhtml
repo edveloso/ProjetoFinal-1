@@ -32,16 +32,16 @@
 				</p:dataTable>
 			</h:form>
 
-			<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto">
+			<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto" showEffect="clip" hideEffect="explode">
 				<h:form id="formProjeto">
 	            	<p:panelGrid columns="2">
 	
 	            		<p:outputLabel value="Nome" />
-	            		<p:inputText value="" size="60" />
+	            		<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
 	            		
 	            		<f:facet name="footer">
-		            		<p:commandButton value="Gravar" action="#{projetoMB.salvar}"  />
-		            		<p:commandButton value="Limpar" />
+		            		<p:commandButton value="Gravar" actionListener="#{projetoMB.salvar}" update="@(formLista)" oncomplete="modalNovoProjeto.hide()" />
+		            		<p:commandButton value="Limpar" actionListener="#{projetoMB.limpar}" />
 	            		</f:facet>
 	            	
 	            	</p:panelGrid>
