@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:decorate template="/template/template.xhtml">
+	<ui:define name="title">
+    	Exportações
+    </ui:define>
+	<ui:define name="conteudo">
+		<h:form id="formExport">
+			<p:treeTable id="treetable" value="#{documentsController.root}"
+				var="document">
+				<f:facet name="header">
+            Lista de Projetos
+        </f:facet>
+
+				<p:column style="width:32%">
+					<f:facet name="header">
+                Projeto
+            </f:facet>
+					<h:outputText value="#{document.name}" />
+				</p:column>
+
+				<p:column style="width:32%">
+					<f:facet name="header">
+                Criado Por
+            </f:facet>
+					<h:outputText value="#{document.size}" />
+				</p:column>
+
+			</p:treeTable>
+			<h:panelGrid columns="2">
+				<p:panel header="Exportar Dados">
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/excel.png" />
+						<p:dataExporter type="xls" target="tbl" fileName="cars" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/pdf.png" />
+						<p:dataExporter type="pdf" target="tbl" fileName="cars" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/xml.png" />
+						<p:dataExporter type="xml" target="tbl" fileName="cars" />
+					</h:commandLink>
+				</p:panel>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
