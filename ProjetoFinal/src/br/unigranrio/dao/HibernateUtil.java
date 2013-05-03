@@ -1,19 +1,19 @@
 package br.unigranrio.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 	
 	private static SessionFactory factory;
 
-	private static SessionFactory configureSessionFactory()	throws HibernateException {
-		
-		
-	
+	static {
+		Configuration cfg = new Configuration();
+		factory = cfg.buildSessionFactory();
 	}
-
-	public static SessionFactory getSessionFactory() {
-		
-		return configureSessionFactory();
-
+	
+	public Session getSession(){
+		return factory.openSession();
 	}
 }
