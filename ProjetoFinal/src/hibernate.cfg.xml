@@ -1,9 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-"-//Hibernate/Hibernate Configuration DTD//EN"
-"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-
-<hibernate-configuration>
+  "-//Hibernate/Hibernate Configuration DTD//EN"
+  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+  
+  <hibernate-configuration 
+ xmlns="http://www.hibernate.org/xsd/hibernate-configuration" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-configuration 
+ https://github.com/hibernate/hibernate-orm/raw/master/hibernate-core/src/main/resources/org/hibernate/hibernate-configuration-4.0.xsd">
+  
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/projetofinal</property>
