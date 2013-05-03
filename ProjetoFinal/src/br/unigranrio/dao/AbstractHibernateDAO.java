@@ -29,9 +29,9 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 
 	public void gravar(final T entity) {
 		session.beginTransaction();
-		session.persist(entity);
-		//session.getTransaction().commit();
-		//session.close();
+		session.save(entity);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	public void atualizar(final T entity) {

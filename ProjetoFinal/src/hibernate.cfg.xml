@@ -19,5 +19,6 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<mapping class="br.unigranrio.bean.requisito.Projeto"/> 
+		<mapping class="br.unigranrio.bean.requisito.Ator"/>
 	</session-factory>
 </hibernate-configuration>

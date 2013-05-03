@@ -1,21 +1,33 @@
 package br.unigranrio.bean.requisito;
 
+import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import br.unigranrio.bean.requisito.enums.TipoAtor;
 
-public class Ator {
-
+@Entity
+public class Ator implements Serializable{
+	
 	private Long id;
 	private String nome;
 	private Projeto projeto;
 	private TipoAtor tipo;
-	private List<CasoDeUsoAtor> casosDeUsoAtor;
+//	private List<CasoDeUsoAtor> casosDeUsoAtor;
 
 	public Ator() {
-		// TODO Auto-generated constructor stub
 	}
 
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -32,6 +44,8 @@ public class Ator {
 		this.nome = nome;
 	}
 
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
+	@PrimaryKeyJoinColumn
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -48,12 +62,13 @@ public class Ator {
 		this.tipo = tipo;
 	}
 
-	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
-		return casosDeUsoAtor;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ator")
+//	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
+//		return casosDeUsoAtor;
+//	}
 
-	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
-		this.casosDeUsoAtor = casosDeUsoAtor;
-	}
+//	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
+//		this.casosDeUsoAtor = casosDeUsoAtor;
+//	}
 
 }

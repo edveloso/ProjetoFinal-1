@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
-import br.unigranrio.dao.DAO;
+import br.unigranrio.dao.impl.AtorDAO;
 
 @ManagedBean
 @SessionScoped
@@ -19,7 +19,7 @@ public class AtorMB implements Serializable {
 	
 	private Ator ator = new Ator();
 	private ListDataModel<Ator> atores = new ListDataModel<Ator>();
-	private DAO<Ator> dao = new DAO<Ator>(Ator.class);
+	private AtorDAO dao = new AtorDAO();
 	private List<Ator> ato;
 	public Boolean cadastro = true;
 	
@@ -44,16 +44,17 @@ public class AtorMB implements Serializable {
 			}else{
 				if(ator.getId() == null){
 					System.out.println("Cadastro realizado com sucesso");
-					dao.adiciona(ator);
+					dao.gravar(ator);
 					this.ator = new Ator();
 				}else{
 					System.out.println("Alteração realizada com sucesso");
-					dao.atualiza(ator);
+					dao.atualizar(ator);
 				}
 			}
 		}else {
-			System.out.println("Aotr já Registrado");
-		}ato = dao.getAllOrder("Nome");
+			System.out.println("Ator já Registrado");
+		}
+		ato = dao.getAllOrder("Nome");
 		this.cadastro = true;
 			
 		}

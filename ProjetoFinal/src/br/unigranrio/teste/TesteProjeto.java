@@ -1,20 +1,28 @@
 package br.unigranrio.teste;
 
+import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.bean.requisito.enums.TipoAtor;
+import br.unigranrio.dao.impl.AtorDAO;
 import br.unigranrio.dao.impl.ProjetoDAO;
 
 public class TesteProjeto {
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		
+		ProjetoDAO projDao = new ProjetoDAO();
+		AtorDAO atorDao = new AtorDAO();
+		
 		Projeto projeto = new Projeto();
+		projeto.setNome("primeiro");
 		
-		ProjetoDAO dao = new ProjetoDAO();
+		Ator ator = new Ator();
+		ator.setNome("Joao");
+		ator.setProjeto(projeto);
+		ator.setTipo(TipoAtor.SECUNDARIO);
 		
-		projeto.setNome("teste");
-		
-		dao.gravar(projeto);
+		projDao.gravar(projeto);
+		atorDao.gravar(ator);
 	}
 	
 }
