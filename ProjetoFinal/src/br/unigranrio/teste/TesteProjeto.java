@@ -7,10 +7,13 @@ public class TesteProjeto {
 
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
+		
 		Projeto projeto = new Projeto();
+		
 		ProjetoDAO dao = new ProjetoDAO();
 		
 		projeto.setNome("teste");
+		
 		dao.gravar(projeto);
 	}
 	
