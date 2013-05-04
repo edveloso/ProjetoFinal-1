@@ -1,11 +1,23 @@
 package br.unigranrio.bean.requisito;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import br.unigranrio.bean.requisito.enums.TipoCasoDeUso;
 
-public class CasoDeUso {
+@Entity
+public class CasoDeUso implements Serializable {
+	
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private Projeto projeto;
@@ -14,18 +26,19 @@ public class CasoDeUso {
 	private String objetivo;
 	private TipoCasoDeUso tipo;
 
-	private List<Ator> atores = new ArrayList<Ator>();
+/*	private List<Ator> atores = new ArrayList<Ator>();
 	private List<CasoDeUsoAtor> casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
 	private List<Fluxo> fluxos = new ArrayList<Fluxo>();
 	private List<RegraDeNegocio> regrasDeNegocio = new ArrayList<RegraDeNegocio>();
 	private List<PreCondicao> preCondicoes = new ArrayList<PreCondicao>();
 	private List<PosCondicao> posCondicoes = new ArrayList<PosCondicao>();
-	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
+	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();*/
 
 	public CasoDeUso() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -33,7 +46,9 @@ public class CasoDeUso {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
+	@PrimaryKeyJoinColumn
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -74,7 +89,7 @@ public class CasoDeUso {
 		this.tipo = tipo;
 	}
 
-	public List<Ator> getAtores() {
+/*	public List<Ator> getAtores() {
 		return atores;
 	}
 
@@ -129,6 +144,6 @@ public class CasoDeUso {
 	public void setRequisitosNaoFuncionais(
 			List<RequisitoNaoFuncional> requisitosNaoFuncionais) {
 		this.requisitosNaoFuncionais = requisitosNaoFuncionais;
-	}
+	}*/
 
 }

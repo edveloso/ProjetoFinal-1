@@ -1,23 +1,34 @@
 package br.unigranrio.bean.requisito;
 
+import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import br.unigranrio.bean.requisito.enums.TipoFluxo;
 
-public class Fluxo {
+@Entity
+public class Fluxo implements Serializable{
+	
 	
 	private Long id;
 	private String nome;
 	private TipoFluxo tipo;
 	private CasoDeUso casoDeUso;
-	protected List<Passo> passos;
-	protected Passo disparadoPor;
+//	protected List<Passo> passos;
+//	protected Passo disparadoPor;
 	private int codigo;
 	
 	public Fluxo() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -41,7 +52,9 @@ public class Fluxo {
 	public void setTipo(TipoFluxo tipo) {
 		this.tipo = tipo;
 	}
-
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
+	@PrimaryKeyJoinColumn
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}
@@ -50,7 +63,7 @@ public class Fluxo {
 		this.casoDeUso = casoDeUso;
 	}
 
-	public List<Passo> getPassos() {
+/*	public List<Passo> getPassos() {
 		return passos;
 	}
 
@@ -65,7 +78,7 @@ public class Fluxo {
 	public void setDisparadoPor(Passo disparadoPor) {
 		this.disparadoPor = disparadoPor;
 	}
-
+*/
 	public int getCodigo() {
 		return codigo;
 	}

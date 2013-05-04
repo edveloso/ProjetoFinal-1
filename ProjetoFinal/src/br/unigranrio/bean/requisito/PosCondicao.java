@@ -1,15 +1,27 @@
 package br.unigranrio.bean.requisito;
 
-public class PosCondicao {
+import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+public class PosCondicao implements Serializable{
+
+	
 	private Long id;
 	private String descricao;	 
 	private CasoDeUso casoDeUso;
 	
 	public PosCondicao() {
-		// TODO Auto-generated constructor stub
+	
 	}
-
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -25,7 +37,9 @@ public class PosCondicao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
+	@PrimaryKeyJoinColumn
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}

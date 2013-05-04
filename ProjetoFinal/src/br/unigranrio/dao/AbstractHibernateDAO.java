@@ -31,7 +31,7 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 		session.beginTransaction();
 		session.save(entity);
 		session.getTransaction().commit();
-		session.close();
+//		session.close();
 	}
 
 	public void atualizar(final T entity) {

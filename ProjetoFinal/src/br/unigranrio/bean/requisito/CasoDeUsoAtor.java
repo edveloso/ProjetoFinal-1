@@ -1,8 +1,13 @@
 package br.unigranrio.bean.requisito;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+
 import br.unigranrio.bean.requisito.enums.TipoAtor;
 
-public class CasoDeUsoAtor {
+@Entity
+public class CasoDeUsoAtor implements Serializable {
 
 	private TipoAtor tipoAtor;
 	private Ator ator;

@@ -20,5 +20,12 @@
 		
 		<mapping class="br.unigranrio.bean.requisito.Projeto"/> 
 		<mapping class="br.unigranrio.bean.requisito.Ator"/>
+		<mapping class="br.unigranrio.bean.requisito.CasoDeUso"/>
+		<mapping class="br.unigranrio.bean.requisito.Fluxo"/>
+		<mapping class="br.unigranrio.bean.requisito.Passo"/>
+		<mapping class="br.unigranrio.bean.requisito.PosCondicao"/>
+		<mapping class="br.unigranrio.bean.requisito.PreCondicao"/>
+		<mapping class="br.unigranrio.bean.requisito.RegraDeNegocio"/>
+		<mapping class="br.unigranrio.bean.requisito.RequisitoNaoFuncional"/>
 	</session-factory>
 </hibernate-configuration>
