@@ -7,7 +7,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.CasoDeUso;
-import br.unigranrio.dao.DAO;
 
 @ManagedBean
 @SessionScoped
@@ -16,14 +15,14 @@ public class CasoDeUsoMB {
 	private CasoDeUso casoDeUso = new CasoDeUso();
 	private ListDataModel<CasoDeUso> casosDeUso = new ListDataModel<CasoDeUso>();
 	private List<CasoDeUso> casos;
-	private DAO<CasoDeUso> dao = new DAO<CasoDeUso>(CasoDeUso.class);
+//	private DAO<CasoDeUso> dao = new DAO<CasoDeUso>(CasoDeUso.class);
 	public Boolean cadastro = true;
 	
 	//Lista de Casos de Uso
 	public List<CasoDeUso> getCasos(){
 		if(casos == null){
 			System.out.println("Carregando Casos de Uso");
-			casos = new DAO<CasoDeUso>(CasoDeUso.class).getAllOrder("nome");
+			//casos = new DAO<CasoDeUso>(CasoDeUso.class).getAllOrder("nome");
 		}
 		return casos;
 	}
@@ -44,17 +43,17 @@ public class CasoDeUsoMB {
 			}else{
 				if(casoDeUso.getId() == null){
 					System.out.println("Cadastro realizado com sucesso");
-					dao.adiciona(casoDeUso);
+					//dao.adiciona(casoDeUso);
 					this.casoDeUso = new CasoDeUso();
 				}else{
 					System.out.println("Alteração realizada com sucesso");
-					dao.atualiza(casoDeUso);
+					//dao.atualiza(casoDeUso);
 				}
 			}
 		}else{
 			System.out.println("Caso de Uso já registrado");
 		}
-		casos = dao.getAllOrder("nome");
+		//casos = dao.getAllOrder("nome");
 		this.cadastro = true;
 	}
 	
@@ -83,13 +82,13 @@ public class CasoDeUsoMB {
 		return casoDeUso;
 	}
 
-	public DAO<CasoDeUso> getDao() {
-		return dao;
-	}
+//	public DAO<CasoDeUso> getDao() {
+//		return dao;
+//	}
 
-	public void setDao(DAO<CasoDeUso> dao) {
-		this.dao = dao;
-	}
+//	public void setDao(DAO<CasoDeUso> dao) {
+//		this.dao = dao;
+//	}
 
 	public void setCasos(List<CasoDeUso> casos) {
 		this.casos = casos;

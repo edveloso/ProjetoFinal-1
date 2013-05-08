@@ -20,8 +20,13 @@
 					<f:facet name="header">  
 			            Projetos  
 			        </f:facet> 
-					<p:column headerText="Nome" style="width:80%">
+					<p:column headerText="Nome" style="width:70%">
 						<h:outputText value="#{projeto.nome}" />
+					</p:column>
+					<p:column style="width:10%">
+						<h:commandLink actionListener="#{projetoMB.escolheProjeto}" value="Selecionar" immediate="true">
+							<f:param id="idProjAlt" value="#{projeto.id}"></f:param>
+						</h:commandLink>
 					</p:column>
 					<p:column style="width:10%">
 						<h:outputText value="alterar" />
@@ -40,7 +45,7 @@
 	            		<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
 	            		
 	            		<f:facet name="footer">
-		            		<p:commandButton value="Gravar" actionListener="#{projetoMB.salvar}" update="@(formLista)" oncomplete="modalNovoProjeto.hide()" />
+		            		<p:commandButton value="Gravar" actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" />
 		            		<p:commandButton value="Limpar" actionListener="#{projetoMB.limpar}" />
 	            		</f:facet>
 	            	

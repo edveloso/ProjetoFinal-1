@@ -10,24 +10,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
+
+import br.unigranrio.dao.impl.AtorDAO;
 
 @Entity
 public class Passo implements Serializable {
-	
-	
+
 	private Long id;
 	private Integer codigo;
-	private Fluxo fluxo = new Fluxo();	
-//	private Ator atorParaXML = new Ator();
+	private Fluxo fluxo = new Fluxo();
+	// private Ator atorParaXML = new Ator();
 	private Ator ator = new Ator();
 	private String acao;
 	private String complemento;
 	private CasoDeUso pontoDeExtensao;
-	
+
 	public Passo() {
-		// TODO Auto-generated constructor stub
 	}
-	
+
+	public Passo(int codigo, String acao, String complemento) {
+		this.codigo = codigo;
+		this.acao = acao;
+		this.complemento = complemento;
+	}
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -45,7 +52,7 @@ public class Passo implements Serializable {
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-	
+
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Fluxo.class)
 	@JoinColumn
 	public Fluxo getFluxo() {
@@ -55,15 +62,13 @@ public class Passo implements Serializable {
 	public void setFluxo(Fluxo fluxo) {
 		this.fluxo = fluxo;
 	}
-/*
-	public Ator getAtorParaXML() {
-		return atorParaXML;
-	}
 
-	public void setAtorParaXML(Ator atorParaXML) {
-		this.atorParaXML = atorParaXML;
-	}
-*/
+	/*
+	 * public Ator getAtorParaXML() { return atorParaXML; }
+	 * 
+	 * public void setAtorParaXML(Ator atorParaXML) { this.atorParaXML =
+	 * atorParaXML; }
+	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Ator.class)
 	@PrimaryKeyJoinColumn
 	public Ator getAtor() {
@@ -89,8 +94,8 @@ public class Passo implements Serializable {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
-	@OneToOne(cascade=CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	public CasoDeUso getPontoDeExtensao() {
 		return pontoDeExtensao;
@@ -100,4 +105,13 @@ public class Passo implements Serializable {
 		this.pontoDeExtensao = pontoDeExtensao;
 	}
 	
+	public String toString() {
+		return "P" + codigo + " - " + new AtorDAO().retornaNomePorId(ator.getId()) + " " + acao + " " + complemento;
+	}
+	
+	@Transient
+	public String getPassoAsString() {
+		return toString();
+	}
+
 }

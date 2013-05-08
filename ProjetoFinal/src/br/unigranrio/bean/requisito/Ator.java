@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,13 +22,14 @@ public class Ator implements Serializable{
 	private String nome;
 	private Projeto projeto;
 	private TipoAtor tipo;
-//	private List<CasoDeUsoAtor> casosDeUsoAtor;
+	private List<CasoDeUsoAtor> casosDeUsoAtor;
 
 	public Ator() {
 	}
 
 	@Id
 	@GeneratedValue
+	@Column(name="ator_id")
 	public Long getId() {
 		return id;
 	}
@@ -62,13 +64,13 @@ public class Ator implements Serializable{
 		this.tipo = tipo;
 	}
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ator")
-//	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
-//		return casosDeUsoAtor;
-//	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ator")
+	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
+		return casosDeUsoAtor;
+	}
 
-//	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
-//		this.casosDeUsoAtor = casosDeUsoAtor;
-//	}
+	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
+		this.casosDeUsoAtor = casosDeUsoAtor;
+	}
 
 }

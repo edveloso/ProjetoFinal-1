@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -35,10 +38,11 @@ public class CasoDeUso implements Serializable {
 	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();*/
 
 	public CasoDeUso() {
-		// TODO Auto-generated constructor stub
 	}
+	
 	@Id
 	@GeneratedValue
+	@Column(name="casoDeUso_id")
 	public Long getId() {
 		return id;
 	}
@@ -81,6 +85,7 @@ public class CasoDeUso implements Serializable {
 		this.objetivo = objetivo;
 	}
 
+	@Enumerated(EnumType.ORDINAL)
 	public TipoCasoDeUso getTipo() {
 		return tipo;
 	}

@@ -1,14 +1,16 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 import br.unigranrio.bean.requisito.enums.TipoFluxo;
 
@@ -27,6 +29,7 @@ public class Fluxo implements Serializable{
 	public Fluxo() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -45,6 +48,7 @@ public class Fluxo implements Serializable{
 		this.nome = nome;
 	}
 
+	@Enumerated(EnumType.ORDINAL)
 	public TipoFluxo getTipo() {
 		return tipo;
 	}
@@ -79,6 +83,7 @@ public class Fluxo implements Serializable{
 		this.disparadoPor = disparadoPor;
 	}
 */
+	@Transient
 	public int getCodigo() {
 		return codigo;
 	}

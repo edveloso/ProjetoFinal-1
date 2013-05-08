@@ -32,7 +32,7 @@
 				</p:dataTable>
 			</h:form>
 
-			<p:dialog widgetVar="modalNovoAtor" header="Novo Ator">
+			<p:dialog widgetVar="modalNovoAtor" header="Novo Ator" showEffect="clip" hideEffect="explode">
 				<h:form id="formAtor">
 	            	<p:panelGrid columns="4">
 		            		            	
@@ -40,7 +40,7 @@
 	            		<p:inputText value="" size="40" />
 	            		
 	            		<f:facet name="footer">
-		            		<p:commandButton value="Gravar" action="#{atorMB.salvar}" />
+		            		<p:commandButton value="Gravar" action="#{atorMB.salvar}" update=":formLista" oncomplete="modalNovoAtor.hide()" />
 		            		<p:commandButton value="Limpar" />
 	            		</f:facet>
 	            	

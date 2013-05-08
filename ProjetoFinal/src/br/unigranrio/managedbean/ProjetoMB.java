@@ -2,21 +2,23 @@ package br.unigranrio.managedbean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIParameter;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.dao.impl.ProjetoDAO;
 
-@ManagedBean
 @SessionScoped
+@ManagedBean
 public class ProjetoMB {
 	
 	private Projeto projeto = new Projeto();
 	private ListDataModel<Projeto> projetos = new ListDataModel<Projeto>();
 	ProjetoDAO dao = new ProjetoDAO();
-	
-	@SuppressWarnings("unchecked")
-	public String salvar(Projeto projeto){
+
+	public String salvar(){
 		dao.gravar(projeto);
 		projeto = new Projeto();
 		return "listProjetos";
@@ -29,15 +31,20 @@ public class ProjetoMB {
 	}
 	
 	public void limpar(){
-		
+	}
+	
+	public void escolheProjeto(ActionEvent event){
+		UIComponent link = event.getComponent();
+		UIParameter param = (UIParameter) link.findComponent("idProjAlt");
+		Long id = (Long) param.getValue();
+		this.projeto = (Projeto) dao.selecionaPorId(id);
 	}
 	
 	public ProjetoMB() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public ListDataModel<Projeto> getProjetos() {
-		projetos = new ListDataModel<Projeto>();
+		projetos = new ListDataModel<Projeto>(dao.retornarTodos());
 		return projetos;
 	}
 

@@ -8,7 +8,7 @@ import org.hibernate.Session;
 public abstract class AbstractHibernateDAO<T extends Serializable> {
 
 	private final Class<T> clazz;
-	private Session session;
+	private Session session = HibernateUtil.getSession();
 
 	public AbstractHibernateDAO(final Class<T> clazzToSet) {
 		this.session = HibernateUtil.getSession();
@@ -31,21 +31,18 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 		session.beginTransaction();
 		session.save(entity);
 		session.getTransaction().commit();
-//		session.close();
 	}
 
 	public void atualizar(final T entity) {
 		session.beginTransaction();
 		session.merge(entity);
 		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void remover(final T entity) {
 		session.beginTransaction();
 		session.delete(entity);
 		session.getTransaction().commit();
-		session.close();
 	}
 
 	public void removerPorId(final Long entityId) {
@@ -53,6 +50,5 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 		final T entity = this.selecionaPorId(entityId);
 		this.remover(entity);
 		session.getTransaction().commit();
-		session.close();
 	}
 }
