@@ -14,23 +14,18 @@ public class ProjetoController {
 	public void gravar(Projeto projeto){
 		if (projeto.getNome() != null){
 			dao.gravar(projeto);
-			ator.AtorSistema(projeto);
+			ator.atorSistema(projeto);
 		}
 	}
 	
 	public void atualizar(Projeto projeto){
 		long id = projeto.getId();
 		Projeto projetoAnterior = (Projeto) dao.selecionaPorId(id);
-			dao.atualizar(projeto);
+		dao.atualizar(projeto);
 	}
 	
 	public void remover(long id){
-		try {
-			dao.selecionaPorId(id);
-			dao.removerPorId(id);
-		} catch (Exception e) {
-			
-		}
+		dao.removerPorId(id);
 	}
 	
 	public Projeto selecionarProjeto(long id){

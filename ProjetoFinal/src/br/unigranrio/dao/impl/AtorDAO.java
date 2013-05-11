@@ -30,9 +30,5 @@ public class AtorDAO extends AbstractHibernateDAO{
 				.setParameter("id", id);
 		return query.list();
 	}
-	
-	public void novoAtorSistema(long id){
-		session.createQuery("insert into ator(nome, projeto_id) values('Sistema', :id)").setParameter("id", id);
-	}
 
 }

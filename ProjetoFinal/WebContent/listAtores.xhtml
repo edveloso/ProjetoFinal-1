@@ -14,6 +14,7 @@
 
 			<br />
 			<br />
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
 				<p:dataTable var="ator" value="#{atorMB.atores}" style="width:800px">
@@ -23,30 +24,59 @@
 					<p:column headerText="Nome" style="width:80%">
 						<h:outputText value="#{ator.nome}" />
 					</p:column>
-					<p:column style="width:10%">
-						<h:outputText value="alterar" />
-					</p:column>
-					<p:column style="width:10%">
-						<h:outputText value="remover" />
-					</p:column>
+					<p:column style="width:5%">
+					<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formEditAtor" oncomplete="modalEditAtor.show();" icon="ui-icon-pencil" />
+				</p:column>
+				<p:column style="width:5%">
+					<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
+				</p:column> 
 				</p:dataTable>
 			</h:form>
 
 			<p:dialog widgetVar="modalNovoAtor" header="Novo Ator" showEffect="clip" hideEffect="explode">
-				<h:form id="formAtor">
+				<h:form id="formNovoAtor">
+	            	<p:panelGrid columns="2">
+		            		            	
+	            		<p:outputLabel value="Nome" />
+	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
+	            		
+	            		<f:facet name="footer">
+		            		<p:commandButton value="Gravar" actionListener="#{atorMB.salvar}" update=":formLista" oncomplete="modalNovoAtor.hide()" />
+		            		<p:commandButton value="Limpar" actionListener="#{atorMB.limpar}" />
+	            		</f:facet>
+	            	
+	            	</p:panelGrid>
+	            </h:form>
+			</p:dialog>
+			
+			
+			<p:dialog widgetVar="modalEditAtor" header="Editar Ator" showEffect="clip" hideEffect="explode">
+				<h:form id="formEditAtor">
 	            	<p:panelGrid columns="4">
 		            		            	
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
 	            		
 	            		<f:facet name="footer">
-		            		<p:commandButton value="Gravar" action="#{atorMB.salvar}" update=":formLista" oncomplete="modalNovoAtor.hide()" />
-		            		<p:commandButton value="Limpar" />
+		            		<p:commandButton value="Atualizar" actionListener="#{atorMB.atualizar}" update=":formLista" oncomplete="modalEditAtor.hide()" />
 	            		</f:facet>
 	            	
 	            	</p:panelGrid>
 	            </h:form>
 			</p:dialog>
+			
+			
+			<p:dialog header="Remover Ator" widgetVar="modalRemoverAtor" showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverAtor">
+				<p:panelGrid columns="1">
+					<h:outputLabel value="Tem certeza de que deseja remover o ator: #{atorMB.ator.nome} ?" style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{atorMB.remover}" update=":formLista" oncomplete="modalRemoverAtor.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemoverAtor.hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
 
         </ui:define>
     </ui:decorate>

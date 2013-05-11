@@ -1,16 +1,14 @@
 package br.unigranrio.managedbean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIParameter;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
-import antlr.debug.Event;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.controller.ProjetoController;
-import br.unigranrio.dao.impl.AtorDAO;
 import br.unigranrio.dao.impl.ProjetoDAO;
 
 @ManagedBean(name = "projetoMB")
@@ -24,27 +22,30 @@ public class ProjetoMB {
 
 	public String salvar() {
 		control.gravar(projeto);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso", projeto.getNome()));  
 		projeto = new Projeto();
 		return "listProjetos";
 	}
 
 	public String atualizar(ActionEvent actionEvent) {
 		control.atualizar(projeto);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso", projeto.getNome()));
 		return "listProjetos";
 	}
 
-	public String remover() {
-		projeto = projetos.getRowData();
+	public String remover(ActionEvent actionEvent) {
 		control.remover(projeto.getId());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Removido com Sucesso", ""));
 		return "listProjetos";
 	}
 	
 	public void escolheProjeto(ActionEvent actionEvent){
 		projeto = projetos.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Escolhido: ", projeto.getNome()));
 	}
 
 	public void limpar() {
-		new Projeto();
+		projeto = new Projeto();
 	}
 
 	public ProjetoMB() {

@@ -14,14 +14,14 @@
 
 		<br />
 		<br />
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:800px" rowKey="#{projeto.id}">
+			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:800px">
 
 				<f:facet name="header">  
 			            Projetos  
 		        </f:facet>
-		        <p:ajax event="rowEdit" listener="#{projetoMB.atualizar}" />
 		        
 				<p:column headerText="Id" style="width:5%">
 					<p:commandLink actionListener="#{projetoMB.escolheProjeto}">
@@ -35,7 +35,7 @@
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formEditProjeto" oncomplete="modalEditProjeto.show();" icon="ui-icon-pencil" />
 				</p:column>
 				<p:column style="width:5%">
-					<p:commandButton actionListener="#{projetoMB.remover}" icon="ui-icon-trash" />
+					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formRemover" oncomplete="modalRemover.show();" icon="ui-icon-trash" />
 				</p:column>  
   
 			</p:dataTable>
@@ -49,7 +49,7 @@
 					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
 
 					<f:facet name="footer">
-						<p:commandButton value="Gravar"	actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" />
+						<p:commandButton value="Salvar"	actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" />
 						<p:commandButton value="Limpar"	actionListener="#{projetoMB.limpar}" />
 					</f:facet>
 
@@ -62,12 +62,25 @@
 				<p:panelGrid id="editProjeto" columns="2">
 
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{projetoMB.projeto.nome}" size="60"	required="true" />
+					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />
 					</f:facet>
 
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Remover Projeto" widgetVar="modalRemover" showEffect="clip" hideEffect="explode">
+			<h:form id="formRemover">
+				<p:panelGrid columns="2">
+					<h:outputText value="Tem certeza de que deseja remover o projeto: " />
+					<p:outputLabel value="#{projetoMB.projeto.nome}" style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{projetoMB.remover}" update=":formLista" oncomplete="modalRemover.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemover.hide()" />
+					</f:facet>
 				</p:panelGrid>
 			</h:form>
 		</p:dialog>

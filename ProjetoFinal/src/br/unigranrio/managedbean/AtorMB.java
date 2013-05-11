@@ -2,9 +2,12 @@ package br.unigranrio.managedbean;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
@@ -27,39 +30,34 @@ public class AtorMB implements Serializable {
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 
-	public void addAtor() {
-		for (Ator atores : this.getAtores()) {
-			if (atores.getNome().equalsIgnoreCase(this.getAtor().getNome())) {
-				this.cadastro = false;
-				break;
-			}
-		}
-		if (this.cadastro == true) {
-			if (this.ator.getNome().length() > 20) {
-				System.out.println("Nome muito grande");
-			} else {
-				if (ator.getId() == null) {
-					System.out.println("Cadastro realizado com sucesso");
-					dao.gravar(ator);
-					this.ator = new Ator();
-				} else {
-					System.out.println("Alteração realizada com sucesso");
-					dao.atualizar(ator);
-				}
-			}
-		} else {
-			System.out.println("Ator já Registrado");
-		}
-		this.cadastro = true;
-	}
-
 	public String salvar() {
 		Projeto projeto = projetoMB.getProjeto();
 		ator.setProjeto(projeto);
 		control.gravar(ator, projeto);
-		dao.gravar(ator);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso", ator.getNome()));
 		ator = new Ator();
 		return "listAtores";
+	}
+	
+	public String atualizar(ActionEvent actionEvent){
+		control.atualizar(ator);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Atualizado com Sucesso", ator.getNome()));
+		return "listAtores";
+	}
+	
+	public String remover(ActionEvent actionEvent){
+		control.remover(ator.getId());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Removido com Sucesso", ""));
+		return "listAtores";
+	}
+	
+	public void limpar(){
+		ator = new Ator();
+	}
+	
+	public void escolheAtor(ActionEvent actionEvent){
+		ator = atores.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: ", ator.getNome()));
 	}
 
 	public AtorMB() {
@@ -67,9 +65,7 @@ public class AtorMB implements Serializable {
 
 	public ListDataModel<Ator> getAtores() {
 		Projeto projeto = projetoMB.getProjeto();
-		System.out.println(projeto.getNome());
 		if(projeto.equals(null)){
-			dao.novoAtorSistema(projeto.getId());
 			atores = new ListDataModel<Ator>();
 		} else {
 			long id = projeto.getId();
