@@ -9,6 +9,7 @@ import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.controller.AtorController;
 import br.unigranrio.dao.impl.AtorDAO;
 
 @ManagedBean
@@ -20,6 +21,7 @@ public class AtorMB implements Serializable {
 	private Ator ator = new Ator();
 	private ListDataModel<Ator> atores = new ListDataModel<Ator>();
 	private AtorDAO dao = new AtorDAO();
+	private AtorController control = new AtorController();
 	public Boolean cadastro = true;
 	
 	@ManagedProperty(value="#{projetoMB}")
@@ -52,8 +54,9 @@ public class AtorMB implements Serializable {
 	}
 
 	public String salvar() {
-		Projeto projeto = projetoMB.getProjetoSelecionado();
+		Projeto projeto = projetoMB.getProjeto();
 		ator.setProjeto(projeto);
+		control.gravar(ator, projeto);
 		dao.gravar(ator);
 		ator = new Ator();
 		return "listAtores";
@@ -63,7 +66,7 @@ public class AtorMB implements Serializable {
 	}
 
 	public ListDataModel<Ator> getAtores() {
-		Projeto projeto = projetoMB.getProjetoSelecionado();
+		Projeto projeto = projetoMB.getProjeto();
 		System.out.println(projeto.getNome());
 		if(projeto.equals(null)){
 			dao.novoAtorSistema(projeto.getId());
