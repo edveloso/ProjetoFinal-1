@@ -2,21 +2,20 @@ package br.unigranrio.managedbean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIParameter;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.dao.impl.AtorDAO;
 import br.unigranrio.dao.impl.ProjetoDAO;
 
+@ManagedBean(name="projetoMB")
 @SessionScoped
-@ManagedBean
 public class ProjetoMB {
 	
 	private Projeto projeto = new Projeto();
-	private ListDataModel<Projeto> projetos = new ListDataModel<Projeto>();
+	private ListDataModel<Projeto> projetos;
 	ProjetoDAO dao = new ProjetoDAO();
+	private Projeto projetoSelecionado = new Projeto();
 
 	public String salvar(){
 		dao.gravar(projeto);
@@ -24,20 +23,25 @@ public class ProjetoMB {
 		return "listProjetos";
 	}
 	
+	public String atualizar(){
+		projeto = projetos.getRowData();
+		dao.atualizar(projeto);
+		//projeto = new Projeto();
+		return "listProjetos";
+	}
+	
 	public String remover(){
 		projeto = projetos.getRowData();
 		dao.removerPorId(projeto.getId());
-		return "listProjetos";		
+		return "listProjetos";
 	}
 	
 	public void limpar(){
+		new Projeto();
 	}
 	
-	public void escolheProjeto(ActionEvent event){
-		UIComponent link = event.getComponent();
-		UIParameter param = (UIParameter) link.findComponent("idProjAlt");
-		Long id = (Long) param.getValue();
-		this.projeto = (Projeto) dao.selecionaPorId(id);
+	public void escolheProjeto(Projeto projeto){
+		this.projeto = projeto;
 	}
 	
 	public ProjetoMB() {
@@ -58,6 +62,14 @@ public class ProjetoMB {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+
+	public Projeto getProjetoSelecionado() {
+		return projetoSelecionado;
+	}
+
+	public void setProjetoSelecionado(Projeto projetoSelecionado) {
+		this.projetoSelecionado = projetoSelecionado;
 	}
 	
 }

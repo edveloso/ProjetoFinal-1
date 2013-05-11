@@ -1,7 +1,8 @@
 package br.unigranrio.dao.impl;
 
-import java.util.List;
+import java.util.List; 
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.unigranrio.bean.requisito.Ator;
@@ -22,10 +23,16 @@ public class AtorDAO extends AbstractHibernateDAO{
 		return selecionaPorId(id).toString();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Ator> retornaPorProjeto(long id){
-		session.beginTransaction();
-		session.createSQLQuery("select * from Ator where projeto_id="+id);
-		
+		Query query = session.createSQLQuery("select * from ator where projeto_id=:id")
+				.addEntity(Ator.class)
+				.setParameter("id", id);
+		return query.list();
+	}
+	
+	public void novoAtorSistema(long id){
+		session.createQuery("insert into ator(nome, projeto_id) values('Sistema', :id)").setParameter("id", id);
 	}
 
 }

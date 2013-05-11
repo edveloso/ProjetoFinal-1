@@ -9,12 +9,11 @@ import org.hibernate.Transaction;
 public abstract class AbstractHibernateDAO<T extends Serializable> {
 
 	private final Class<T> clazz;
-	private Session session = HibernateUtil.getSession();
-	private Transaction tx; 
+	private Session session;
 
 	public AbstractHibernateDAO(final Class<T> clazzToSet) {
 		this.session = HibernateUtil.getSession();
-		this.tx = session.beginTransaction();
+		
 		this.clazz = clazzToSet;
 	}
 
@@ -29,16 +28,19 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 	}
 
 	public void gravar(final T entity) {
+		session.beginTransaction();
 		session.save(entity);
 		session.getTransaction().commit();
 	}
 
 	public void atualizar(final T entity) {
+		session.beginTransaction();
 		session.merge(entity);
 		session.getTransaction().commit();
 	}
 
 	public void remover(final T entity) {
+		session.beginTransaction();
 		session.delete(entity);
 		session.getTransaction().commit();
 	}
@@ -46,6 +48,5 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 	public void removerPorId(final Long entityId) {
 		final T entity = this.selecionaPorId(entityId);
 		this.remover(entity);
-		session.getTransaction().commit();
 	}
 }

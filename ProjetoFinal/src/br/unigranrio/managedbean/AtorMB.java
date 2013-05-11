@@ -1,14 +1,14 @@
 package br.unigranrio.managedbean;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
+import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.dao.impl.AtorDAO;
 
 @ManagedBean
@@ -20,17 +20,10 @@ public class AtorMB implements Serializable {
 	private Ator ator = new Ator();
 	private ListDataModel<Ator> atores = new ListDataModel<Ator>();
 	private AtorDAO dao = new AtorDAO();
-	private List<Ator> ato;
 	public Boolean cadastro = true;
-
-	// Lista de Atores
-	public List<Ator> getAto() {
-		if (ato == null) {
-			System.out.println("Carregando Atores.");
-			// ato = new DAO<Ator>(Ator.class).getAllOrder("nome");
-		}
-		return ato;
-	}
+	
+	@ManagedProperty(value="#{projetoMB}")
+	private ProjetoMB projetoMB;
 
 	public void addAtor() {
 		for (Ator atores : this.getAtores()) {
@@ -55,12 +48,12 @@ public class AtorMB implements Serializable {
 		} else {
 			System.out.println("Ator já Registrado");
 		}
-		// ato = dao.getAllOrder("Nome");
 		this.cadastro = true;
-
 	}
 
 	public String salvar() {
+		Projeto projeto = projetoMB.getProjetoSelecionado();
+		ator.setProjeto(projeto);
 		dao.gravar(ator);
 		ator = new Ator();
 		return "listAtores";
@@ -70,9 +63,15 @@ public class AtorMB implements Serializable {
 	}
 
 	public ListDataModel<Ator> getAtores() {
-		ProjetoMB projetoMB = (ProjetoMB) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("projetoMB");
-		long id = projetoMB.getProjeto().getId();
-		atores = new ListDataModel<Ator>(dao.retornaPorProjeto(id));
+		Projeto projeto = projetoMB.getProjetoSelecionado();
+		System.out.println(projeto.getNome());
+		if(projeto.equals(null)){
+			dao.novoAtorSistema(projeto.getId());
+			atores = new ListDataModel<Ator>();
+		} else {
+			long id = projeto.getId();
+			atores = new ListDataModel<Ator>(dao.retornaPorProjeto(id));
+		}
 		return atores;
 	}
 
@@ -88,16 +87,12 @@ public class AtorMB implements Serializable {
 		this.ator = ator;
 	}
 
-	// public DAO<Ator> getDao() {
-	// return dao;
-	// }
-
-	// public void setDao(DAO<Ator> dao) {
-	// this.dao = dao;
-	// }
-
-	public void setAto(List<Ator> ato) {
-		this.ato = ato;
+	public void setProjetoMB(ProjetoMB projetoMB){
+		this.projetoMB = projetoMB;
+	}
+	
+	public ProjetoMB getProjetoMB(){
+		return projetoMB;
 	}
 
 }
