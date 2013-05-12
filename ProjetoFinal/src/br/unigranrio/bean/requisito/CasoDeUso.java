@@ -13,10 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.unigranrio.bean.requisito.enums.TipoCasoDeUso;
 
 @Entity
+@XmlRootElement(name = "casoDeUso") //representa o elemento principal, ou a tag principal do XML.
 public class CasoDeUso implements Serializable {
 	
 
@@ -43,6 +46,7 @@ public class CasoDeUso implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name="casoDeUso_id")
+	@XmlElement(name="casoDeUso_id")
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +57,7 @@ public class CasoDeUso implements Serializable {
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name="casoDeUso_projeto")
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -60,7 +65,7 @@ public class CasoDeUso implements Serializable {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
-
+	@XmlElement(name="casoDeUso_codigo")
 	public String getCodigo() {
 		return codigo;
 	}
@@ -68,7 +73,7 @@ public class CasoDeUso implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-
+	@XmlElement(name="casoDeUso_nome")
 	public String getNome() {
 		return nome;
 	}
@@ -76,7 +81,7 @@ public class CasoDeUso implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	@XmlElement(name="casoDeUso_objetivo")
 	public String getObjetivo() {
 		return objetivo;
 	}
@@ -86,6 +91,7 @@ public class CasoDeUso implements Serializable {
 	}
 
 	@Enumerated(EnumType.ORDINAL)
+	@XmlElement(name="casoDeUso_tipo")
 	public TipoCasoDeUso getTipo() {
 		return tipo;
 	}

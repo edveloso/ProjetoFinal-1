@@ -12,12 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import br.unigranrio.bean.requisito.enums.TipoAtor;
 
+
+
 @Entity
+@XmlRootElement(name = "ator") //representa o elemento principal, ou a tag principal do XML.
 public class Ator implements Serializable{
-	
+		
 	private Long id;
 	private String nome;
 	private Projeto projeto;
@@ -26,10 +33,12 @@ public class Ator implements Serializable{
 
 	public Ator() {
 	}
+	
 
 	@Id
 	@GeneratedValue
 	@Column(name="ator_id")
+	@XmlElement(name="ator_id")
 	public Long getId() {
 		return id;
 	}
@@ -37,7 +46,8 @@ public class Ator implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@XmlElement(name = "ator_nome")
 	public String getNome() {
 		return nome;
 	}
@@ -48,6 +58,7 @@ public class Ator implements Serializable{
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name = "ator_projeto")
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -55,7 +66,7 @@ public class Ator implements Serializable{
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
-
+	@XmlElement(name= "ator_tipo")
 	public TipoAtor getTipo() {
 		return tipo;
 	}
@@ -65,6 +76,8 @@ public class Ator implements Serializable{
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ator")
+	@XmlElementWrapper(name = "casosDeUso_atores")
+	@XmlElement(name="ator_casosDeUso")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
 		return casosDeUsoAtor;
 	}

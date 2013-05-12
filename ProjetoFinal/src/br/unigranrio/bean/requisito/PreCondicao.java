@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "precondicao") //representa o elemento principal, ou a tag principal do XML.
 public class PreCondicao implements Serializable{
 
 	private Long id;
@@ -17,11 +20,11 @@ public class PreCondicao implements Serializable{
 	private CasoDeUso casoDeUso;
 	
 	public PreCondicao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Id
 	@GeneratedValue
+	@XmlElement(name="pre_id")
 	public Long getId() {
 		return id;
 	}
@@ -29,7 +32,7 @@ public class PreCondicao implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement(name="pre_descricao")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -40,6 +43,7 @@ public class PreCondicao implements Serializable{
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name="pre_casoDeUso")
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}

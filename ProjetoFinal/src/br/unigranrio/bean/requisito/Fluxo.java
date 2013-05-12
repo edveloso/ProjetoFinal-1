@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.unigranrio.bean.requisito.enums.TipoFluxo;
 
 @Entity
+@XmlRootElement(name = "fluxo") //representa o elemento principal, ou a tag principal do XML.
 public class Fluxo implements Serializable{
 	
 	
@@ -32,6 +35,7 @@ public class Fluxo implements Serializable{
 	
 	@Id
 	@GeneratedValue
+	@XmlElement(name="fluxo_id")
 	public Long getId() {
 		return id;
 	}
@@ -39,7 +43,7 @@ public class Fluxo implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement(name="fluxo_nome")
 	public String getNome() {
 		return nome;
 	}
@@ -49,6 +53,7 @@ public class Fluxo implements Serializable{
 	}
 
 	@Enumerated(EnumType.ORDINAL)
+	@XmlElement(name="fluxo_tipo")
 	public TipoFluxo getTipo() {
 		return tipo;
 	}
@@ -59,6 +64,7 @@ public class Fluxo implements Serializable{
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name="fluxo_casoDeUso")
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}
@@ -84,6 +90,7 @@ public class Fluxo implements Serializable{
 	}
 */
 	@Transient
+	@XmlElement(name="fluxo_codigo")
 	public int getCodigo() {
 		return codigo;
 	}
