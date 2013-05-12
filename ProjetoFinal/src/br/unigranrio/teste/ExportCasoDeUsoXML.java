@@ -3,7 +3,7 @@ package br.unigranrio.teste;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,34 +24,45 @@ import br.unigranrio.bean.requisito.enums.TipoFluxo;
 
 public class ExportCasoDeUsoXML {
 
-
-	
-
 	public static void main(String[] args) throws JAXBException, IOException {
-	
-		
-	
 		
 		Projeto projeto = new Projeto();
 		projeto.setNome("primeiro");
 		
+		Collection<Ator> collection = new ArrayList<Ator>();
+		ArrayList<Ator> array = new ArrayList<Ator>();
+		
+		Ator ator1 = new Ator();
+		ator1.setNome("Sistema");
+		ator1.setTipo(TipoAtor.PRIMARIO);
+		collection.add(ator1);
+		array.add(ator1);
+		
 		Ator ator = new Ator();
 		ator.setNome("Joao");
-		ator.setProjeto(projeto);
 		ator.setTipo(TipoAtor.SECUNDARIO);
+		collection.add(ator);
+		array.add(ator);
 		
+
 		CasoDeUso caso = new CasoDeUso();
-		caso.setNome("Manutencao do Sistema");
 		caso.setProjeto(projeto);
 		caso.setCodigo("UC001");
+		caso.setNome("Manutencao do Sistema");
 		caso.setObjetivo("Realizar a manutencao do Sistema");
 		caso.setTipo(TipoCasoDeUso.ABSTRATO);
-		caso.addAtor(ator);
+		caso.setAtores(array);	
+		
+		Passo passos = new Passo();
+		passos.setAtors(collection);
+		passos.setAcao("Acao");
+		passos.setComplemento("Complemento");
 		
 		Fluxo flux = new Fluxo();
-		flux.setNome("Fluxo 1");
-		flux.setTipo(TipoFluxo.PRINCIPAL);
 		flux.setCodigo(1);
+		flux.setTipo(TipoFluxo.PRINCIPAL);
+		flux.setNome("Fluxo 1");
+		flux.addPassos(passos);
 		
 			
 		PosCondicao pos = new PosCondicao();

@@ -1,6 +1,7 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.unigranrio.dao.impl.AtorDAO;
@@ -28,6 +30,8 @@ public class Passo implements Serializable {
 	private String acao;
 	private String complemento;
 	private CasoDeUso pontoDeExtensao;
+	
+	private Collection<Ator> ators;//para exportar xml dos atores dos passos.
 
 	public Passo() {
 	}
@@ -120,5 +124,16 @@ public class Passo implements Serializable {
 	public String getPassoAsString() {
 		return toString();
 	}
+	@XmlElementWrapper(name = "atores")
+	@XmlElement(name = "ator")
+	public Collection<Ator> getAtors() {
+		return ators;
+	}
+
+	public void setAtors(Collection<Ator> ators) {
+		this.ators = ators;
+	}
+
+
 
 }

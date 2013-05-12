@@ -1,6 +1,8 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.unigranrio.bean.requisito.enums.TipoFluxo;
@@ -25,8 +28,8 @@ public class Fluxo implements Serializable{
 	private String nome;
 	private TipoFluxo tipo;
 	private CasoDeUso casoDeUso;
-//	protected List<Passo> passos;
-//	protected Passo disparadoPor;
+	protected List<Passo> passos;
+	protected Passo disparadoPor;
 	private int codigo;
 	
 	public Fluxo() {
@@ -72,15 +75,17 @@ public class Fluxo implements Serializable{
 	public void setCasoDeUso(CasoDeUso casoDeUso) {
 		this.casoDeUso = casoDeUso;
 	}
-
-/*	public List<Passo> getPassos() {
+	@XmlElementWrapper(name="fluxo_passos")
+	@XmlElement(name="fluxo_passo")
+	public List<Passo> getPassos() {
 		return passos;
 	}
 
 	public void setPassos(List<Passo> passos) {
 		this.passos = passos;
 	}
-
+	
+	@XmlElement(name="fluxo_disparadoPor")
 	public Passo getDisparadoPor() {
 		return disparadoPor;
 	}
@@ -88,7 +93,7 @@ public class Fluxo implements Serializable{
 	public void setDisparadoPor(Passo disparadoPor) {
 		this.disparadoPor = disparadoPor;
 	}
-*/
+
 	@Transient
 	@XmlElement(name="fluxo_codigo")
 	public int getCodigo() {
@@ -97,6 +102,12 @@ public class Fluxo implements Serializable{
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
+	}
+	
+	public void addPassos(Passo passo){
+		if(passos==null)
+			passos = new ArrayList<Passo>();
+		passos.add(passo);
 	}
 
 }
