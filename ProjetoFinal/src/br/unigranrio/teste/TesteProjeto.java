@@ -1,5 +1,7 @@
 package br.unigranrio.teste;
 
+import java.util.ArrayList;
+
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
 import br.unigranrio.bean.requisito.Fluxo;
@@ -36,6 +38,8 @@ public class TesteProjeto {
 		RegraDeNegocioDAO regraDao = new RegraDeNegocioDAO();
 		RequisitoNaoFuncionalDAO reqDao = new RequisitoNaoFuncionalDAO();
 				
+		ArrayList<Ator> array = new ArrayList<Ator>();
+		
 		Projeto projeto = new Projeto();
 		projeto.setNome("primeiro");
 		
@@ -43,6 +47,13 @@ public class TesteProjeto {
 		ator.setNome("Joao");
 		ator.setProjeto(projeto);
 		ator.setTipo(TipoAtor.SECUNDARIO);
+		array.add(ator);
+		
+		Ator ator1 = new Ator();
+		ator.setNome("Sistema");
+		ator.setProjeto(projeto);
+		ator.setTipo(TipoAtor.PRIMARIO);
+		array.add(ator1);
 		
 		CasoDeUso caso = new CasoDeUso();
 		caso.setNome("Manutenção do Sistema");
@@ -50,6 +61,7 @@ public class TesteProjeto {
 		caso.setCodigo("UC001 -");
 		caso.setObjetivo("Realizar a manutenção do Sistema");
 		caso.setTipo(TipoCasoDeUso.ABSTRATO);
+		caso.setAtores(array);
 		
 		Fluxo flux = new Fluxo();
 		flux.setNome("Fluxo 1");
@@ -59,7 +71,7 @@ public class TesteProjeto {
 		
 		Passo pa = new Passo();
 		pa.setAcao("Modificar");
-		pa.setAtor(ator);
+		pa.setAtor(array);
 		pa.setComplemento("Realizar a modificação da camada persistência");
 		pa.setFluxo(flux);
 		pa.setPontoDeExtensao(caso);

@@ -33,7 +33,7 @@ public class Fluxo implements Serializable{
 	private int codigo;
 	
 	public Fluxo() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	@Id
@@ -77,6 +77,7 @@ public class Fluxo implements Serializable{
 	}
 	@XmlElementWrapper(name="fluxo_passos")
 	@XmlElement(name="fluxo_passo")
+	@Transient
 	public List<Passo> getPassos() {
 		return passos;
 	}

@@ -3,7 +3,7 @@ package br.unigranrio.teste;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -29,19 +29,17 @@ public class ExportCasoDeUsoXML {
 		Projeto projeto = new Projeto();
 		projeto.setNome("primeiro");
 		
-		Collection<Ator> collection = new ArrayList<Ator>();
+		
 		ArrayList<Ator> array = new ArrayList<Ator>();
 		
 		Ator ator1 = new Ator();
 		ator1.setNome("Sistema");
 		ator1.setTipo(TipoAtor.PRIMARIO);
-		collection.add(ator1);
 		array.add(ator1);
 		
 		Ator ator = new Ator();
 		ator.setNome("Joao");
 		ator.setTipo(TipoAtor.SECUNDARIO);
-		collection.add(ator);
 		array.add(ator);
 		
 
@@ -54,7 +52,7 @@ public class ExportCasoDeUsoXML {
 		caso.setAtores(array);	
 		
 		Passo passos = new Passo();
-		passos.setAtors(collection);
+		passos.setAtor(array);
 		passos.setAcao("Acao");
 		passos.setComplemento("Complemento");
 		
@@ -79,8 +77,7 @@ public class ExportCasoDeUsoXML {
 		
 		RequisitoNaoFuncional req = new RequisitoNaoFuncional();
 		req.setDescricao("O sistema devera rodar em qualquer plataforma");
-		
-		
+			
 	
 		caso.addFluxos(flux);
 		caso.addPreCondicoes(pre);
@@ -88,7 +85,6 @@ public class ExportCasoDeUsoXML {
 		caso.addRegrasDeNegocio(regra);
 		caso.addRequisitosNaoFuncionais(req);
 		
-	
 		
 		JAXBContext context = JAXBContext.newInstance(CasoDeUso.class);
 		Marshaller marshal = context.createMarshaller();

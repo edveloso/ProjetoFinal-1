@@ -1,7 +1,9 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,12 +28,12 @@ public class Passo implements Serializable {
 	private Integer codigo;
 	private Fluxo fluxo = new Fluxo();
 	// private Ator atorParaXML = new Ator();
-	private Ator ator = new Ator();
+	private List<Ator> ator = new ArrayList<Ator>();//para exportar xml dos atores dos passos.
 	private String acao;
 	private String complemento;
 	private CasoDeUso pontoDeExtensao;
 	
-	private Collection<Ator> ators;//para exportar xml dos atores dos passos.
+	
 
 	public Passo() {
 	}
@@ -78,16 +80,8 @@ public class Passo implements Serializable {
 	 * public void setAtorParaXML(Ator atorParaXML) { this.atorParaXML =
 	 * atorParaXML; }
 	 */
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Ator.class)
-	@PrimaryKeyJoinColumn
-	@XmlElement(name="passo_ator")
-	public Ator getAtor() {
-		return ator;
-	}
+	
 
-	public void setAtor(Ator ator) {
-		this.ator = ator;
-	}
 	@XmlElement(name="passo_acao")
 	public String getAcao() {
 		return acao;
@@ -116,24 +110,24 @@ public class Passo implements Serializable {
 		this.pontoDeExtensao = pontoDeExtensao;
 	}
 	
-	public String toString() {
-		return "P" + codigo + " - " + new AtorDAO().retornaNomePorId(ator.getId()) + " " + acao + " " + complemento;
-	}
+
 	
 	@Transient
 	public String getPassoAsString() {
 		return toString();
 	}
-	@XmlElementWrapper(name = "atores")
-	@XmlElement(name = "ator")
-	public Collection<Ator> getAtors() {
-		return ators;
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Ator.class)
+	@PrimaryKeyJoinColumn
+	@XmlElement(name="passo_ator")
+	public List<Ator> getAtor() {
+		return ator;
 	}
 
-	public void setAtors(Collection<Ator> ators) {
-		this.ators = ators;
+	public void setAtor(List<Ator> ator) {
+		this.ator = ator;
 	}
-
-
+	public String toString() {
+		return "P" + codigo + " - " + new AtorDAO().retornaNomePorId(((Ator) ator).getId()) + " " + acao + " " + complemento;
+	}
 
 }
