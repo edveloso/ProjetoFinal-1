@@ -14,12 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import br.unigranrio.bean.requisito.enums.TipoCasoDeUso;
 
 @Entity
 @XmlRootElement(name = "casoDeUso") //representa o elemento principal, ou a tag principal do XML.
+@XmlType(propOrder = { "id", "projeto", "codigo", "nome", "objetivo", "tipo", "atores", "casosDeUsoAtor", "fluxos", "regrasDeNegocio", "preCondicoes", "posCondicoes", "requisitosNaoFuncionais"})
 public class CasoDeUso implements Serializable {
 	
 
@@ -32,13 +35,13 @@ public class CasoDeUso implements Serializable {
 	private String objetivo;
 	private TipoCasoDeUso tipo;
 
-/*	private List<Ator> atores = new ArrayList<Ator>();
+	private List<Ator> atores = new ArrayList<Ator>();
 	private List<CasoDeUsoAtor> casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
 	private List<Fluxo> fluxos = new ArrayList<Fluxo>();
 	private List<RegraDeNegocio> regrasDeNegocio = new ArrayList<RegraDeNegocio>();
 	private List<PreCondicao> preCondicoes = new ArrayList<PreCondicao>();
 	private List<PosCondicao> posCondicoes = new ArrayList<PosCondicao>();
-	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();*/
+	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
 
 	public CasoDeUso() {
 	}
@@ -99,15 +102,17 @@ public class CasoDeUso implements Serializable {
 	public void setTipo(TipoCasoDeUso tipo) {
 		this.tipo = tipo;
 	}
-
-/*	public List<Ator> getAtores() {
+	@XmlElementWrapper(name="casoDeUso_atores")
+	@XmlElement(name="casoDeUso_ator")
+	public List<Ator> getAtores() {
 		return atores;
 	}
 
 	public void setAtores(List<Ator> atores) {
 		this.atores = atores;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_casosAtores")
+	@XmlElement(name="casoDeUso_casosAtor")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
 		return casosDeUsoAtor;
 	}
@@ -115,7 +120,8 @@ public class CasoDeUso implements Serializable {
 	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
 		this.casosDeUsoAtor = casosDeUsoAtor;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_fluxos")
+	@XmlElement(name="casoDeUso_fluxo")
 	public List<Fluxo> getFluxos() {
 		return fluxos;
 	}
@@ -123,7 +129,8 @@ public class CasoDeUso implements Serializable {
 	public void setFluxos(List<Fluxo> fluxos) {
 		this.fluxos = fluxos;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_regras")
+	@XmlElement(name="casoDeUso_regra")
 	public List<RegraDeNegocio> getRegrasDeNegocio() {
 		return regrasDeNegocio;
 	}
@@ -131,7 +138,8 @@ public class CasoDeUso implements Serializable {
 	public void setRegrasDeNegocio(List<RegraDeNegocio> regrasDeNegocio) {
 		this.regrasDeNegocio = regrasDeNegocio;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_precondicoes")
+	@XmlElement(name="casoDeUso_pre")
 	public List<PreCondicao> getPreCondicoes() {
 		return preCondicoes;
 	}
@@ -139,7 +147,8 @@ public class CasoDeUso implements Serializable {
 	public void setPreCondicoes(List<PreCondicao> preCondicoes) {
 		this.preCondicoes = preCondicoes;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_poscondicoes")
+	@XmlElement(name="casoDeUso_pos")
 	public List<PosCondicao> getPosCondicoes() {
 		return posCondicoes;
 	}
@@ -147,7 +156,8 @@ public class CasoDeUso implements Serializable {
 	public void setPosCondicoes(List<PosCondicao> posCondicoes) {
 		this.posCondicoes = posCondicoes;
 	}
-
+	@XmlElementWrapper(name="casoDeUso_requisitos")
+	@XmlElement(name="casoDeUso_requisito")
 	public List<RequisitoNaoFuncional> getRequisitosNaoFuncionais() {
 		return requisitosNaoFuncionais;
 	}
@@ -155,6 +165,6 @@ public class CasoDeUso implements Serializable {
 	public void setRequisitosNaoFuncionais(
 			List<RequisitoNaoFuncional> requisitosNaoFuncionais) {
 		this.requisitosNaoFuncionais = requisitosNaoFuncionais;
-	}*/
+	}
 
 }
