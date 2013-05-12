@@ -34,7 +34,6 @@ public class Ator implements Serializable{
 	public Ator() {
 	}
 	
-
 	@Id
 	@GeneratedValue
 	@Column(name="ator_id")

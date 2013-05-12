@@ -166,5 +166,49 @@ public class CasoDeUso implements Serializable {
 			List<RequisitoNaoFuncional> requisitosNaoFuncionais) {
 		this.requisitosNaoFuncionais = requisitosNaoFuncionais;
 	}
+	
+	public void addAtor(Ator ator){
+		if(atores==null) 
+			atores = new ArrayList<Ator>();
+			atores.add(ator);
+			
+	}
+	
+	public void addCasosDeUsoAtor(CasoDeUsoAtor casoDeUsoAtor){
+		if(casosDeUsoAtor==null) 
+			casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
+		casosDeUsoAtor.add(casoDeUsoAtor);
+			
+	}
+	
+	public void addFluxos(Fluxo fluxo){
+		if(fluxos==null)
+			fluxos = new ArrayList<Fluxo>();
+		fluxos.add(fluxo);
+	}
+	
+	public void addRegrasDeNegocio(RegraDeNegocio regraDeNegocio){
+		if(regrasDeNegocio==null)
+			regrasDeNegocio = new ArrayList<RegraDeNegocio>();
+		regrasDeNegocio.add(regraDeNegocio);
+	}
+
+	public void addPreCondicoes(PreCondicao preCondicao){
+		if(preCondicoes==null)
+			preCondicoes = new ArrayList<PreCondicao>();
+		preCondicoes.add(preCondicao);
+	}
+	
+	public void addPosCondicoes(PosCondicao posCondicao){
+		if(posCondicoes==null)
+			posCondicoes = new ArrayList<PosCondicao>();
+		posCondicoes.add(posCondicao);
+	}
+	
+	public void addRequisitosNaoFuncionais(RequisitoNaoFuncional requisitoNaoFuncional){
+		if(requisitosNaoFuncionais==null)
+			requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
+		requisitosNaoFuncionais.add(requisitoNaoFuncional);
+	}
 
 }
