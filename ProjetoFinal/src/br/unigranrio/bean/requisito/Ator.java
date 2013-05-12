@@ -15,8 +15,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import br.unigranrio.bean.requisito.enums.TipoAtor;
 
 
@@ -66,6 +64,7 @@ public class Ator implements Serializable{
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+	
 	@XmlElement(name= "ator_tipo")
 	public TipoAtor getTipo() {
 		return tipo;

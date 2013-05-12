@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -102,6 +103,8 @@ public class CasoDeUso implements Serializable {
 	public void setTipo(TipoCasoDeUso tipo) {
 		this.tipo = tipo;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_atores")
 	@XmlElement(name="casoDeUso_ator")
 	public List<Ator> getAtores() {
@@ -111,6 +114,8 @@ public class CasoDeUso implements Serializable {
 	public void setAtores(List<Ator> atores) {
 		this.atores = atores;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_casosAtores")
 	@XmlElement(name="casoDeUso_casosAtor")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
@@ -120,6 +125,8 @@ public class CasoDeUso implements Serializable {
 	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
 		this.casosDeUsoAtor = casosDeUsoAtor;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_fluxos")
 	@XmlElement(name="casoDeUso_fluxo")
 	public List<Fluxo> getFluxos() {
@@ -129,6 +136,8 @@ public class CasoDeUso implements Serializable {
 	public void setFluxos(List<Fluxo> fluxos) {
 		this.fluxos = fluxos;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_regras")
 	@XmlElement(name="casoDeUso_regra")
 	public List<RegraDeNegocio> getRegrasDeNegocio() {
@@ -138,6 +147,8 @@ public class CasoDeUso implements Serializable {
 	public void setRegrasDeNegocio(List<RegraDeNegocio> regrasDeNegocio) {
 		this.regrasDeNegocio = regrasDeNegocio;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_precondicoes")
 	@XmlElement(name="casoDeUso_pre")
 	public List<PreCondicao> getPreCondicoes() {
@@ -147,6 +158,8 @@ public class CasoDeUso implements Serializable {
 	public void setPreCondicoes(List<PreCondicao> preCondicoes) {
 		this.preCondicoes = preCondicoes;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_poscondicoes")
 	@XmlElement(name="casoDeUso_pos")
 	public List<PosCondicao> getPosCondicoes() {
@@ -156,6 +169,8 @@ public class CasoDeUso implements Serializable {
 	public void setPosCondicoes(List<PosCondicao> posCondicoes) {
 		this.posCondicoes = posCondicoes;
 	}
+	
+	@Transient
 	@XmlElementWrapper(name="casoDeUso_requisitos")
 	@XmlElement(name="casoDeUso_requisito")
 	public List<RequisitoNaoFuncional> getRequisitosNaoFuncionais() {
