@@ -12,29 +12,34 @@ import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.bean.requisito.enums.TipoAtor;
 import br.unigranrio.controller.AtorController;
 import br.unigranrio.dao.impl.AtorDAO;
 
-@ManagedBean
+@ManagedBean(name="atorMB")
 @SessionScoped
 public class AtorMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Ator ator = new Ator();
-	private ListDataModel<Ator> atores = new ListDataModel<Ator>();
-	private AtorDAO dao = new AtorDAO();
+	private ListDataModel<Ator> atores;
 	private AtorController control = new AtorController();
-	public Boolean cadastro = true;
+	private TipoAtor tpAtor;
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 
 	public String salvar() {
+		String erro = null;
 		Projeto projeto = projetoMB.getProjeto();
 		ator.setProjeto(projeto);
-		control.gravar(ator, projeto);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso", ator.getNome()));
+		erro = control.gravar(ator, projeto);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, " "));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso", ator.getNome()));
+		}
 		ator = new Ator();
 		return "listAtores";
 	}
@@ -69,7 +74,7 @@ public class AtorMB implements Serializable {
 			atores = new ListDataModel<Ator>();
 		} else {
 			long id = projeto.getId();
-			atores = new ListDataModel<Ator>(dao.retornaPorProjeto(id));
+			atores = new ListDataModel<Ator>(control.selecionarTodosProjeto(id));
 		}
 		return atores;
 	}
@@ -92,6 +97,18 @@ public class AtorMB implements Serializable {
 	
 	public ProjetoMB getProjetoMB(){
 		return projetoMB;
+	}
+
+	public TipoAtor[] getTipos() {
+		return tpAtor.values();
+	}
+
+	public void setTpAtor(TipoAtor tpAtor) {
+		this.tpAtor = tpAtor;
+	}
+	
+	public TipoAtor getTpAtor() {
+		return tpAtor;
 	}
 
 }

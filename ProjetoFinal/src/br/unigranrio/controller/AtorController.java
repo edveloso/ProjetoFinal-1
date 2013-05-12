@@ -10,21 +10,25 @@ public class AtorController {
 	
 	AtorDAO dao = new AtorDAO();
 	
-	public void gravar(Ator ator, Projeto projeto){
-		
+	public AtorController() {
+	}
+	
+	public String gravar(Ator ator, Projeto projeto){
+		String erro = null;
 		List<Ator> atores = dao.retornarTodos();
 		for (Ator ator2 : atores) {
 			if(ator2.getNome() == ator.getNome()){
+				erro = "Ator já cadastrado";
 				break;
 			}
 		}
 		if(ator.getNome().length() > 20){
-			System.out.println("Nome muito grande");
+			erro = "Nome maior que 20 caracteres, por favor diminua o tamanho do nome do Ator";
 		} else {
 			ator.setProjeto(projeto);
 			dao.gravar(ator);
 		}
-		
+		return erro;
 	}
 	
 	public void atualizar(Ator ator) {
@@ -43,5 +47,9 @@ public class AtorController {
 		atorSistema.setNome("Sistema");
 		atorSistema.setProjeto(projeto);
 		dao.gravar(atorSistema);
+	}
+	
+	public List<Ator> selecionarTodosProjeto(long id){
+		return dao.retornaPorProjeto(id);
 	}
 }

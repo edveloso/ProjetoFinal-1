@@ -23,7 +23,7 @@
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            	</h:panelGrid>
-	            	<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":tabCaso" />
+	            	<p:commandButton value="Atualizar" actionListener="#{casoDeUsoMB.atualizar}" update=":tabCaso" />
 	            	<p:commandButton value="Limpar" />
 	            </p:fieldset>
             </h:form>
@@ -41,8 +41,8 @@
 	            					<f:selectItems value="#{atorMB.atores}" />
 	            				</p:selectOneMenu>
 	            				<p:outputLabel value="Tipo de Ator" />
-	            				<p:selectOneMenu value="#{atorMB.tpAtor}">
-	            					<f:selectItems var="tipoAtor" value="#{atorMB.tipos}" />
+	            				<p:selectOneMenu value="">
+	            					<f:selectItems value="" />
 	            				</p:selectOneMenu>
 	            				<p:commandButton value="Gravar" />
 	            			</h:panelGrid>

@@ -2,75 +2,85 @@ package br.unigranrio.managedbean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
+import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
+import br.unigranrio.bean.requisito.CasoDeUsoAtor;
+import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.controller.CasoDeUsoController;
 
 @ManagedBean
 @SessionScoped
 public class CasoDeUsoMB {
 
 	private CasoDeUso casoDeUso = new CasoDeUso();
-	private ListDataModel<CasoDeUso> casosDeUso = new ListDataModel<CasoDeUso>();
-	private List<CasoDeUso> casos;
-//	private DAO<CasoDeUso> dao = new DAO<CasoDeUso>(CasoDeUso.class);
-	public Boolean cadastro = true;
+	private ListDataModel<CasoDeUso> casosDeUso;
+	private CasoDeUsoController control = new CasoDeUsoController();
+	private CasoDeUsoAtor casoAtor = new CasoDeUsoAtor();
 	
-	//Lista de Casos de Uso
-	public List<CasoDeUso> getCasos(){
-		if(casos == null){
-			System.out.println("Carregando Casos de Uso");
-			//casos = new DAO<CasoDeUso>(CasoDeUso.class).getAllOrder("nome");
-		}
-		return casos;
-	}
+	@ManagedProperty(value="#{projetoMB}")
+	private ProjetoMB projetoMB;
+	
+	@ManagedProperty(value="#{atorMB}")
+	private AtorMB atorMB;
 
 	public CasoDeUsoMB() {
 		
 	}
-	//Tentando inserir validação
-	public void addCasoDeUso(){
-		for(CasoDeUso casos : this.getCasos()){
-			if(casos.getNome().equalsIgnoreCase(this.getCasoDeUso().getNome())){
-				this.cadastro = false;
-			}
-		}
-		if(this.cadastro == true){
-			if(this.casoDeUso.getNome().length()>20) {
-				System.out.println("Caso de uso com mais de 20 caracteres, Sejá mais objetivo");
-			}else{
-				if(casoDeUso.getId() == null){
-					System.out.println("Cadastro realizado com sucesso");
-					//dao.adiciona(casoDeUso);
-					this.casoDeUso = new CasoDeUso();
-				}else{
-					System.out.println("Alteração realizada com sucesso");
-					//dao.atualiza(casoDeUso);
-				}
-			}
-		}else{
-			System.out.println("Caso de Uso já registrado");
-		}
-		//casos = dao.getAllOrder("nome");
-		this.cadastro = true;
+	
+	public void getAtores(){
+		List<Ator> atores = (List<Ator>) atorMB.getAtores();
 	}
 	
 	public String addCaso(){
 		return "addCasos";
 	}
 	
-	public String salvar(CasoDeUso caso){
+	public String atualizaCaso(){
+		return "updateCasos";
+	}
+	
+	public String salvar(){
+		Projeto projeto = projetoMB.getProjeto();
+		casoDeUso.setProjeto(projeto);
+		control.gravar(casoDeUso);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Salvo com Sucesso", casoDeUso.getNome()));
+		casoDeUso = new CasoDeUso();
+		return "addCasos";
+	}
+	
+	public String remover(ActionEvent actionEvent){
+		control.remover(casoDeUso.getId());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Removido com Sucesso", ""));
 		return "listCasos";
 	}
 	
-	public String apagar(){
+	public String atualizar(ActionEvent actionEvent){
+		control.atualizar(casoDeUso);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Atualizado com Sucesso", casoDeUso.getNome()));
 		return "listCasos";
+	}
+	
+	public void escolheCaso(ActionEvent actionEvent){
+		casoDeUso = casosDeUso.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: ", casoDeUso.getNome()));
 	}
 
 	public ListDataModel<CasoDeUso> getCasosDeUso() {
-		casosDeUso = new ListDataModel<CasoDeUso>();
+		Projeto projeto = projetoMB.getProjeto();
+		if(projeto == null){
+			casosDeUso = new ListDataModel<CasoDeUso>();
+		} else {
+			long id = projeto.getId();
+			casosDeUso = new ListDataModel<CasoDeUso>(control.selecionarTodosProjeto(id));
+		}
 		return casosDeUso;
 	}
 
@@ -82,20 +92,32 @@ public class CasoDeUsoMB {
 		return casoDeUso;
 	}
 
-//	public DAO<CasoDeUso> getDao() {
-//		return dao;
-//	}
-
-//	public void setDao(DAO<CasoDeUso> dao) {
-//		this.dao = dao;
-//	}
-
-	public void setCasos(List<CasoDeUso> casos) {
-		this.casos = casos;
-	}
-
 	public void setCasoDeUso(CasoDeUso casoDeUso) {
 		this.casoDeUso = casoDeUso;
+	}
+
+	public ProjetoMB getProjetoMB() {
+		return projetoMB;
+	}
+
+	public void setProjetoMB(ProjetoMB projetoMB) {
+		this.projetoMB = projetoMB;
+	}
+
+	public AtorMB getAtorMB() {
+		return atorMB;
+	}
+
+	public void setAtorMB(AtorMB atorMB) {
+		this.atorMB = atorMB;
+	}
+
+	public CasoDeUsoAtor getCasoAtor() {
+		return casoAtor;
+	}
+
+	public void setCasoAtor(CasoDeUsoAtor casoAtor) {
+		this.casoAtor = casoAtor;
 	}
 	
 }

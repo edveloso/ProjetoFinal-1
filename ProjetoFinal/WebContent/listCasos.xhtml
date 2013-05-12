@@ -14,6 +14,8 @@
 
 			<br />
 			<br />
+			
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
 				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
@@ -27,13 +29,25 @@
 						<h:outputText value="#{caso.nome}" />
 					</p:column>
 					<p:column style="width:10%">
-						<h:outputText value="alterar" />
+						<p:commandButton actionListener="#{casoDeUsoMB.escolheCaso}" action="#{casoDeUsoMB.atualizaCaso}" icon="ui-icon-pencil" />
 					</p:column>
 					<p:column style="width:10%">
-						<h:outputText value="remover" />
+						<p:commandButton actionListener="#{casoDeUsoMB.escolheCaso}" update=":formRemoverCaso" oncomplete="modalRemoverCaso.show();" icon="ui-icon-trash" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
+			
+			<p:dialog header="Remover Caso de Uso" widgetVar="modalRemoverCaso" showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverCaso">
+				<p:panelGrid columns="1">
+					<h:outputLabel value="Tem certeza de que deseja remover o caso de uso #{casoDeUsoMB.casoDeUso.nome} ?" style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{casoDeUsoMB.remover}" update=":formLista" oncomplete="modalRemoverCaso.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemoverCaso.hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
 
         </ui:define>
     </ui:decorate>

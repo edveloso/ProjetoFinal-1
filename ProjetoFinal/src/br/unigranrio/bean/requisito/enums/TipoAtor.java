@@ -13,4 +13,8 @@ public enum TipoAtor {
 	public String toString() {
 		return descricao;
 	}
+	
+	public String getDescricao(){
+		return descricao;
+	}
 }

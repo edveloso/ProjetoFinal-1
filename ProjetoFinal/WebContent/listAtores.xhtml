@@ -25,11 +25,11 @@
 						<h:outputText value="#{ator.nome}" />
 					</p:column>
 					<p:column style="width:5%">
-					<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formEditAtor" oncomplete="modalEditAtor.show();" icon="ui-icon-pencil" />
-				</p:column>
-				<p:column style="width:5%">
-					<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
-				</p:column> 
+						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formEditAtor" oncomplete="modalEditAtor.show();" icon="ui-icon-pencil" />
+					</p:column>
+					<p:column style="width:5%">
+						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
+					</p:column> 
 				</p:dataTable>
 			</h:form>
 
