@@ -11,10 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.unigranrio.dao.impl.AtorDAO;
 
 @Entity
+@XmlRootElement(name = "passo") //representa o elemento principal, ou a tag principal do XML.
 public class Passo implements Serializable {
 
 	private Long id;
@@ -37,6 +40,7 @@ public class Passo implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@XmlElement(name="passo_id")
 	public Long getId() {
 		return id;
 	}
@@ -44,7 +48,7 @@ public class Passo implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement(name="passo_codigo")
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -55,6 +59,7 @@ public class Passo implements Serializable {
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Fluxo.class)
 	@JoinColumn
+	@XmlElement(name="passo_fluxo")
 	public Fluxo getFluxo() {
 		return fluxo;
 	}
@@ -71,6 +76,7 @@ public class Passo implements Serializable {
 	 */
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Ator.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name="passo_ator")
 	public Ator getAtor() {
 		return ator;
 	}
@@ -78,7 +84,7 @@ public class Passo implements Serializable {
 	public void setAtor(Ator ator) {
 		this.ator = ator;
 	}
-
+	@XmlElement(name="passo_acao")
 	public String getAcao() {
 		return acao;
 	}
@@ -86,7 +92,7 @@ public class Passo implements Serializable {
 	public void setAcao(String acao) {
 		this.acao = acao;
 	}
-
+	@XmlElement(name="passo_complemento")
 	public String getComplemento() {
 		return complemento;
 	}
@@ -97,6 +103,7 @@ public class Passo implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
+	@XmlElement(name="passo_pontoExtensao")
 	public CasoDeUso getPontoDeExtensao() {
 		return pontoDeExtensao;
 	}

@@ -8,9 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name="projeto")
+@XmlRootElement(name = "projeto") //representa o elemento principal, ou a tag principal do XML.
 public class Projeto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,13 +21,13 @@ public class Projeto implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
 	@Column(length=50)
 	private String nome;
 	
 	public Projeto() {
 	}
-	
+
+	@XmlElement(name="projeto_id")
 	public Long getId() {
 		return id;
 	}
@@ -32,7 +35,8 @@ public class Projeto implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	@XmlElement(name="projeto_nome")
 	public String getNome() {
 		return nome;
 	}

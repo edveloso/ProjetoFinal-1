@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "poscondicao") //representa o elemento principal, ou a tag principal do XML.
 public class PosCondicao implements Serializable{
 
 	
@@ -22,6 +25,7 @@ public class PosCondicao implements Serializable{
 	}
 	@Id
 	@GeneratedValue
+	@XmlElement(name="pos_id")
 	public Long getId() {
 		return id;
 	}
@@ -29,7 +33,7 @@ public class PosCondicao implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement(name="pos_descricao")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -40,10 +44,11 @@ public class PosCondicao implements Serializable{
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name="pos_casoDeUso")
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}
-
+	
 	public void setCasoDeUso(CasoDeUso casoDeUso) {
 		this.casoDeUso = casoDeUso;
 	}

@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "requisitoNaoFuncional") //representa o elemento principal, ou a tag principal do XML.
 public class RequisitoNaoFuncional implements Serializable{
 
 	private Long id;
@@ -22,6 +25,7 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	@Id
 	@GeneratedValue
+	@XmlElement(name= "requisito_id")
 	public Long getId() {
 		return id;
 	}
@@ -29,7 +33,7 @@ public class RequisitoNaoFuncional implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@XmlElement(name= "requisito_descricao")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -40,6 +44,7 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
 	@PrimaryKeyJoinColumn
+	@XmlElement(name= "requisito_casoDeUso")
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}
