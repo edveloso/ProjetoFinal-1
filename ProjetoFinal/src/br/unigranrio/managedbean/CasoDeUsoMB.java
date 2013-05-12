@@ -1,7 +1,5 @@
 package br.unigranrio.managedbean;
 
-import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -10,33 +8,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
-import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
-import br.unigranrio.bean.requisito.CasoDeUsoAtor;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.controller.CasoDeUsoController;
 
-@ManagedBean
+@ManagedBean(name="casoDeUsoMB")
 @SessionScoped
 public class CasoDeUsoMB {
 
 	private CasoDeUso casoDeUso = new CasoDeUso();
 	private ListDataModel<CasoDeUso> casosDeUso;
 	private CasoDeUsoController control = new CasoDeUsoController();
-	private CasoDeUsoAtor casoAtor = new CasoDeUsoAtor();
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
-	
-	@ManagedProperty(value="#{atorMB}")
-	private AtorMB atorMB;
 
 	public CasoDeUsoMB() {
 		
-	}
-	
-	public void getAtores(){
-		List<Ator> atores = (List<Ator>) atorMB.getAtores();
 	}
 	
 	public String addCaso(){
@@ -103,21 +91,4 @@ public class CasoDeUsoMB {
 	public void setProjetoMB(ProjetoMB projetoMB) {
 		this.projetoMB = projetoMB;
 	}
-
-	public AtorMB getAtorMB() {
-		return atorMB;
-	}
-
-	public void setAtorMB(AtorMB atorMB) {
-		this.atorMB = atorMB;
-	}
-
-	public CasoDeUsoAtor getCasoAtor() {
-		return casoAtor;
-	}
-
-	public void setCasoAtor(CasoDeUsoAtor casoAtor) {
-		this.casoAtor = casoAtor;
-	}
-	
 }

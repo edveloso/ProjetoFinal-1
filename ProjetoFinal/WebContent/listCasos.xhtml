@@ -10,7 +10,7 @@
     		Casos de Uso
     	</ui:define>
         <ui:define name="conteudo">
-            <p:commandButton value="Novo" action="#{casoDeUsoMB.addCaso}" />
+            <p:commandButton value="Novo" onclick="modalNovoCaso.show();" />
 
 			<br />
 			<br />
@@ -47,6 +47,23 @@
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Cadastrar Caso de Uso" widgetVar="modalNovoCaso" showEffect="clip" hideEffect="explode">
+			<h:form id="formNovoCaso">
+	            <p:fieldset legend="Dados do Caso de Uso">
+	            	 <h:panelGrid columns="2">
+			            <p:outputLabel value="Código" />
+	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
+	            		<p:outputLabel value="Nome" />
+	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
+	            		<p:outputLabel value="Objetivo" />
+	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
+	            	</h:panelGrid>
+	            	<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()" />
+	            	<p:commandButton value="Limpar" />
+	            </p:fieldset>
+            </h:form>
 		</p:dialog>
 
         </ui:define>
