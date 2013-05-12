@@ -37,19 +37,19 @@
             			<h:form id="formInfoCaso1">
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Nome" />
-	            				<p:selectOneMenu value="#{casoDeUsoMB.casoAtor}">
-	            					<f:selectItems value="#{atorMB.atores}" />
+	            				<p:selectOneMenu value="#{casoDeUsoAtorMB.casoAtor.ator}">
+	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" />
 	            				</p:selectOneMenu>
 	            				<p:outputLabel value="Tipo de Ator" />
-	            				<p:selectOneMenu value="">
-	            					<f:selectItems value="" />
+	            				<p:selectOneMenu value="#{atorMB.tpAtor}">
+	            					<f:selectItems var="tipoAtor" value="#{atorMB.tipos}" />
 	            				</p:selectOneMenu>
 	            				<p:commandButton value="Gravar" />
 	            			</h:panelGrid>
 	            		</h:form>
             	
             			<h:form id="listaAtores">
-							<p:dataTable var="ator" value="" style="width:500px">
+							<p:dataTable var="" value="" style="width:500px">
 								<f:facet name="header">  
 						            Atores  
 						        </f:facet> 
@@ -72,24 +72,24 @@
             			<h:form id="formInfoCaso2">
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Pré-Condição" />
-	            				<p:inputText value="" />
-	            				<p:commandButton value="Gravar" />
+	            				<p:inputText value="#{preCondicaoMB.pre.descricao}" />
+	            				<p:commandButton value="Gravar" actionListener="#{preCondicaoMB.salvar}" update=":tabCaso" />
 	            			</h:panelGrid>
 	            		</h:form>
 	            
-	            		<h:form>
-	            			<p:dataTable var="precondicao" value="" style="width:500px">
+	            		<h:form id="formPre">
+	            			<p:dataTable var="precondicao" value="#{preCondicaoMB.list}" style="width:500px">
 	            				<f:facet name="header">
 	            					Pré-Condições
 	            				</f:facet>
 	            				<p:column headerText="Número" style="width:15%">
-									<h:outputText value="" />
+									<h:outputText value="#{precondicao.id}" />
 								</p:column>
 								<p:column headerText="Pré-Condição" style="width:75%">
-									<h:outputText value="" />
+									<h:outputText value="#{precondicao.descricao}" />
 								</p:column>
 								<p:column style="width:10%">
-									<h:outputText value="remover" />
+									<p:commandButton actionListener="#{preCondicaoMB.escolhe}" update=":formRemoverPre" oncomplete="modalRemoverPre.show();" icon="ui-icon-trash" />
 								</p:column>
 	            			</p:dataTable>
 	            		</h:form>
@@ -201,7 +201,20 @@
             		
             		</p:tab>
             	</p:tabView>
-            </p:fieldset>  
+            </p:fieldset>
+            
+            
+            <p:dialog header="Remover Pré-Condição" widgetVar="modalRemoverPre" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverPre">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover a pré-condição: #{preCondicaoMB.pre.descricao} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{preCondicaoMB.remover}" update=":tabCaso:formPre" oncomplete="modalRemoverPre.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverPre.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
            
         </ui:define>
     </ui:decorate>

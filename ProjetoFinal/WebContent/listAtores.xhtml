@@ -67,16 +67,16 @@
 			
 			
 			<p:dialog header="Remover Ator" widgetVar="modalRemoverAtor" showEffect="clip" hideEffect="explode">
-			<h:form id="formRemoverAtor">
-				<p:panelGrid columns="1">
-					<h:outputLabel value="Tem certeza de que deseja remover o ator: #{atorMB.ator.nome} ?" style="font:14px" />
-					<f:facet name="footer">
-						<p:commandButton value="Sim" actionListener="#{atorMB.remover}" update=":formLista" oncomplete="modalRemoverAtor.hide()" />
-						<p:commandButton value="Não" oncomplete="modalRemoverAtor.hide()" />
-					</f:facet>
-				</p:panelGrid>
-			</h:form>
-		</p:dialog>
+				<h:form id="formRemoverAtor">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o ator: #{atorMB.ator.nome} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{atorMB.remover}" update=":formLista" oncomplete="modalRemoverAtor.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverAtor.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
 
         </ui:define>
     </ui:decorate>
