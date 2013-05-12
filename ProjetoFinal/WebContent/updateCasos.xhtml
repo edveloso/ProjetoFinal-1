@@ -73,7 +73,7 @@
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Pré-Condição" />
 	            				<p:inputText value="#{preCondicaoMB.pre.descricao}" />
-	            				<p:commandButton value="Gravar" actionListener="#{preCondicaoMB.salvar}" update=":tabCaso" />
+	            				<p:commandButton value="Gravar" actionListener="#{preCondicaoMB.salvar}" update=":tabCaso:formPre" />
 	            			</h:panelGrid>
 	            		</h:form>
 	            
@@ -102,24 +102,24 @@
             			<h:form id="formInfoCaso3">
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Pós-Condição" />
-	            				<p:inputText value="" />
-	            				<p:commandButton value="Gravar" />
+	            				<p:inputText value="#{posCondicaoMB.pos.descricao}" />
+	            				<p:commandButton value="Gravar" actionListener="#{posCondicaoMB.salvar}" update=":tabCaso:formPos" />
 	            			</h:panelGrid>
 	            		</h:form>
 	            
-	            		<h:form>
-	            			<p:dataTable var="poscondicao" value="" style="width:500px">
+	            		<h:form id="formPos">
+	            			<p:dataTable var="poscondicao" value="#{posCondicaoMB.list}" style="width:500px">
 	            				<f:facet name="header">
 	            					Pós-Condições
 	            				</f:facet>
 	            				<p:column headerText="Número" style="width:15%">
-									<h:outputText value="" />
+									<h:outputText value="#{poscondicao.id}" />
 								</p:column>
 								<p:column headerText="Pós-Condição" style="width:75%">
-									<h:outputText value="" />
+									<h:outputText value="#{poscondicao.descricao}" />
 								</p:column>
 								<p:column style="width:10%">
-									<h:outputText value="remover" />
+									<p:commandButton actionListener="#{posCondicaoMB.escolhe}" update=":formRemoverPos" oncomplete="modalRemoverPos.show();" icon="ui-icon-trash" />
 								</p:column>
 	            			</p:dataTable>
 	            		</h:form>
@@ -211,6 +211,18 @@
 						<f:facet name="footer">
 							<p:commandButton value="Sim" actionListener="#{preCondicaoMB.remover}" update=":tabCaso:formPre" oncomplete="modalRemoverPre.hide()" />
 							<p:commandButton value="Não" oncomplete="modalRemoverPre.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Remover Pós-Condição" widgetVar="modalRemoverPos" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverPos">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover a pós-condição: #{posCondicaoMB.pos.descricao} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{posCondicaoMB.remover}" update=":tabCaso:formPos" oncomplete="modalRemoverPos.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverPos.hide()" />
 						</f:facet>
 					</p:panelGrid>
 				</h:form>
