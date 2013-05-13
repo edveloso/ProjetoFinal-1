@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "precondicao") //representa o elemento principal, ou a tag principal do XML.
 public class PreCondicao implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;	 
 	private CasoDeUso casoDeUso;

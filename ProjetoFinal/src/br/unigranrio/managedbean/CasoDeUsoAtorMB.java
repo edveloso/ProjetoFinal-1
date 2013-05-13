@@ -1,10 +1,14 @@
 package br.unigranrio.managedbean;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
@@ -22,6 +26,7 @@ public class CasoDeUsoAtorMB {
 	private CasoDeUsoAtorController control = new CasoDeUsoAtorController();
 	private AtorController controlAtor = new AtorController();
 	private List<Ator> listAtores;
+	private List<CasoDeUsoAtor> listAtoresCaso;
 	
 	@ManagedProperty(value="#{casoDeUsoMB}")
 	private CasoDeUsoMB casoMB;
@@ -29,13 +34,43 @@ public class CasoDeUsoAtorMB {
 	@ManagedProperty(value="#{atorMB}")
 	private AtorMB atorMB;
 	
+	@ManagedProperty(value="#{projetoMB}")
+	private ProjetoMB projetoMB;
+	
 	public CasoDeUsoAtorMB() {
 	}
 	
-	public void listAtores(){
-		long id = atorMB.getAtor().getProjeto().getId();
+	public void escolhe(ActionEvent actionEvent){
+		casoAtor = listCasoAtor.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: ", casoAtor.getAtor().getNome()));
+	}
+	
+	public String remover(ActionEvent actionEvent){
+		control.remover(casoAtor.getId());
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Removido com Sucesso", ""));
+		return "updateCasos";
+	}
+	
+	/*public List<Ator> listAtores(){
+		long id = projetoMB.getProjeto().getId();
 		System.out.println(id);
 		listAtores = controlAtor.selecionarTodosProjeto(id);
+		return listAtores;
+	}*/
+	
+	public List<CasoDeUsoAtor> getlistAtoresCaso(){
+		CasoDeUso caso = casoMB.getCasoDeUso();
+		if(caso == null){
+			listAtoresCaso = new ArrayList<CasoDeUsoAtor>();
+		} else {
+			long id = caso.getId();
+			listAtoresCaso = new ArrayList<CasoDeUsoAtor>(control.selecionarTodosPorCaso(id));
+		}
+		return listAtoresCaso;
+	}
+	
+	public void setListAtoresCaso(List<CasoDeUsoAtor> listAtoresCaso) {
+		this.listAtoresCaso = listAtoresCaso;
 	}
 
 	public CasoDeUsoAtor getCasoAtor() {
@@ -78,11 +113,37 @@ public class CasoDeUsoAtorMB {
 	}
 
 	public List<Ator> getListAtores() {
+		long id = projetoMB.getProjeto().getId();
+		System.out.println(id);
+		listAtores = controlAtor.selecionarTodosProjeto(id);
 		return listAtores;
 	}
 
 	public void setListAtores(List<Ator> listAtores) {
 		this.listAtores = listAtores;
 	}
+
+	public ProjetoMB getProjetoMB() {
+		return projetoMB;
+	}
+
+	public void setProjetoMB(ProjetoMB projetoMB) {
+		this.projetoMB = projetoMB;
+	}
 	
+	public String salvar(){
+		String erro = null;
+		CasoDeUso casoDeUso = casoMB.getCasoDeUso();
+		Ator ator = atorMB.getAtor();
+		casoAtor.setCasoDeUso(casoDeUso);
+		casoAtor.setAtor(ator);
+		erro = control.gravar(casoAtor);
+		if(erro == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator do Caso de Uso Salvo com Sucesso", casoAtor.getAtor().getNome()));
+			return "updateCasos";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir Ator do Caso de Uso", erro));
+			return "updateCasos";
+		}
+	}
 }

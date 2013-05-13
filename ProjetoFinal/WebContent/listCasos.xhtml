@@ -10,7 +10,7 @@
     		Casos de Uso
     	</ui:define>
         <ui:define name="conteudo">
-            <p:commandButton value="Novo" onclick="modalNovoCaso.show();" />
+            <p:commandButton value="Novo" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" oncomplete="modalNovoCaso.show();" />
 
 			<br />
 			<br />
@@ -25,8 +25,11 @@
 			        <p:column headerText="Código" style="width:20%">
 						<h:outputText value="#{caso.codigo}" />
 					</p:column>
-					<p:column headerText="Nome" style="width:60%">
+					<p:column headerText="Nome" style="width:30%">
 						<h:outputText value="#{caso.nome}" />
+					</p:column>
+					<p:column headerText="Tipo" style="width:30%">
+						<h:outputText value="#{caso.tipo}" />
 					</p:column>
 					<p:column style="width:10%">
 						<p:commandButton actionListener="#{casoDeUsoMB.escolheCaso}" action="#{casoDeUsoMB.atualizaCaso}" icon="ui-icon-pencil" />
@@ -57,6 +60,11 @@
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
+	            		<p:outputLabel value="Tipo Caso de Uso" />
+	            		<p:selectOneRadio value="#{casoDeUsoMB.casoDeUso.tipo}">
+          					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
+            				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
+          				</p:selectOneRadio>
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            	</h:panelGrid>

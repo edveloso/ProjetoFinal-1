@@ -15,12 +15,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "regraDeNegocio") //representa o elemento principal, ou a tag principal do XML.
 public class RegraDeNegocio implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;	 
 	private CasoDeUso casoDeUso;
 	
 	public RegraDeNegocio() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Id

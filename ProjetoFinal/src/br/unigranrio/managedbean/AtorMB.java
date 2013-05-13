@@ -12,9 +12,7 @@ import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
-import br.unigranrio.bean.requisito.enums.TipoAtor;
 import br.unigranrio.controller.AtorController;
-import br.unigranrio.dao.impl.AtorDAO;
 
 @ManagedBean(name="atorMB")
 @SessionScoped
@@ -25,7 +23,6 @@ public class AtorMB implements Serializable {
 	private Ator ator = new Ator();
 	private ListDataModel<Ator> atores;
 	private AtorController control = new AtorController();
-	private TipoAtor tpAtor;
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
@@ -97,18 +94,6 @@ public class AtorMB implements Serializable {
 	
 	public ProjetoMB getProjetoMB(){
 		return projetoMB;
-	}
-
-	public TipoAtor[] getTipos() {
-		return tpAtor.values();
-	}
-
-	public void setTpAtor(TipoAtor tpAtor) {
-		this.tpAtor = tpAtor;
-	}
-	
-	public TipoAtor getTpAtor() {
-		return tpAtor;
 	}
 
 }

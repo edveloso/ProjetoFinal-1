@@ -2,9 +2,7 @@ package br.unigranrio.controller;
 
 import java.util.List;
 
-import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
-import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.dao.impl.CasoDeUsoDAO;
 
 public class CasoDeUsoController {
@@ -13,13 +11,13 @@ public class CasoDeUsoController {
 	
 	public void gravar(CasoDeUso caso){
 		if (caso.getNome() != null){
+			String codigo = caso.getCodigo();
+			caso.setCodigo("UC"+codigo);
 			dao.gravar(caso);
 		}
 	}
 	
 	public void atualizar(CasoDeUso caso){
-		long id = caso.getId();
-		CasoDeUso casoAnterior = (CasoDeUso) dao.selecionaPorId(id);
 		dao.atualizar(caso);
 	}
 	

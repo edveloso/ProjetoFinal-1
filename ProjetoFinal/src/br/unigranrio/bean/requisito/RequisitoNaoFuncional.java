@@ -15,12 +15,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "requisitoNaoFuncional") //representa o elemento principal, ou a tag principal do XML.
 public class RequisitoNaoFuncional implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;	 
 	private CasoDeUso casoDeUso;
 	
 	public RequisitoNaoFuncional() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Id

@@ -32,8 +32,6 @@ public class AtorController {
 	}
 	
 	public void atualizar(Ator ator) {
-		long id = ator.getId();
-		Ator atorAnterior = (Ator) dao.selecionaPorId(id);
 		dao.atualizar(ator);
 
 	}

@@ -9,7 +9,6 @@ import javax.xml.bind.Marshaller;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
-import br.unigranrio.bean.requisito.enums.TipoAtor;
 
 public class ExportXML {
 
@@ -22,7 +21,7 @@ public class ExportXML {
 		Ator ator = new Ator();
 		ator.setNome("Joao");
 		ator.setProjeto(projeto);
-		ator.setTipo(TipoAtor.SECUNDARIO);
+		ator.setTipo("Secundario");
 		
 		JAXBContext context = JAXBContext.newInstance(Ator.class);
 		Marshaller marshal = context.createMarshaller();
