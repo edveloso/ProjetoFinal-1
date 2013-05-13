@@ -1,6 +1,8 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,14 +13,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-public class Passo implements Serializable { 
+@XmlRootElement(name = "passo") //representa o elemento principal, ou a tag principal do XML.
+public class Passo implements Serializable {
+ 
 
 	private Long id;
 	private Integer codigo;
 	private Fluxo fluxo = new Fluxo();	
-	private Ator atorParaXML = new Ator();
+	private List<Ator> atorParaXML = new ArrayList<Ator>();
 	private Ator ator = new Ator();
 	private String acao;
 	private String complemento;
@@ -34,6 +41,7 @@ public class Passo implements Serializable {
 	
 	@Id
 	@GeneratedValue
+	@XmlElement(name="passo_id")
 	public Long getId() {
 		return id;
 	}
@@ -42,6 +50,7 @@ public class Passo implements Serializable {
 		this.id = id;
 	}
 
+	@XmlElement(name="passo_codigo")
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -50,6 +59,7 @@ public class Passo implements Serializable {
 		this.codigo = codigo;
 	}
 
+	@XmlElement(name="passo_acao")
 	public String getAcao() {
 		return acao;
 	}
@@ -58,6 +68,7 @@ public class Passo implements Serializable {
 		this.acao = acao;
 	}
 
+	@XmlElement(name="passo_complemento")
 	public String getComplemento() {
 		return complemento;
 	}
@@ -68,6 +79,7 @@ public class Passo implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="idFluxo") //insertable=false, updatable=false
+	@XmlElement(name="passo_fluxo")
 	public Fluxo getFluxo() {
 		return fluxo;
 	}
@@ -78,6 +90,7 @@ public class Passo implements Serializable {
 
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idCasoDeUsoExtensao", insertable=false, updatable=false)
+	@XmlElement(name="passo_pontoExtensao")
 	public CasoDeUso getPontoDeExtensao() {
 		return pontoDeExtensao;
 	}
@@ -97,15 +110,15 @@ public class Passo implements Serializable {
 	}
 	
 	@Transient
-	public Ator getAtorParaXML() {
-		atorParaXML = new Ator();
-		atorParaXML.setNome(this.ator.getNome());
-		
+	@XmlElementWrapper(name="passo_atores")
+	@XmlElement(name="passo_ator")
+	public List<Ator> getAtorParaXML() {		
 		return atorParaXML;
 	}
 	
-	public void setAtorParaXML(Ator atorParaXML) {
+	public void setAtorParaXML(List<Ator> atorParaXML) {
 		this.atorParaXML = atorParaXML;
+		
 	}
 
 	public String toString() {
