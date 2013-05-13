@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cascade;
 @Entity
 public class Fluxo implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
 	private String tipo;

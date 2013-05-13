@@ -25,7 +25,6 @@ public class Ator implements Serializable{
 	private Long id;
 	private String nome;
 	private Projeto projeto;
-	private String tipo;
 	private List<CasoDeUsoAtor> casosDeUsoAtor;
 
 	public Ator() {
@@ -63,15 +62,6 @@ public class Ator implements Serializable{
 		this.projeto = projeto;
 	}
 	
-	@XmlElement(name= "ator_tipo")
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
 	@Transient
 	@XmlElementWrapper(name = "casosDeUso_atores")
 	@XmlElement(name="ator_casosDeUso")
