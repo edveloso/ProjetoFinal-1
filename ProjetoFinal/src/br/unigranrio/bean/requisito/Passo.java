@@ -20,10 +20,10 @@ import br.unigranrio.dao.impl.AtorDAO;
 @XmlRootElement(name = "passo") //representa o elemento principal, ou a tag principal do XML.
 public class Passo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Integer codigo;
 	private Fluxo fluxo = new Fluxo();
-	// private Ator atorParaXML = new Ator();
 	private Ator ator = new Ator();
 	private String acao;
 	private String complemento;

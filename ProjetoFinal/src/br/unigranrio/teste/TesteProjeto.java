@@ -9,9 +9,6 @@ import br.unigranrio.bean.requisito.PreCondicao;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.bean.requisito.RequisitoNaoFuncional;
-import br.unigranrio.bean.requisito.enums.TipoAtor;
-import br.unigranrio.bean.requisito.enums.TipoCasoDeUso;
-import br.unigranrio.bean.requisito.enums.TipoFluxo;
 import br.unigranrio.dao.impl.AtorDAO;
 import br.unigranrio.dao.impl.CasoDeUsoDAO;
 import br.unigranrio.dao.impl.FluxoDAO;
@@ -42,18 +39,18 @@ public class TesteProjeto {
 		Ator ator = new Ator();
 		ator.setNome("Joao");
 		ator.setProjeto(projeto);
-		ator.setTipo(TipoAtor.SECUNDARIO);
+		ator.setTipo("Secundatio");
 		
 		CasoDeUso caso = new CasoDeUso();
 		caso.setNome("Manutenção do Sistema");
 		caso.setProjeto(projeto);
 		caso.setCodigo("UC001 -");
 		caso.setObjetivo("Realizar a manutenção do Sistema");
-		caso.setTipo(TipoCasoDeUso.ABSTRATO);
+		caso.setTipo("Abstrato");
 		
 		Fluxo flux = new Fluxo();
 		flux.setNome("Fluxo 1");
-		flux.setTipo(TipoFluxo.PRINCIPAL);
+		flux.setTipo("PRINCIPAL");
 		flux.setCasoDeUso(caso);
 		flux.setCodigo(1);
 		

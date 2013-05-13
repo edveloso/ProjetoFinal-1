@@ -6,7 +6,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.unigranrio.bean.requisito.PosCondicao;
-import br.unigranrio.bean.requisito.PreCondicao;
 import br.unigranrio.dao.AbstractHibernateDAO;
 import br.unigranrio.dao.HibernateUtil;
 

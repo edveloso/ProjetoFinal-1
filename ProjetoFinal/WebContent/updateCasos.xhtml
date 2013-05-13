@@ -20,6 +20,11 @@
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
+	            		<p:outputLabel value="Tipo Caso de Uso" />
+	            		<p:selectOneRadio value="#{casoDeUsoMB.casoDeUso.tipo}">
+          					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
+            				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
+          				</p:selectOneRadio>
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            	</h:panelGrid>
@@ -37,30 +42,31 @@
             			<h:form id="formInfoCaso1">
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Nome" />
-	            				<p:selectOneMenu value="#{casoDeUsoAtorMB.casoAtor.ator}">
-	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" />
+	            				<p:selectOneMenu value="#{casoDeUsoAtorMB.casoAtor.ator.nome}">
+	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" var="ator" itemLabel="#{ator.nome}" />
 	            				</p:selectOneMenu>
 	            				<p:outputLabel value="Tipo de Ator" />
-	            				<p:selectOneMenu value="#{atorMB.tpAtor}">
-	            					<f:selectItems var="tipoAtor" value="#{atorMB.tipos}" />
-	            				</p:selectOneMenu>
-	            				<p:commandButton value="Gravar" />
+	            				<p:selectOneRadio value="#{casoDeUsoAtorMB.casoAtor.tipoAtor}">
+		          					<f:selectItem itemLabel="Primário" itemValue="Primario" />  
+		            				<f:selectItem itemLabel="Secundário" itemValue="Secundario" /> 
+		          				</p:selectOneRadio>
+	            				<p:commandButton value="Gravar" actionListener="#{casoDeUsoAtorMB.salvar}" update=":tabCaso:formAtores" />
 	            			</h:panelGrid>
 	            		</h:form>
             	
-            			<h:form id="listaAtores">
-							<p:dataTable var="" value="" style="width:500px">
+            			<h:form id="formAtores">
+							<p:dataTable var="casoAtor" value="#{casoDeUsoAtorMB.listCasoAtor}" style="width:500px">
 								<f:facet name="header">  
 						            Atores  
 						        </f:facet> 
 								<p:column headerText="Nome" style="width:45%">
-									<h:outputText value="" />
+									<h:outputText value="#{casoAtor.ator.nome}" />
 								</p:column>
 								<p:column headerText="Tipo" style="width:45%">
-									<h:outputText value="" />
+									<h:outputText value="#{casoAtor.ator.tipo}" />
 								</p:column>
 								<p:column style="width:10%">
-									<h:outputText value="remover" />
+									<p:commandButton actionListener="#{casoDeUsoAtorMB.escolhe}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
 								</p:column>
 							</p:dataTable>
 	            		</h:form>
@@ -132,23 +138,55 @@
             			<h:form id="formInfoCaso4">
 	            			<h:panelGrid columns="2">
 	            				<p:outputLabel value="Regra de Negócio" />
-	            				<p:inputText value="" />
-	            				<p:commandButton value="Gravar" />
+	            				<p:inputText value="#{regraDeNegocioMB.regra.descricao}" />
+	            				<p:commandButton value="Gravar" actionListener="#{regraDeNegocioMB.salvar}" update=":tabCaso:formRegra" />
 	            			</h:panelGrid>
 	            		</h:form>
 	            
-	            		<h:form>
-	            			<p:dataTable var="regra" value="" style="width:500px">
+	            		<h:form id="formRegra">
+	            			<p:dataTable var="regra" value="#{regraDeNegocioMB.list}" style="width:500px">
 	            				<f:facet name="header">
 	            					Regras de Negócio
 	            				</f:facet>
 	            				<p:column headerText="Número" style="width:15%">
-									<h:outputText value="" />
+									<h:outputText value="#{regra.id}" />
 								</p:column>
 								<p:column headerText="Regra de Negócio" style="width:75%">
-									<h:outputText value="" />
+									<h:outputText value="#{regra.descricao}" />
 								</p:column>
 								<p:column style="width:10%">
+									<p:commandButton actionListener="#{regraDeNegocioMB.escolhe}" update=":formRemoverRegra" oncomplete="modalRemoverRegra.show();" icon="ui-icon-trash" />
+									<h:outputText value="remover" />
+								</p:column>
+	            			</p:dataTable>
+	            		</h:form>
+            	
+            		</p:tab>
+            		
+            		
+            		<p:tab title="Requisito Não Funcional">
+            	
+            			<h:form id="formInfoCaso6">
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Requisito Não Funcional" />
+	            				<p:inputText value="#{requisitoNaoFuncionalMB.req.descricao}" />
+	            				<p:commandButton value="Gravar" actionListener="#{requisitoNaoFuncionalMB.salvar}" update=":tabCaso:formRequisito" />
+	            			</h:panelGrid>
+	            		</h:form>
+	            
+	            		<h:form id="formRequisito">
+	            			<p:dataTable var="requisito" value="#{requisitoNaoFuncionalMB.list}" style="width:500px">
+	            				<f:facet name="header">
+	            					Requisitos Não Funcionais
+	            				</f:facet>
+	            				<p:column headerText="Número" style="width:15%">
+									<h:outputText value="#{requisito.id}" />
+								</p:column>
+								<p:column headerText="Requisito Não Funcional" style="width:75%">
+									<h:outputText value="#{requisito.descricao}" />
+								</p:column>
+								<p:column style="width:10%">
+									<p:commandButton actionListener="#{requisitoNaoFuncionalMB.escolhe}" update=":formRemoverRequisito" oncomplete="modalRemoverRequisito.show();" icon="ui-icon-trash" />
 									<h:outputText value="remover" />
 								</p:column>
 	            			</p:dataTable>
@@ -157,27 +195,36 @@
             		</p:tab>
             		
             	
-            		<p:tab title="Fluxo Principal">
+            		<p:tab title="Fluxos">
             	
             			<h:form id="formInfoCaso5">
-	            			<h:panelGrid columns="2">
+	            			<h:panelGrid columns="4">
+	            				<p:outputLabel value="Fluxo" />
 	            				<p:outputLabel value="Ator" />
-	            				<p:selectOneMenu value="#{atorMB.ator}">
-	            					<f:selectItems value="#{atorMB.atores}" />
-	            				</p:selectOneMenu>
 	            				<p:outputLabel value="Ação" />
-	            				<p:autoComplete value="" />
 	            				<p:outputLabel value="Complemento" />
+	            				<p:selectOneMenu>
+	            					<f:selectItem itemLabel="Principal" itemValue="Principal" />
+	            					<f:selectItem itemLabel="Exceção" itemValue="Excecao" />
+	            					<f:selectItem itemLabel="Alternativo" itemValue="Alternativo" />
+	            				</p:selectOneMenu>
+	            				<p:selectOneMenu value="#{passoMB.passo.ator}">
+	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" var="ator" itemLabel="#{ator.nome}" />
+	            				</p:selectOneMenu>
+	            				<p:autoComplete value="" />
 	            				<p:inputText value="" />
-	            				<p:commandButton value="Gravar" />
+	            				<p:commandButton value="Gravar" actionListener="{passoMB.salvar}" update=":tabCaso:formPasso" />
 	            			</h:panelGrid>
 	            		</h:form>
             	
-            			<h:form>
-            				<p:dataTable var="fluxop" value="" style="width:600px">
+            			<h:form id="formPasso">
+            				<p:dataTable var="passo" value="" style="width:600px">
 	            				<f:facet name="header">
 	            					Passos
 	            				</f:facet>
+	            				<p:column headerText="Fluxo" style="width:10%">
+            						<h:outputText value="" />
+            					</p:column>
             					<p:column headerText="Código" style="width:10%">
             						<h:outputText value="" />
             					</p:column>
@@ -191,9 +238,6 @@
             						<h:outputText value="" />
             					</p:column>
             					<p:column style="width:10%">
-            						<h:outputText value="editar" />
-            					</p:column>
-            					<p:column style="width:10%">
             						<h:outputText value="remover" />
             					</p:column>
             				</p:dataTable>
@@ -203,6 +247,18 @@
             	</p:tabView>
             </p:fieldset>
             
+            
+            <p:dialog header="Remover Ator" widgetVar="modalRemoverAtor" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverAtor">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o Ator: #{casoDeUsoAtorMB.casoAtor.ator} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{casoDeUsoAtorMB.remover}" update=":tabCaso:formAtores" oncomplete="modalRemoverAtor.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverAtor.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
             
             <p:dialog header="Remover Pré-Condição" widgetVar="modalRemoverPre" showEffect="clip" hideEffect="explode">
 				<h:form id="formRemoverPre">
@@ -223,6 +279,30 @@
 						<f:facet name="footer">
 							<p:commandButton value="Sim" actionListener="#{posCondicaoMB.remover}" update=":tabCaso:formPos" oncomplete="modalRemoverPos.hide()" />
 							<p:commandButton value="Não" oncomplete="modalRemoverPos.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Remover Regra de Negócio" widgetVar="modalRemoverRegra" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverRegra">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover a Regra de Negócio: #{regraDeNegocioMB.regra.descricao} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{regraDeNegocioMB.remover}" update=":tabCaso:formRegra" oncomplete="modalRemoverRegra.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverRegra.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Remover Requisito Não Funcional" widgetVar="modalRemoverRequisito" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverRequisito">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o Requisito Não Funcional: #{requisitoNaoFuncionalMB.req.descricao} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{requisitoNaoFuncionalMB.remover}" update=":tabCaso:formRequisito" oncomplete="modalRemoverRequisito.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverRequisito.hide()" />
 						</f:facet>
 					</p:panelGrid>
 				</h:form>

@@ -19,8 +19,6 @@ public class ProjetoController {
 	}
 	
 	public void atualizar(Projeto projeto){
-		long id = projeto.getId();
-		Projeto projetoAnterior = (Projeto) dao.selecionaPorId(id);
 		dao.atualizar(projeto);
 	}
 	

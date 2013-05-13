@@ -27,6 +27,10 @@ public class CasoDeUsoMB {
 		
 	}
 	
+	public void novoCaso(){
+		casoDeUso = new CasoDeUso();
+	}
+	
 	public String addCaso(){
 		return "addCasos";
 	}
@@ -91,4 +95,5 @@ public class CasoDeUsoMB {
 	public void setProjetoMB(ProjetoMB projetoMB) {
 		this.projetoMB = projetoMB;
 	}
+
 }

@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -18,8 +16,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import br.unigranrio.bean.requisito.enums.TipoCasoDeUso;
 
 @Entity
 @XmlRootElement(name = "casoDeUso") //representa o elemento principal, ou a tag principal do XML.
@@ -34,7 +30,7 @@ public class CasoDeUso implements Serializable {
 	private String codigo;
 	private String nome;
 	private String objetivo;
-	private TipoCasoDeUso tipo;
+	private String tipo;
 
 	private List<Ator> atores = new ArrayList<Ator>();
 	private List<CasoDeUsoAtor> casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
@@ -69,6 +65,7 @@ public class CasoDeUso implements Serializable {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+	
 	@XmlElement(name="casoDeUso_codigo")
 	public String getCodigo() {
 		return codigo;
@@ -77,6 +74,7 @@ public class CasoDeUso implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
 	@XmlElement(name="casoDeUso_nome")
 	public String getNome() {
 		return nome;
@@ -85,6 +83,7 @@ public class CasoDeUso implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	@XmlElement(name="casoDeUso_objetivo")
 	public String getObjetivo() {
 		return objetivo;
@@ -94,13 +93,12 @@ public class CasoDeUso implements Serializable {
 		this.objetivo = objetivo;
 	}
 
-	@Enumerated(EnumType.ORDINAL)
 	@XmlElement(name="casoDeUso_tipo")
-	public TipoCasoDeUso getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoCasoDeUso tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	

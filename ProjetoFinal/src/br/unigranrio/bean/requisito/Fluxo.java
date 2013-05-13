@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,23 +12,18 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.unigranrio.bean.requisito.enums.TipoFluxo;
-
 @Entity
 @XmlRootElement(name = "fluxo") //representa o elemento principal, ou a tag principal do XML.
 public class Fluxo implements Serializable{
 	
-	
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
-	private TipoFluxo tipo;
+	private String tipo;
 	private CasoDeUso casoDeUso;
-//	protected List<Passo> passos;
-//	protected Passo disparadoPor;
 	private int codigo;
 	
 	public Fluxo() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Id
@@ -43,6 +36,7 @@ public class Fluxo implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	@XmlElement(name="fluxo_nome")
 	public String getNome() {
 		return nome;
@@ -52,13 +46,12 @@ public class Fluxo implements Serializable{
 		this.nome = nome;
 	}
 
-	@Enumerated(EnumType.ORDINAL)
 	@XmlElement(name="fluxo_tipo")
-	public TipoFluxo getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoFluxo tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	
@@ -73,22 +66,6 @@ public class Fluxo implements Serializable{
 		this.casoDeUso = casoDeUso;
 	}
 
-/*	public List<Passo> getPassos() {
-		return passos;
-	}
-
-	public void setPassos(List<Passo> passos) {
-		this.passos = passos;
-	}
-
-	public Passo getDisparadoPor() {
-		return disparadoPor;
-	}
-
-	public void setDisparadoPor(Passo disparadoPor) {
-		this.disparadoPor = disparadoPor;
-	}
-*/
 	@Transient
 	@XmlElement(name="fluxo_codigo")
 	public int getCodigo() {

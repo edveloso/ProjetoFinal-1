@@ -6,27 +6,26 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import br.unigranrio.bean.requisito.enums.TipoAtor;
 
 
 
 @Entity
 @XmlRootElement(name = "ator") //representa o elemento principal, ou a tag principal do XML.
 public class Ator implements Serializable{
-		
+
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
 	private Projeto projeto;
-	private TipoAtor tipo;
+	private String tipo;
 	private List<CasoDeUsoAtor> casosDeUsoAtor;
 
 	public Ator() {
@@ -65,15 +64,15 @@ public class Ator implements Serializable{
 	}
 	
 	@XmlElement(name= "ator_tipo")
-	public TipoAtor getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoAtor tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ator")
+	@Transient
 	@XmlElementWrapper(name = "casosDeUso_atores")
 	@XmlElement(name="ator_casosDeUso")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
