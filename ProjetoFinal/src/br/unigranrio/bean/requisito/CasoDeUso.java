@@ -7,11 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
@@ -112,7 +112,7 @@ public class CasoDeUso implements Serializable {
 		this.atores = atores;
 	}
 	
-	@Transient
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.casoDeUso", cascade=CascadeType.ALL)
 	@XmlElementWrapper(name="casoDeUso_casosAtores")
 	@XmlElement(name="casoDeUso_casosAtor")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {

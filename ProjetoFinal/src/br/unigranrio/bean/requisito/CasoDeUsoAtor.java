@@ -2,54 +2,51 @@ package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.xml.bind.annotation.XmlElement;
+import javax.persistence.JoinColumn;
+import javax.persistence.Transient;
 
 
 @Entity
+@AssociationOverrides({
+	@AssociationOverride(name = "pk.casoDeUso", 
+		joinColumns = @JoinColumn(name = "casoDeUso_id")),
+	@AssociationOverride(name = "pk.ator", 
+		joinColumns = @JoinColumn(name = "ator_id")) })
 public class CasoDeUsoAtor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private long id;
-	private Ator ator = new Ator();
-	private CasoDeUso casoDeUso = new CasoDeUso();
+	private CasoDeUsoAtorId pk = new CasoDeUsoAtorId();
 	private String tipoAtor;
 	
-	@Id
-	@GeneratedValue
-	@Column(name="casoAtor_id")
-	@XmlElement(name="casoAtor_id")
-	public long getId() {
-		return id;
+	@EmbeddedId
+	public CasoDeUsoAtorId getPk() {
+		return pk;
+	}
+
+	public void setPk(CasoDeUsoAtorId pk) {
+		this.pk = pk;
 	}
 	
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	@OneToOne
-	@PrimaryKeyJoinColumn(referencedColumnName="ator_id")
-	public Ator getAtor() {
-		return ator;
-	}
-	
-	public void setAtor(Ator ator) {
-		this.ator = ator;
-	}
-	
-	@OneToOne
-	@PrimaryKeyJoinColumn(referencedColumnName="casoDeUso_id")
+	@Transient
 	public CasoDeUso getCasoDeUso() {
-		return casoDeUso;
+		return getPk().getCasoDeUso();
 	}
 	
 	public void setCasoDeUso(CasoDeUso casoDeUso) {
-		this.casoDeUso = casoDeUso;
+		getPk().setCasoDeUso(casoDeUso);
+	}
+	
+	@Transient
+	public Ator getAtor() {
+		return getPk().getAtor();
+	}
+	
+	public void setAtor(Ator ator) {
+		getPk().setAtor(ator);
 	}
 
 	public String getTipoAtor() {
@@ -59,5 +56,20 @@ public class CasoDeUsoAtor implements Serializable{
 	public void setTipoAtor(String tipoAtor) {
 		this.tipoAtor = tipoAtor;
 	}
+	
+	public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CasoDeUsoAtor that = (CasoDeUsoAtor) o;
+
+        if (getPk() != null ? !getPk().equals(that.getPk()) : that.getPk() != null) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        return (getPk() != null ? getPk().hashCode() : 0);
+    }
 	
 }
