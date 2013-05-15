@@ -14,9 +14,8 @@
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="140">
+		<p:layoutUnit position="north" size="190">
 			<h:graphicImage url="/template/resources/img/header_uni.jpg" />
-			<p:growl id="msg" />
 			<p:menubar>
 				<p:menuitem value="Inicio" url="/index.jsf" />
 				<p:menuitem value="Projetos" url="/listProjetos.jsf" icon="ui-icon-document" />
@@ -24,6 +23,10 @@
 				<p:menuitem value="Casos de Uso" url="/listCasos.jsf" icon="ui-icon-pencil" />
 				<p:menuitem value="Exportações" url="/exportacoes.jsf" icon="ui-icon-script" />
 			</p:menubar>
+			<br />
+			<p:panel styleClass="ui-state-error">
+				<h:outputText value="#{mensagemMB.mensagem}" />
+			</p:panel>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
