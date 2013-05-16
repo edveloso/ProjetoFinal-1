@@ -22,13 +22,16 @@ public class CasoDeUsoMB {
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
+	
+	@ManagedProperty("#{mensagemMB}")
+	private MensagemMB msgMB;
 
 	public CasoDeUsoMB() {
 		
 	}
 	
 	public void novoCaso(){
-		casoDeUso = new CasoDeUso();
+		this.casoDeUso = new CasoDeUso();
 	}
 	
 	public String addCaso(){
@@ -36,6 +39,9 @@ public class CasoDeUsoMB {
 	}
 	
 	public String atualizaCaso(){
+		casoDeUso = casosDeUso.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: ", casoDeUso.getNome()));
+		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoDeUso.getCodigo() + " - " + casoDeUso.getNome());
 		return "updateCasos";
 	}
 	
@@ -63,6 +69,7 @@ public class CasoDeUsoMB {
 	public void escolheCaso(ActionEvent actionEvent){
 		casoDeUso = casosDeUso.getRowData();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: ", casoDeUso.getNome()));
+		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoDeUso.getCodigo() + " - " + casoDeUso.getNome());
 	}
 
 	public ListDataModel<CasoDeUso> getCasosDeUso() {
@@ -96,4 +103,12 @@ public class CasoDeUsoMB {
 		this.projetoMB = projetoMB;
 	}
 
+	public MensagemMB getMsgMB() {
+		return msgMB;
+	}
+
+	public void setMsgMB(MensagemMB msgMB) {
+		this.msgMB = msgMB;
+	}
+	
 }

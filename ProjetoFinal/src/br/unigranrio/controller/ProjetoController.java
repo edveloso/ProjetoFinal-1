@@ -1,5 +1,7 @@
 package br.unigranrio.controller;
 
+import java.util.List;
+
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.dao.impl.ProjetoDAO;
 
@@ -28,6 +30,10 @@ public class ProjetoController {
 	
 	public Projeto selecionarProjeto(long id){
 		return (Projeto) dao.selecionaPorId(id);
+	}
+	
+	public List<Projeto> retornaTodos(){
+		return dao.retornarTodos();
 	}
 
 }

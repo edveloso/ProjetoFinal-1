@@ -57,7 +57,7 @@ public class ProjetoMB {
 	}
 
 	public ListDataModel<Projeto> getProjetos() {
-		projetos = new ListDataModel<Projeto>(dao.retornarTodos());
+		projetos = new ListDataModel<Projeto>(control.retornaTodos());
 		return projetos;
 	}
 

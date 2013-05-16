@@ -10,10 +10,11 @@
     		Atores
     	</ui:define>
         <ui:define name="conteudo">
-            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" type="button" />
+            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" actionListener="#{atorMB.limpar}" update=":formNovoAtor" type="button" />
 
 			<br />
 			<br />
+			<!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
@@ -24,10 +25,10 @@
 					<p:column headerText="Nome" style="width:80%">
 						<h:outputText value="#{ator.nome}" />
 					</p:column>
-					<p:column style="width:5%">
+					<p:column headerText="Editar" style="width:5%">
 						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formEditAtor" oncomplete="modalEditAtor.show();" icon="ui-icon-pencil" />
 					</p:column>
-					<p:column style="width:5%">
+					<p:column headerText="Excluir" style="width:5%">
 						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
 					</p:column> 
 				</p:dataTable>
@@ -42,7 +43,7 @@
 	            		
 	            		<f:facet name="footer">
 		            		<p:commandButton value="Gravar" actionListener="#{atorMB.salvar}" update=":formLista" oncomplete="modalNovoAtor.hide()" />
-		            		<p:commandButton value="Limpar" actionListener="#{atorMB.limpar}" />
+		            		<p:commandButton value="Limpar" actionListener="#{atorMB.limpar}" update=":formNovoAtor" />
 	            		</f:facet>
 	            	
 	            	</p:panelGrid>

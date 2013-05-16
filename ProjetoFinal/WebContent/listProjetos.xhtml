@@ -10,10 +10,11 @@
     		Projetos
     	</ui:define>
 	<ui:define name="conteudo">
-		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" type="button" />
+		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" type="button" />
 
 		<br />
 		<br />
+		<!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 		<h:form id="formLista">
@@ -31,10 +32,10 @@
 				<p:column headerText="Nome" style="width:85%">
 					<h:outputText value="#{projeto.nome}" />
 				</p:column>
-				<p:column style="width:5%">
+				<p:column headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formEditProjeto" oncomplete="modalEditProjeto.show();" icon="ui-icon-pencil" />
 				</p:column>
-				<p:column style="width:5%">
+				<p:column headerText="Excluir" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formRemover" oncomplete="modalRemover.show();" icon="ui-icon-trash" />
 				</p:column>  
   
@@ -50,7 +51,7 @@
 
 					<f:facet name="footer">
 						<p:commandButton value="Salvar"	actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" />
-						<p:commandButton value="Limpar"	actionListener="#{projetoMB.limpar}" />
+						<p:commandButton value="Limpar"	actionListener="#{projetoMB.limpar}" update=":formProjeto" />
 					</f:facet>
 
 				</p:panelGrid>
