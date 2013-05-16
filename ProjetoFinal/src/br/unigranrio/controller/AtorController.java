@@ -50,4 +50,8 @@ public class AtorController {
 	public List<Ator> selecionarTodosProjeto(long id){
 		return dao.retornaPorProjeto(id);
 	}
+	
+	public Ator selecionaAtorPorId(long id){
+		return (Ator) dao.selecionaPorId(id);
+	}
 }

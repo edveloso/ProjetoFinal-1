@@ -21,7 +21,7 @@ public class CasoDeUsoAtorDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<CasoDeUsoAtor> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from casodeusoator where casoDeUso_casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from casodeusoator where casoDeUso_id=:id")
 				.addEntity(CasoDeUsoAtor.class)
 				.setParameter("id", id);
 		return query.list();

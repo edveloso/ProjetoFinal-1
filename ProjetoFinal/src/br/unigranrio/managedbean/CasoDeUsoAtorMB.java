@@ -1,6 +1,7 @@
 package br.unigranrio.managedbean;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -10,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
@@ -27,6 +29,7 @@ public class CasoDeUsoAtorMB {
 	private AtorController controlAtor = new AtorController();
 	private List<Ator> listAtores;
 	private List<CasoDeUsoAtor> listAtoresCaso;
+	private long atorId;
 	
 	@ManagedProperty(value="#{casoDeUsoMB}")
 	private CasoDeUsoMB casoMB;
@@ -46,7 +49,7 @@ public class CasoDeUsoAtorMB {
 	}
 	
 	public String remover(ActionEvent actionEvent){
-		control.remover(casoAtor.getId());
+		control.removerObj(casoAtor);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Removido com Sucesso", ""));
 		return "updateCasos";
 	}
@@ -118,7 +121,7 @@ public class CasoDeUsoAtorMB {
 		listAtores = controlAtor.selecionarTodosProjeto(id);
 		return listAtores;
 	}
-
+	
 	public void setListAtores(List<Ator> listAtores) {
 		this.listAtores = listAtores;
 	}
@@ -132,12 +135,24 @@ public class CasoDeUsoAtorMB {
 	}
 	
 	public String salvar(){
+		System.out.println("Entrou em salvar()");
 		String erro = null;
-		CasoDeUso casoDeUso = casoMB.getCasoDeUso();
-		Ator ator = atorMB.getAtor();
+		System.out.println("Passou por por erro=null");
+		CasoDeUso casoDeUso = new CasoDeUso(); 
+		casoDeUso = casoMB.getCasoDeUso();
+		System.out.println("recuperou o caso de uso");
+		//Ator ator = atorMB.getAtor();
+		Ator ator = new Ator(); 
+		ator = controlAtor.selecionaAtorPorId(atorId);
+		System.out.println("recuperou o ator");
 		casoAtor.setCasoDeUso(casoDeUso);
+		System.out.println("setou caso de uso no casoAtor");
 		casoAtor.setAtor(ator);
+		System.out.println("setou ator no casoAtor");
+		System.out.println(ator.getNome() + casoDeUso.getNome());
 		erro = control.gravar(casoAtor);
+		System.out.println("chamou control.gravar()");
+		System.out.println(erro);
 		if(erro == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator do Caso de Uso Salvo com Sucesso", casoAtor.getAtor().getNome()));
 			return "updateCasos";
@@ -146,4 +161,13 @@ public class CasoDeUsoAtorMB {
 			return "updateCasos";
 		}
 	}
+
+	public long getAtorId() {
+		return atorId;
+	}
+
+	public void setAtorId(long atorId) {
+		this.atorId = atorId;
+	}
+
 }

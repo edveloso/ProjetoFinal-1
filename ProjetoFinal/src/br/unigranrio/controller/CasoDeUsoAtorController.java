@@ -29,4 +29,8 @@ public class CasoDeUsoAtorController {
 		dao.removerPorId(id);
 	}
 	
+	public void removerObj(CasoDeUsoAtor casoAtor){
+		dao.remover(casoAtor);
+	}
+	
 }

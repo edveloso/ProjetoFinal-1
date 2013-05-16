@@ -3,6 +3,7 @@ package br.unigranrio.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,7 +14,6 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 
 	public AbstractHibernateDAO(final Class<T> clazzToSet) {
 		this.session = HibernateUtil.getSession();
-		
 		this.clazz = clazzToSet;
 	}
 
@@ -28,25 +28,47 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 	}
 
 	public void gravar(final T entity) {
-		session.beginTransaction();
-		session.save(entity);
-		session.getTransaction().commit();
+		try {
+			if(session == null)
+				session = HibernateUtil.getSession();
+			session.beginTransaction();
+			session.merge(entity);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void atualizar(final T entity) {
-		session.beginTransaction();
-		session.merge(entity);
-		session.getTransaction().commit();
+		try {
+			session.beginTransaction();
+			session.merge(entity);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void remover(final T entity) {
-		session.beginTransaction();
-		session.delete(entity);
-		session.getTransaction().commit();
+		try {
+			session.beginTransaction();
+			session.delete(entity);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 	public void removerPorId(final Long entityId) {
-		final T entity = this.selecionaPorId(entityId);
-		this.remover(entity);
+		try {
+			final T entity = this.selecionaPorId(entityId);
+			this.remover(entity);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 }
