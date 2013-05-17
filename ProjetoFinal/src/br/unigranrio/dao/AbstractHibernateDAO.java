@@ -32,7 +32,7 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 			if(session == null)
 				session = HibernateUtil.getSession();
 			session.beginTransaction();
-			session.merge(entity);
+			session.save(entity);
 			session.getTransaction().commit();
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();

@@ -18,7 +18,7 @@ public class CasoDeUsoAtorController {
 	public String gravar(CasoDeUsoAtor casoAtor){
 		String erro = null;
 		try {
-			dao.gravar(casoAtor);
+			dao.merge(casoAtor);
 		} catch (Exception e) {
 			erro = e.toString();
 		}

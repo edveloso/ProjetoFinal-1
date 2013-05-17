@@ -2,6 +2,7 @@ package br.unigranrio.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -27,5 +28,17 @@ public class CasoDeUsoAtorDAO extends AbstractHibernateDAO{
 		return query.list();
 	}
 
-
+	public void merge(CasoDeUsoAtor casoAtor){
+		try {
+			if(session == null)
+				session = HibernateUtil.getSession();
+			session.beginTransaction();
+			session.merge(casoAtor);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+	}
+	
 }

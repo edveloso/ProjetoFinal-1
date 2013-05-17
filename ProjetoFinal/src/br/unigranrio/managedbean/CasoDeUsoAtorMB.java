@@ -53,14 +53,7 @@ public class CasoDeUsoAtorMB {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Removido com Sucesso", ""));
 		return "updateCasos";
 	}
-	
-	/*public List<Ator> listAtores(){
-		long id = projetoMB.getProjeto().getId();
-		System.out.println(id);
-		listAtores = controlAtor.selecionarTodosProjeto(id);
-		return listAtores;
-	}*/
-	
+
 	public List<CasoDeUsoAtor> getlistAtoresCaso(){
 		CasoDeUso caso = casoMB.getCasoDeUso();
 		if(caso == null){
@@ -135,24 +128,14 @@ public class CasoDeUsoAtorMB {
 	}
 	
 	public String salvar(){
-		System.out.println("Entrou em salvar()");
 		String erro = null;
-		System.out.println("Passou por por erro=null");
 		CasoDeUso casoDeUso = new CasoDeUso(); 
 		casoDeUso = casoMB.getCasoDeUso();
-		System.out.println("recuperou o caso de uso");
-		//Ator ator = atorMB.getAtor();
 		Ator ator = new Ator(); 
 		ator = controlAtor.selecionaAtorPorId(atorId);
-		System.out.println("recuperou o ator");
 		casoAtor.setCasoDeUso(casoDeUso);
-		System.out.println("setou caso de uso no casoAtor");
 		casoAtor.setAtor(ator);
-		System.out.println("setou ator no casoAtor");
-		System.out.println(ator.getNome() + casoDeUso.getNome());
 		erro = control.gravar(casoAtor);
-		System.out.println("chamou control.gravar()");
-		System.out.println(erro);
 		if(erro == null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator do Caso de Uso Salvo com Sucesso", casoAtor.getAtor().getNome()));
 			return "updateCasos";
