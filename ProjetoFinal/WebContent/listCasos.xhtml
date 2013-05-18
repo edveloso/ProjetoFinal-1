@@ -14,8 +14,6 @@
 
 			<br />
 			<br />
-			
-			<!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
@@ -45,60 +43,60 @@
 			</h:form>
 			
 			<p:dialog header="Remover Caso de Uso" widgetVar="modalRemoverCaso" showEffect="clip" hideEffect="explode">
-			<h:form id="formRemoverCaso">
-				<p:panelGrid columns="1">
-					<h:outputLabel value="Tem certeza de que deseja remover o caso de uso #{casoDeUsoMB.casoDeUso.nome} ?" style="font:14px" />
-					<f:facet name="footer">
-						<p:commandButton value="Sim" actionListener="#{casoDeUsoMB.remover}" update=":formLista" oncomplete="modalRemoverCaso.hide()" />
-						<p:commandButton value="Não" oncomplete="modalRemoverCaso.hide()" />
-					</f:facet>
-				</p:panelGrid>
-			</h:form>
-		</p:dialog>
-		
-		<p:dialog header="Cadastrar Caso de Uso" widgetVar="modalNovoCaso" showEffect="clip" hideEffect="explode">
-			<h:form id="formNovoCaso">
-	            <p:fieldset legend="Dados do Caso de Uso">
+				<h:form id="formRemoverCaso">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o caso de uso #{casoDeUsoMB.casoDeUso.nome} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{casoDeUsoMB.remover}" update=":formLista" oncomplete="modalRemoverCaso.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverCaso.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Cadastrar Caso de Uso" widgetVar="modalNovoCaso" showEffect="clip" hideEffect="explode">
+				<h:form id="formNovoCaso">
 	            	 <h:panelGrid columns="2">
 			            <p:outputLabel value="Código" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
-	            		<p:selectOneRadio value="#{casoDeUsoMB.casoDeUso.tipo}">
-          					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
-            				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
-          				</p:selectOneRadio>
+	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
+	         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
+	           				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
+	         				</p:selectOneMenu>
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
+	            		<f:facet name="footer">
+	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()" />
+	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
+	            		</f:facet>
 	            	</h:panelGrid>
-	            	<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()" />
-	            	<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
-	            </p:fieldset>
-            </h:form>
-		</p:dialog>
-		
-		<p:dialog header="Alterar Caso de Uso" widgetVar="modalEditCaso" showEffect="clip" hideEffect="explode">
-			<h:form id="formEditCaso">
-	            <p:fieldset legend="Dados do Caso de Uso">
+	            </h:form>
+			</p:dialog>
+			
+			<p:dialog header="Alterar Caso de Uso" widgetVar="modalEditCaso" showEffect="clip" hideEffect="explode">
+				<h:form id="formEditCaso">
 	            	 <h:panelGrid columns="2">
 			            <p:outputLabel value="Código" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
-	            		<p:selectOneRadio value="#{casoDeUsoMB.casoDeUso.tipo}">
-          					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
-            				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
-          				</p:selectOneRadio>
+	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
+	         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
+	           				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
+	         				</p:selectOneMenu>
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
+	            		<f:facet name="footer">
+	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.atualizar}" update=":formLista" oncomplete="modalEditCaso.hide()" />
+	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
+	            		</f:facet>
 	            	</h:panelGrid>
-	            	<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()" />
-	            	<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
-	            </p:fieldset>
-            </h:form>
-		</p:dialog>
+	            </h:form>
+			</p:dialog>
 
         </ui:define>
     </ui:decorate>

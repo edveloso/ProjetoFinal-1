@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"> <ui:decorate
+	template="/template/template.xhtml">
+	<ui:define name="title">
+    		Passos
+   	</ui:define>
+	<ui:define name="conteudo">
+		<p:commandButton value="Novo" onclick="modalNovoPasso.show();" actionListener="#{passoMB.limpar}" update=":formPasso" />
+
+		<br />
+		<br />
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+		<h:form id="formLista">
+			<p:dataTable var="passo" value="#{passoMB.passos}" style="width:800px">
+
+				<f:facet name="header">  
+			            Passos  
+		        </f:facet>
+		        
+				<p:column headerText="Id" style="width:5%">
+					<h:outputText value="#{passo.id}" />
+				</p:column>
+				<p:column headerText="Código" style="width:5%">
+					<h:outputText value="#{passo.codigo}" />
+				</p:column>
+				<p:column headerText="Ator" style="width:15%">
+					<h:outputText value="#{passo.ator.nome}" />
+				</p:column>
+				<p:column headerText="Ação" style="width:15%">
+					<h:outputText value="#{passo.acao}" />
+				</p:column>
+				<p:column headerText="Complemento" style="width:45%">
+					<h:outputText value="#{passo.complemento}" />
+				</p:column>
+				<p:column headerText="Ponto de Extensão" style="width:5%">
+					<h:outputText value="#{passo.pontoDeExtensao}" />
+				</p:column>
+				<p:column headerText="Editar" style="width:5%">
+					<p:commandButton actionListener="#{passoMB.escolhe}" update=":formEditPasso" oncomplete="modalEditPasso.show();" icon="ui-icon-pencil" />
+				</p:column>
+				<p:column headerText="Excluir" style="width:5%">
+					<p:commandButton actionListener="#{passoMB.escolhe}" update=":formRemoverPasso" oncomplete="modalRemoverPasso.show();" icon="ui-icon-trash" />
+				</p:column>  
+  
+			</p:dataTable>
+		</h:form>
+
+		<p:dialog header="Novo Passo" widgetVar="modalNovoPasso" showEffect="clip" hideEffect="explode">
+			<h:form id="formPasso">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Código" />
+					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
+					
+					<p:outputLabel value="Ator" />
+					<p:inputText value="#{passoMB.passo.codigo}" required="true" />
+					
+					<p:outputLabel value="Ação" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="" size="20" required="true" />
+					
+					<p:outputLabel value="Complemento" />
+					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
+					
+					<p:outputLabel value="Ponto de Extensão" />
+					<p:inputText value="#{passoMB.passo.pontoDeExtensao}" required="true" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Salvar"	actionListener="#{passoMB.salvar}" update=":formLista" oncomplete="modalNovoPasso.hide()" />
+						<p:commandButton value="Limpar"	actionListener="#{passoMB.limpar}" update=":formPasso" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Editar Passo" widgetVar="modalEditPasso" showEffect="clip" hideEffect="explode">
+			<h:form id="formEditPasso">
+				<h:panelGrid id="editPasso" columns="2">
+
+					<p:outputLabel value="Código" />
+					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
+					
+					<p:outputLabel value="Ator" />
+					<p:inputText value="#{passoMB.passo.codigo}" required="true" />
+					
+					<p:outputLabel value="Ação" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="" size="20" required="true" />
+					
+					<p:outputLabel value="Complemento" />
+					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
+					
+					<p:outputLabel value="Ponto de Extensão" />
+					<p:inputText value="#{passoMB.passo.pontoDeExtensao}" required="true" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Remover Passo" widgetVar="modalRemoverPasso" showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverPasso">
+				<h:panelGrid columns="2">
+					<h:outputText value="Tem certeza de que deseja remover o passo: " />
+					<p:outputLabel value="#{passoMB.passo.codigo}" style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{passoMB.remover}" update=":formLista" oncomplete="modalRemoverPasso.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemoverPasso.hide()" />
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+	</ui:define>
+</ui:decorate> </html>

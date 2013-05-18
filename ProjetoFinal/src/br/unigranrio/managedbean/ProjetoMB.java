@@ -27,11 +27,11 @@ public class ProjetoMB {
 	public String salvar() {
 		control.gravar(projeto);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso", projeto.getNome()));  
-		projeto = new Projeto();
 		return "listProjetos";
 	}
 
 	public String atualizar(ActionEvent actionEvent) {
+		projeto = new Projeto();
 		control.atualizar(projeto);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso", projeto.getNome()));
 		return "listProjetos";
@@ -51,6 +51,7 @@ public class ProjetoMB {
 
 	public void limpar() {
 		projeto = new Projeto();
+		msgMB.setMensagem("Escolha um projeto abaixo: ");
 	}
 
 	public ProjetoMB() {

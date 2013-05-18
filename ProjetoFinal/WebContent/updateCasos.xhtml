@@ -50,10 +50,10 @@
 	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" var="ator" itemLabel="#{ator.nome}" itemValue="#{ator.id}" />
 	            				</p:selectOneMenu>
 	            				<p:outputLabel value="Tipo de Ator" />
-	            				<p:selectOneRadio value="#{casoDeUsoAtorMB.casoAtor.tipoAtor}">
+	            				<p:selectOneMenu value="#{casoDeUsoAtorMB.casoAtor.tipoAtor}">
 		          					<f:selectItem itemLabel="Primário" itemValue="Primario" />  
 		            				<f:selectItem itemLabel="Secundário" itemValue="Secundario" /> 
-		          				</p:selectOneRadio>
+		          				</p:selectOneMenu>
 	            				<p:commandButton value="Gravar" actionListener="#{casoDeUsoAtorMB.salvar}" update=":tabCaso:formAtores" />
 	            			</h:panelGrid>
 	            		</h:form>
@@ -202,47 +202,39 @@
             		<p:tab title="Fluxos">
             	
             			<h:form id="formInfoCaso5">
-	            			<h:panelGrid columns="4">
-	            				<p:outputLabel value="Fluxo" />
-	            				<p:outputLabel value="Ator" />
-	            				<p:outputLabel value="Ação" />
-	            				<p:outputLabel value="Complemento" />
-	            				<p:selectOneMenu>
+	            			<h:panelGrid columns="2">
+	            				<p:outputLabel value="Código" />
+	            				<p:inputText value="#{fluxoMB.fluxo.codigo}" />
+	            				<p:outputLabel value="Tipo" />
+	            				<p:selectOneMenu value="#{fluxoMB.fluxo.tipo}">
 	            					<f:selectItem itemLabel="Principal" itemValue="Principal" />
 	            					<f:selectItem itemLabel="Exceção" itemValue="Excecao" />
 	            					<f:selectItem itemLabel="Alternativo" itemValue="Alternativo" />
 	            				</p:selectOneMenu>
-	            				<p:selectOneMenu value="#{passoMB.passo.ator}">
-	            					<f:selectItems value="#{casoDeUsoAtorMB.listAtores}" var="ator" itemLabel="#{ator.nome}" />
-	            				</p:selectOneMenu>
-	            				<p:autoComplete value="" />
-	            				<p:inputText value="" />
-	            				<p:commandButton value="Gravar" actionListener="{passoMB.salvar}" update=":tabCaso:formPasso" />
+	            				<p:outputLabel value="Nome" />
+	            				<p:inputText value="#{fluxoMB.fluxo.nome}" />
+	            				<p:commandButton value="Gravar" actionListener="#{fluxoMB.salvar}" update=":tabCaso:formFluxo" />
 	            			</h:panelGrid>
 	            		</h:form>
             	
-            			<h:form id="formPasso">
-            				<p:dataTable var="passo" value="" style="width:600px">
+            			<h:form id="formFluxo">
+            				<p:dataTable var="fluxo" value="#{fluxoMB.fluxos}" style="width:600px">
 	            				<f:facet name="header">
-	            					Passos
+	            					Fluxos
 	            				</f:facet>
-	            				<p:column headerText="Fluxo" style="width:10%">
-            						<h:outputText value="" />
+	            				<p:column headerText="Código" style="width:10%">
+	            					<p:commandLink action="#{fluxoMB.adicionaPasso}">
+            							<h:outputText value="#{fluxo.codigo}" />
+            						</p:commandLink>
             					</p:column>
-            					<p:column headerText="Código" style="width:10%">
-            						<h:outputText value="" />
+            					<p:column headerText="Tipo" style="width:20%">
+            						<h:outputText value="#{fluxo.tipo}" />
             					</p:column>
-            					<p:column headerText="Ator" style="width:20%">
-            						<h:outputText value="" />
-            					</p:column>
-            					<p:column headerText="Ação" style="width:20%">
-            						<h:outputText value="" />
-            					</p:column>
-            					<p:column headerText="Complemento" style="width:30%">
-            						<h:outputText value="" />
+            					<p:column headerText="Nome" style="width:60%">
+            						<h:outputText value="#{fluxo.nome}" />
             					</p:column>
             					<p:column style="width:10%">
-            						<h:outputText value="remover" />
+            						<p:commandButton actionListener="#{fluxoMB.escolhe}" update=":formRemoverFluxo" oncomplete="modalRemoverFluxo.show();" icon="ui-icon-trash" />
             					</p:column>
             				</p:dataTable>
             			</h:form>
@@ -307,6 +299,18 @@
 						<f:facet name="footer">
 							<p:commandButton value="Sim" actionListener="#{requisitoNaoFuncionalMB.remover}" update=":tabCaso:formRequisito" oncomplete="modalRemoverRequisito.hide()" />
 							<p:commandButton value="Não" oncomplete="modalRemoverRequisito.hide()" />
+						</f:facet>
+					</p:panelGrid>
+				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Remover Fluxo" widgetVar="modalRemoverFluxo" showEffect="clip" hideEffect="explode">
+				<h:form id="formRemoverFluxo">
+					<p:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o Fluxo: #{fluxoMB.fluxo.nome} ?" style="font:14px" />
+						<f:facet name="footer">
+							<p:commandButton value="Sim" actionListener="#{fluxoMB.remover}" update=":tabCaso:formFluxo" oncomplete="modalRemoverFluxo.hide()" />
+							<p:commandButton value="Não" oncomplete="modalRemoverFluxo.hide()" />
 						</f:facet>
 					</p:panelGrid>
 				</h:form>

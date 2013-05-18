@@ -10,11 +10,10 @@
     		Atores
     	</ui:define>
         <ui:define name="conteudo">
-            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" actionListener="#{atorMB.limpar}" update=":formNovoAtor" type="button" />
+            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" actionListener="#{atorMB.limpar}" update=":formNovoAtor" />
 
 			<br />
 			<br />
-			<!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
@@ -36,7 +35,7 @@
 
 			<p:dialog widgetVar="modalNovoAtor" header="Novo Ator" showEffect="clip" hideEffect="explode">
 				<h:form id="formNovoAtor">
-	            	<p:panelGrid columns="2">
+	            	<h:panelGrid columns="2">
 		            		            	
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
@@ -46,14 +45,14 @@
 		            		<p:commandButton value="Limpar" actionListener="#{atorMB.limpar}" update=":formNovoAtor" />
 	            		</f:facet>
 	            	
-	            	</p:panelGrid>
+	            	</h:panelGrid>
 	            </h:form>
 			</p:dialog>
 			
 			
 			<p:dialog widgetVar="modalEditAtor" header="Editar Ator" showEffect="clip" hideEffect="explode">
 				<h:form id="formEditAtor">
-	            	<p:panelGrid columns="4">
+	            	<h:panelGrid columns="4">
 		            		            	
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
@@ -62,7 +61,7 @@
 		            		<p:commandButton value="Atualizar" actionListener="#{atorMB.atualizar}" update=":formLista" oncomplete="modalEditAtor.hide()" />
 	            		</f:facet>
 	            	
-	            	</p:panelGrid>
+	            	</h:panelGrid>
 	            </h:form>
 			</p:dialog>
 			

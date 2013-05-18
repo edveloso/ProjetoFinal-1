@@ -23,17 +23,13 @@ public class Fluxo implements Serializable {
 	private Long id;
 	private String nome;
 	private String tipo;
+	private String codigo;
 	private CasoDeUso casoDeUso;
-	
 	protected List<Passo> passos;
 	
 	private List<Passo> passosParaXML = new ArrayList<Passo>();
-	
 	protected Passo disparadoPor;
-	
 	private Passo disparadoPorParaXML;
-	
-	private int codigo;
 
 	@Id
 	@GeneratedValue
@@ -59,6 +55,14 @@ public class Fluxo implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	@ManyToOne
@@ -114,12 +118,4 @@ public class Fluxo implements Serializable {
 		this.disparadoPorParaXML = disparadoPor;
 	}
 
-	@Transient
-	public int getCodigo() {
-		return codigo;
-	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
 }

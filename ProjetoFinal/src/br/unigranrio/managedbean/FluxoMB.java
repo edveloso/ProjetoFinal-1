@@ -24,15 +24,33 @@ public class FluxoMB implements Serializable {
 	private ListDataModel<Fluxo> fluxos;
 	private FluxoController control = new FluxoController();
 	
+	@ManagedProperty(value="#{projetoMB}")
+	private ProjetoMB projetoMB;
+	
 	@ManagedProperty(value="#{casoDeUsoMB}")
 	private CasoDeUsoMB casoMB;
+	
+	@ManagedProperty("#{mensagemMB}")
+	private MensagemMB msgMB;
 
+	public String adicionaPasso(){
+		fluxo = fluxos.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxo.getCodigo() + fluxo.getNome() + fluxo.getTipo()));
+		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " - " + fluxo.getCodigo() + fluxo.getNome() + fluxo.getTipo());
+		return "listPassos";
+	}
+	
 	public String salvar() {
+		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
 		fluxo.setCasoDeUso(caso);
-		control.gravar(fluxo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Salvo com Sucesso", fluxo.getNome()));
-		fluxo = new Fluxo();
+		erro = control.gravar(fluxo);
+		if(erro == null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Salvo com Sucesso", fluxo.getNome()));
+			fluxo = new Fluxo();
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao salvar o Fluxo", erro));
+		}
 		return "updateCasos";
 	}
 	

@@ -8,13 +8,12 @@
 	template="/template/template.xhtml">
 	<ui:define name="title">
     		Projetos
-    	</ui:define>
+   	</ui:define>
 	<ui:define name="conteudo">
-		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" type="button" />
+		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" />
 
 		<br />
 		<br />
-		<!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 		<h:form id="formLista">
@@ -44,7 +43,7 @@
 
 		<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto" showEffect="clip" hideEffect="explode">
 			<h:form id="formProjeto">
-				<p:panelGrid columns="2">
+				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Nome" />
 					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
@@ -54,13 +53,13 @@
 						<p:commandButton value="Limpar"	actionListener="#{projetoMB.limpar}" update=":formProjeto" />
 					</f:facet>
 
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 		
 		<p:dialog header="Editar Projeto" widgetVar="modalEditProjeto" showEffect="clip" hideEffect="explode">
 			<h:form id="formEditProjeto">
-				<p:panelGrid id="editProjeto" columns="2">
+				<h:panelGrid id="editProjeto" columns="2">
 
 					<p:outputLabel value="Nome" />
 					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
@@ -69,20 +68,20 @@
 						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />
 					</f:facet>
 
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 		
 		<p:dialog header="Remover Projeto" widgetVar="modalRemover" showEffect="clip" hideEffect="explode">
 			<h:form id="formRemover">
-				<p:panelGrid columns="2">
+				<h:panelGrid columns="2">
 					<h:outputText value="Tem certeza de que deseja remover o projeto: " />
 					<p:outputLabel value="#{projetoMB.projeto.nome}" style="font:14px" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim" actionListener="#{projetoMB.remover}" update=":formLista" oncomplete="modalRemover.hide()" />
 						<p:commandButton value="Não" oncomplete="modalRemover.hide()" />
 					</f:facet>
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 		
