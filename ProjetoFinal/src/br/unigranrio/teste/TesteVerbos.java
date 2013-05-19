@@ -14,7 +14,7 @@ public class TesteVerbos {
 		verbos = control.recuperaVerbos();
 		String verbo = null;
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 10; i < 21; i++) {
 			verbo = verbos.get(i);
 			System.out.println(verbo);
 		}

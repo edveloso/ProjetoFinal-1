@@ -99,7 +99,7 @@ public class Passo implements Serializable {
 		this.pontoDeExtensao = pontoDeExtensao;
 	}
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@PrimaryKeyJoinColumn(name="idAtor")
 	public Ator getAtor() {
 		return ator;

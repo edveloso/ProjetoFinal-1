@@ -22,10 +22,7 @@
 				<f:facet name="header">  
 			            Passos  
 		        </f:facet>
-		        
-				<p:column headerText="Id" style="width:5%">
-					<h:outputText value="#{passo.id}" />
-				</p:column>
+
 				<p:column headerText="Código" style="width:5%">
 					<h:outputText value="#{passo.codigo}" />
 				</p:column>
@@ -35,11 +32,11 @@
 				<p:column headerText="Ação" style="width:15%">
 					<h:outputText value="#{passo.acao}" />
 				</p:column>
-				<p:column headerText="Complemento" style="width:45%">
+				<p:column headerText="Complemento" style="width:50%">
 					<h:outputText value="#{passo.complemento}" />
 				</p:column>
 				<p:column headerText="Ponto de Extensão" style="width:5%">
-					<h:outputText value="#{passo.pontoDeExtensao}" />
+					<h:outputText value="#{passo.pontoDeExtensao.nome}" />
 				</p:column>
 				<p:column headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{passoMB.escolhe}" update=":formEditPasso" oncomplete="modalEditPasso.show();" icon="ui-icon-pencil" />
@@ -108,7 +105,7 @@
        				</p:selectOneMenu>
 
 					<f:facet name="footer">
-						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />
+						<p:commandButton value="Atualizar" actionListener="#{passoMB.atualizar}" update=":formLista" oncomplete="modalEditPasso.hide()" />
 					</f:facet>
 
 				</h:panelGrid>

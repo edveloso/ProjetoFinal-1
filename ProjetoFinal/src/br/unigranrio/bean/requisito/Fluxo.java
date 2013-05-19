@@ -75,9 +75,8 @@ public class Fluxo implements Serializable {
 		this.casoDeUso = casoDeUso;
 	}
 
-	@OneToMany(mappedBy="fluxo", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, 
-		  	  org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+	@OneToMany(mappedBy="fluxo", cascade = CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	public List<Passo> getPassos() {
 		return passos;
 	}
