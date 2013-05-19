@@ -1,7 +1,6 @@
 package br.unigranrio.managedbean;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,7 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.CasoDeUso;
@@ -110,7 +108,6 @@ public class CasoDeUsoAtorMB {
 
 	public List<Ator> getListAtores() {
 		long id = projetoMB.getProjeto().getId();
-		System.out.println(id);
 		listAtores = controlAtor.selecionarTodosProjeto(id);
 		return listAtores;
 	}

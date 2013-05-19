@@ -13,7 +13,7 @@ public class PassoController {
 	}
 	
 	public void gravar(Passo passo){
-		dao.gravar(passo);
+		dao.merge(passo);
 	}
 	
 	public void atualizar(Passo passo) {

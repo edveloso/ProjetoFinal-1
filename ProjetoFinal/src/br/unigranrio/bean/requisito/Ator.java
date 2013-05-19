@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@XmlRootElement(name = "ator") //representa o elemento principal, ou a tag principal do XML.
+@XmlRootElement(name = "ator")
 public class Ator implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -64,7 +63,7 @@ public class Ator implements Serializable{
 		this.projeto = projeto;
 	}
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.ator") //, cascade=CascadeType.ALL
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.ator")
 	@XmlElementWrapper(name = "casosDeUso_atores")
 	@XmlElement(name="ator_casosDeUso")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {

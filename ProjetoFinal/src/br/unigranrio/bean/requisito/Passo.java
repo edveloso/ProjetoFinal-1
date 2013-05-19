@@ -18,10 +18,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name = "passo") //representa o elemento principal, ou a tag principal do XML.
+@XmlRootElement(name = "passo") 
 public class Passo implements Serializable {
  
-
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Integer codigo;
 	private Fluxo fluxo = new Fluxo();	
@@ -78,7 +78,7 @@ public class Passo implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="idFluxo") //insertable=false, updatable=false
+	@JoinColumn(name="idFluxo")
 	@XmlElement(name="passo_fluxo")
 	public Fluxo getFluxo() {
 		return fluxo;
@@ -99,7 +99,7 @@ public class Passo implements Serializable {
 		this.pontoDeExtensao = pontoDeExtensao;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn(name="idAtor")
 	public Ator getAtor() {
 		return ator;

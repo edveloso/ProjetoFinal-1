@@ -59,20 +59,25 @@
 					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
 					
 					<p:outputLabel value="Ator" />
-					<p:inputText value="#{passoMB.passo.codigo}" required="true" />
+					<p:selectOneMenu value="#{passoMB.atorId}">
+       					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
+       				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" size="20" required="true" />
 					
 					<p:outputLabel value="Complemento" />
 					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
 					
 					<p:outputLabel value="Ponto de Extensão" />
-					<p:inputText value="#{passoMB.passo.pontoDeExtensao}" required="true" />
+					<p:selectOneMenu value="#{passoMB.casoId}">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+       					<f:selectItems value="#{passoMB.listCasos}" var="caso" itemLabel="#{caso.nome}" itemValue="#{caso.id}" />
+       				</p:selectOneMenu>
 
 					<f:facet name="footer">
 						<p:commandButton value="Salvar"	actionListener="#{passoMB.salvar}" update=":formLista" oncomplete="modalNovoPasso.hide()" />
-						<p:commandButton value="Limpar"	actionListener="#{passoMB.limpar}" update=":formPasso" />
+						<p:commandButton value="Limpar"	actionListener="#{passoMB.limpar}" update=":formPasso" oncomplete="modalNovoPasso.hide()" />
 					</f:facet>
 
 				</h:panelGrid>
@@ -87,16 +92,20 @@
 					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
 					
 					<p:outputLabel value="Ator" />
-					<p:inputText value="#{passoMB.passo.codigo}" required="true" />
+					<p:selectOneMenu value="#{passoMB.atorId}">
+       					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
+       				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" size="20" required="true" />
 					
 					<p:outputLabel value="Complemento" />
 					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
 					
 					<p:outputLabel value="Ponto de Extensão" />
-					<p:inputText value="#{passoMB.passo.pontoDeExtensao}" required="true" />
+					<p:selectOneMenu value="#{passoMB.casoId}">
+       					<f:selectItems value="#{passoMB.listCasos}" var="caso" itemLabel="#{caso.nome}" itemValue="#{caso.id}" />
+       				</p:selectOneMenu>
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />

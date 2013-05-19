@@ -21,6 +21,7 @@ public class FluxoMB implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Fluxo fluxo = new Fluxo();
+	private Fluxo fluxoEscolhido = new Fluxo();
 	private ListDataModel<Fluxo> fluxos;
 	private FluxoController control = new FluxoController();
 	
@@ -34,9 +35,9 @@ public class FluxoMB implements Serializable {
 	private MensagemMB msgMB;
 
 	public String adicionaPasso(){
-		fluxo = fluxos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxo.getCodigo() + fluxo.getNome() + fluxo.getTipo()));
-		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " - " + fluxo.getCodigo() + fluxo.getNome() + fluxo.getTipo());
+		fluxoEscolhido = fluxos.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo()));
+		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " >> " + fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo());
 		return "listPassos";
 	}
 	
@@ -51,6 +52,7 @@ public class FluxoMB implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao salvar o Fluxo", erro));
 		}
+		fluxo = new Fluxo();
 		return "updateCasos";
 	}
 	
@@ -71,8 +73,8 @@ public class FluxoMB implements Serializable {
 	}
 	
 	public void escolhe(ActionEvent actionEvent){
-		fluxo = fluxos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxo.getTipo()));
+		fluxoEscolhido = fluxos.getRowData();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxoEscolhido.getTipo()));
 	}
 
 	public FluxoMB() {
@@ -107,6 +109,30 @@ public class FluxoMB implements Serializable {
 
 	public void setCasoMB(CasoDeUsoMB casoMB) {
 		this.casoMB = casoMB;
+	}
+
+	public ProjetoMB getProjetoMB() {
+		return projetoMB;
+	}
+
+	public void setProjetoMB(ProjetoMB projetoMB) {
+		this.projetoMB = projetoMB;
+	}
+
+	public MensagemMB getMsgMB() {
+		return msgMB;
+	}
+
+	public void setMsgMB(MensagemMB msgMB) {
+		this.msgMB = msgMB;
+	}
+
+	public Fluxo getFluxoEscolhido() {
+		return fluxoEscolhido;
+	}
+
+	public void setFluxoEscolhido(Fluxo fluxoEscolhido) {
+		this.fluxoEscolhido = fluxoEscolhido;
 	}
 
 }
