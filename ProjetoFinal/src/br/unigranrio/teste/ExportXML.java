@@ -21,7 +21,6 @@ public class ExportXML {
 		Ator ator = new Ator();
 		ator.setNome("Joao");
 		ator.setProjeto(projeto);
-		ator.setTipo("Secundario");
 		
 		JAXBContext context = JAXBContext.newInstance(Ator.class);
 		Marshaller marshal = context.createMarshaller();

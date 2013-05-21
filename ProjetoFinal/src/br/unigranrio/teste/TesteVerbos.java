@@ -1,24 +1,46 @@
 package br.unigranrio.teste;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.unigranrio.controller.VerboController;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TesteVerbos {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException,
+			FileNotFoundException {
 
-		VerboController control = new VerboController();
-		List<String> verbos = new ArrayList<String>();
-		verbos = control.recuperaVerbos();
-		String verbo = null;
+		File arquivo = new File("pt-BR.dic");
+		BufferedReader br = null;
+		String string = null;
 		
-		for (int i = 10; i < 21; i++) {
-			verbo = verbos.get(i);
-			System.out.println(verbo);
+		File arquivoNovo = new File("dic.txt"); 
+		FileWriter fw = new FileWriter(arquivoNovo);  
+		BufferedWriter bw = new BufferedWriter(fw);  
+		
+		String verbo[] = null;
+		
+		try {
+			FileReader fr = new FileReader(arquivo);
+			br = new BufferedReader(fr);
+			string = br.readLine();
+			while (string != null) {
+				string = br.readLine();
+				if(string.contains("/XY")){
+					verbo = string.split("/");
+					System.out.println(verbo[0] + verbo[1]);
+					bw.write(verbo[0]+"\n");
+					bw.flush();
+				}
+			}
+			bw.close();
+			br.close();
+
+		} finally {
+			System.out.println("Terminei");;
 		}
-		
 	}
-
 }

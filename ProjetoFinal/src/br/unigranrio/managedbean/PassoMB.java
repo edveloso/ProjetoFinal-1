@@ -38,6 +38,8 @@ public class PassoMB implements Serializable {
 	private long casoId;
 	private List<CasoDeUsoAtor> listAtores;
 	private List<CasoDeUso> listCasos;
+	List<String> verbos = controlVerbo.recuperaVerbos();
+	List<String> possibilidades = new ArrayList<String>();
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
@@ -49,15 +51,13 @@ public class PassoMB implements Serializable {
 	private CasoDeUsoAtorMB casoDeUsoAtorMB;
 	
 	public List<String> complete(String query){
-		List<String> verbos = new ArrayList<String>();
-		verbos = controlVerbo.recuperaVerbos();
-		/*List<String> possibilidades = new ArrayList<String>();
+
 		for (String string : verbos) {
 			if(string.toLowerCase().startsWith(query.toLowerCase())){
 				possibilidades.add(string);
 			}
-		}*/
-		return verbos;
+		}
+		return possibilidades;
 	}
 
 	public String salvar() {
