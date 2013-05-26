@@ -61,7 +61,7 @@
        				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" />
 					
 					<p:outputLabel value="Complemento" />
 					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
@@ -94,7 +94,7 @@
        				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" />
 					
 					<p:outputLabel value="Complemento" />
 					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />

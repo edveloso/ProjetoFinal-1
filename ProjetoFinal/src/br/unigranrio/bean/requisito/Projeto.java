@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
 @Table(name="projeto")
-@XmlRootElement(name = "projeto") //representa o elemento principal, ou a tag principal do XML.
+@XStreamAlias("projeto")
 public class Projeto implements Serializable {
 
 	private static final long serialVersionUID = 1L;

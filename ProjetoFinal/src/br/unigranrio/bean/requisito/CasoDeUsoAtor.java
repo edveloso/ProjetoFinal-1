@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 
 @Entity
 @AssociationOverrides({
@@ -16,9 +19,12 @@ import javax.persistence.Transient;
 		joinColumns = @JoinColumn(name = "casoDeUso_id")),
 	@AssociationOverride(name = "pk.ator", 
 		joinColumns = @JoinColumn(name = "ator_id")) })
+@XStreamAlias("ator")
 public class CasoDeUsoAtor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@XStreamOmitField
 	private CasoDeUsoAtorId pk = new CasoDeUsoAtorId();
 	private String tipoAtor;
 	

@@ -46,10 +46,8 @@ public class ExportCasoXML {
 		passos.setComplemento("Complemento");
 
 		Fluxo flux = new Fluxo();
-		flux.setCodigo(1);
 		flux.setTipo("Principal");
 		flux.setNome("Fluxo 1");
-		flux.addPassos(passos);
 
 		PosCondicao pos = new PosCondicao();
 		pos.setDescricao("Fechar");

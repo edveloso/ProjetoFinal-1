@@ -23,7 +23,7 @@ public class Passo implements Serializable {
  
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private Integer codigo;
+	private String codigo;
 	private Fluxo fluxo = new Fluxo();	
 	private List<Ator> atorParaXML = new ArrayList<Ator>();
 	private Ator ator = new Ator();
@@ -31,7 +31,7 @@ public class Passo implements Serializable {
 	private String complemento;
 	private CasoDeUso pontoDeExtensao;
 	
-	public Passo(int codigo, String acao, String complemento) {
+	public Passo(String codigo, String acao, String complemento) {
 		this.codigo = codigo;
 		this.acao = acao;
 		this.complemento = complemento; 
@@ -51,11 +51,11 @@ public class Passo implements Serializable {
 	}
 
 	@XmlElement(name="passo_codigo")
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

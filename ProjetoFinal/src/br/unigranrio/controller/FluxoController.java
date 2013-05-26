@@ -14,7 +14,7 @@ public class FluxoController {
 	
 	public String gravar(Fluxo fluxo){
 		String erro = null;
-		/*List<Fluxo> fluxos = dao.retornaPorCaso(fluxo.getCasoDeUso().getId());
+		List<Fluxo> fluxos = dao.retornaPorCaso(fluxo.getCasoDeUso().getId());
 		if(fluxo.getTipo().equals("Principal")){
 			for (Fluxo fluxo2 : fluxos) {
 				if(fluxo.getTipo().equals(fluxo2.getTipo())){
@@ -26,8 +26,8 @@ public class FluxoController {
 			String codigo = fluxo.getCodigo();
 			fluxo.setCodigo("F"+codigo);
 			dao.gravar(fluxo);
-		}*/
-		dao.gravar(fluxo);
+		}
+		//dao.gravar(fluxo);
 		return erro;
 	}
 	

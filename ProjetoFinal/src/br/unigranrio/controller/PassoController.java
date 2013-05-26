@@ -13,6 +13,8 @@ public class PassoController {
 	}
 	
 	public void gravar(Passo passo){
+		String codigo = "P"+passo.getCodigo();
+		passo.setCodigo(codigo);
 		dao.merge(passo);
 	}
 	

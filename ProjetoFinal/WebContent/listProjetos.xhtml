@@ -17,7 +17,7 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:800px">
+			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:600px">
 
 				<f:facet name="header">  
 			            Projetos  
@@ -34,7 +34,7 @@
 				<p:column headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formEditProjeto" oncomplete="modalEditProjeto.show();" icon="ui-icon-pencil" />
 				</p:column>
-				<p:column headerText="Excluir" style="width:5%">
+				<p:column headerText="Remover" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formRemover" oncomplete="modalRemover.show();" icon="ui-icon-trash" />
 				</p:column>  
   

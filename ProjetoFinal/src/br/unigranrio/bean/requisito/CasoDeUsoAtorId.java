@@ -5,11 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 @Embeddable
 public class CasoDeUsoAtorId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private CasoDeUso casoDeUso;
+	
+	@XStreamAlias("ator")
 	private Ator ator;
 	
 	@ManyToOne

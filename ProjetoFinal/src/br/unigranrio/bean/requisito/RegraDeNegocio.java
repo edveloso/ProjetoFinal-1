@@ -9,10 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
-@XmlRootElement(name = "regraDeNegocio") //representa o elemento principal, ou a tag principal do XML.
+@XStreamAlias("regraDeNegocio")
 public class RegraDeNegocio implements Serializable{
 
 	private static final long serialVersionUID = 1L;

@@ -58,9 +58,9 @@
 				<h:form id="formNovoCaso">
 	            	 <h:panelGrid columns="2">
 			            <p:outputLabel value="Código" />
-	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
+	            		<p:inputText id="codigoCaso" value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" required="true" requiredMessage="O código do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Nome" />
-	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
+	            		<p:inputText id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" size="30" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
 	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
 	         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
@@ -73,6 +73,16 @@
 	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
 	            		</f:facet>
 	            	</h:panelGrid>
+	            	<p:tooltip for="codigoCaso">
+	            		O código do caso de uso deve ser númerico.<br />
+	            		A codificação será acrescentada depois.
+	            	</p:tooltip>
+	            	<p:tooltip for="nomeCaso">
+		       			1.	Formato do nome: verbo no infinitivo + objeto.<br/>
+						2.	Evite verbos vagos como "fazer" ou "processar". Use um verbo <br />
+						que ajude no entendimento do objetivo do caso de uso.<br/>
+						3.	Evite usar termos técnicos no nome do caso de uso.
+		       		</p:tooltip>
 	            </h:form>
 			</p:dialog>
 			

@@ -13,20 +13,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 
 @Entity
-@XmlRootElement(name = "ator")
+@XStreamAlias("ator")
 public class Ator implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String nome;
+	@XStreamOmitField
 	private Projeto projeto;
+	@XStreamOmitField
 	private List<CasoDeUsoAtor> casosDeUsoAtor;
+	private String tipo;
 
 	public Ator() {
 	}
@@ -43,7 +48,6 @@ public class Ator implements Serializable{
 		this.id = id;
 	}
 	
-	@XmlElement(name = "ator_nome")
 	public String getNome() {
 		return nome;
 	}
@@ -54,7 +58,6 @@ public class Ator implements Serializable{
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
 	@PrimaryKeyJoinColumn
-	@XmlElement(name = "ator_projeto")
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -64,14 +67,24 @@ public class Ator implements Serializable{
 	}
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.ator")
-	@XmlElementWrapper(name = "casosDeUso_atores")
-	@XmlElement(name="ator_casosDeUso")
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
 		return casosDeUsoAtor;
 	}
 
 	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
 		this.casosDeUsoAtor = casosDeUsoAtor;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	public boolean equals(Ator ator) {
+		return this.nome.equals(ator.nome) && this.projeto.getId().equals(ator.projeto.getId());
 	}
 
 }

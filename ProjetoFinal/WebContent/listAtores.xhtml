@@ -17,7 +17,7 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
-				<p:dataTable var="ator" value="#{atorMB.atores}" style="width:800px">
+				<p:dataTable var="ator" value="#{atorMB.atores}" style="width:600px">
 					<f:facet name="header">  
 			            Atores  
 			        </f:facet> 
@@ -27,7 +27,7 @@
 					<p:column headerText="Editar" style="width:5%">
 						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formEditAtor" oncomplete="modalEditAtor.show();" icon="ui-icon-pencil" />
 					</p:column>
-					<p:column headerText="Excluir" style="width:5%">
+					<p:column headerText="Remover" style="width:5%">
 						<p:commandButton actionListener="#{atorMB.escolheAtor}" update=":formRemoverAtor" oncomplete="modalRemoverAtor.show();" icon="ui-icon-trash" />
 					</p:column> 
 				</p:dataTable>

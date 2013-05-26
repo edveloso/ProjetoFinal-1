@@ -16,7 +16,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 @Entity
+@XStreamAlias("fluxo")
 public class Fluxo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,11 +28,15 @@ public class Fluxo implements Serializable {
 	private String nome;
 	private String tipo;
 	private String codigo;
+	@XStreamOmitField
 	private CasoDeUso casoDeUso;
+	@XStreamOmitField
 	protected List<Passo> passos;
-	
+	@XStreamAlias("passos")
 	private List<Passo> passosParaXML = new ArrayList<Passo>();
+	@XStreamOmitField
 	protected Passo disparadoPor;
+	@XStreamAlias("disparadoPor")
 	private Passo disparadoPorParaXML;
 
 	@Id
