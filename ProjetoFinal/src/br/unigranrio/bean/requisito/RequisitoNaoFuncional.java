@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
 @XStreamAlias("requisitoNaoFuncional")
@@ -18,7 +19,8 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	private String descricao;	 
+	private String descricao;
+	@XStreamOmitField
 	private CasoDeUso casoDeUso;
 	
 	public RequisitoNaoFuncional() {
@@ -45,7 +47,6 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
 	@PrimaryKeyJoinColumn
-	@XmlElement(name= "requisito_casoDeUso")
 	public CasoDeUso getCasoDeUso() {
 		return casoDeUso;
 	}

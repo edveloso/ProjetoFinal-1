@@ -16,6 +16,9 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 
+import br.unigranrio.bean.requisito.Fluxo;
+import br.unigranrio.bean.requisito.Passo;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -38,7 +41,7 @@ public class Fluxo implements Serializable {
 	protected Passo disparadoPor;
 	@XStreamAlias("disparadoPor")
 	private Passo disparadoPorParaXML;
-
+	
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -118,6 +121,21 @@ public class Fluxo implements Serializable {
 	
 	@Transient
 	public Passo getDisparadoPorParaXML() {
+		if(disparadoPorParaXML == null)
+			disparadoPorParaXML = new Passo();
+		
+		if(disparadoPor != null){
+			disparadoPorParaXML.setAcao(disparadoPor.getAcao());
+			disparadoPorParaXML.setAtorParaXML(disparadoPor.getAtorParaXML());
+			disparadoPorParaXML.setCodigo(disparadoPor.getCodigo());
+			disparadoPorParaXML.setComplemento(disparadoPor.getComplemento());
+			disparadoPorParaXML.setId(disparadoPor.getId());
+			
+			Fluxo flx = new Fluxo();
+			flx.setNome(disparadoPor.getFluxo().getNome());
+						
+			disparadoPorParaXML.setFluxo(flx);
+		}
 		return disparadoPorParaXML;
 	}
 	

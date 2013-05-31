@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-
 import br.unigranrio.bean.requisito.CasoDeUso;
 
 import com.thoughtworks.xstream.XStream;
@@ -21,11 +18,12 @@ public class ExportadorXml implements Exportador {
 		
 		CasoDeUso casoDeUso = (CasoDeUso)exCasoDeUso;
 		
-		ServletContext context = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
+		//ServletContext context = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
 		  
-	    String path = context.getRealPath("/");
-		
-		String nomeArquivo =  path + "public" + File.separator + "exportacao" + File.separator + "xml" + File.separator + casoDeUso.getCodigo() + " - " + casoDeUso.getNome() + ".xml";
+	    //String path = context.getRealPath("\\");
+		String path = "C:\\Users\\Marcos\\Downloads\\";
+	    
+	    String nomeArquivo =  path + File.separator + casoDeUso.getCodigo() + " - " + casoDeUso.getNome() + ".xml";
 		
 		File arquivoXml = new File(nomeArquivo);
 		

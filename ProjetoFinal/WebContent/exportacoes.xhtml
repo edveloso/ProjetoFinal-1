@@ -10,44 +10,32 @@
     	Exportações
     </ui:define>
 	<ui:define name="conteudo">
-		<h:form id="formExport">
-			<p:treeTable id="treetable" value="#{documentsController.root}"
-				var="document">
-				<f:facet name="header">
-            Lista de Projetos
-        </f:facet>
-
-				<p:column style="width:32%">
-					<f:facet name="header">
-                Projeto
-            </f:facet>
-					<h:outputText value="#{document.name}" />
+		<h:form id="formLista">
+			<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
+				<f:facet name="header">  
+		            Casos de Uso  
+		        </f:facet>
+		        <p:column headerText="Código" style="width:10%">
+					<h:outputText value="#{caso.codigo}" />
 				</p:column>
-
-				<p:column style="width:32%">
-					<f:facet name="header">
-                Criado Por
-            </f:facet>
-					<h:outputText value="#{document.size}" />
+				<p:column headerText="Nome" style="width:50%">
+					<h:outputText value="#{caso.nome}" />
 				</p:column>
-
-			</p:treeTable>
-			<h:panelGrid columns="2">
-				<p:panel header="Exportar Dados">
-					<h:commandLink>
-						<p:graphicImage value="/resources/css/images/excel.png" />
-						<p:dataExporter type="xls" target="tbl" fileName="cars" />
-					</h:commandLink>
-					<h:commandLink>
-						<p:graphicImage value="/resources/css/images/pdf.png" />
-						<p:dataExporter type="pdf" target="tbl" fileName="cars" />
-					</h:commandLink>
-					<h:commandLink>
-						<p:graphicImage value="/resources/css/images/xml.png" />
-						<p:dataExporter type="xml" target="tbl" fileName="cars" />
-					</h:commandLink>
-				</p:panel>
-			</h:panelGrid>
+				<p:column headerText="Tipo" style="width:10%">
+					<h:outputText value="#{caso.tipo}" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu value="#{exportacaoMB.formato}" required="true" requiredMessage="Selecione o formato de exportação.">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="XML" itemValue="xml" />
+						<f:selectItem itemLabel="PDF" itemValue="pdf" />
+						<f:selectItem itemLabel="ODT" itemValue="odt" />							
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:commandButton value="Exportar" id="btnExportar" actionListener="#{exportacaoMB.exportar}" update=":formLista" />
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:decorate>
