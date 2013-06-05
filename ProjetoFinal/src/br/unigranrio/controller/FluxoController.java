@@ -15,7 +15,7 @@ public class FluxoController {
 	public String gravar(Fluxo fluxo){
 		String erro = null;
 		List<Fluxo> fluxos = dao.retornaPorCaso(fluxo.getCasoDeUso().getId());
-		if(fluxo.getTipo().equals("Principal")){
+		if(fluxo.getTipo().equals("Principal") && !fluxos.isEmpty()){
 			for (Fluxo fluxo2 : fluxos) {
 				if(fluxo.getTipo().equals(fluxo2.getTipo())){
 					erro = "Não se pode cadastrar mais de um fluxo do tipo 'Principal'";
@@ -23,11 +23,12 @@ public class FluxoController {
 				}
 			}
 		} else {
-			String codigo = fluxo.getCodigo();
-			fluxo.setCodigo("F"+codigo);
+			int numero = Integer.parseInt(dao.countItensParaCodigo(fluxo.getCasoDeUso().getId()));
+			numero++;
+			String codigo = "F"+numero;
+			fluxo.setCodigo(codigo);
 			dao.gravar(fluxo);
 		}
-		//dao.gravar(fluxo);
 		return erro;
 	}
 	

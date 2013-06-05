@@ -41,7 +41,6 @@ public class ExportCasoXML {
 		caso.setAtores(array);
 
 		Passo passos = new Passo();
-		passos.setAtorParaXML(array);
 		passos.setAcao("Acao");
 		passos.setComplemento("Complemento");
 

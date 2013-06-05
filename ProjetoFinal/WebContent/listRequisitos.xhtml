@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:decorate template="/template/template.xhtml">
+	<ui:define name="title">
+    		Requisito Não Funcional
+    	</ui:define>
+	<ui:define name="conteudo">
+		<p:commandButton value="Novo"
+			onclick="modalNovoRequisitoNaoFuncional.show();"
+			actionListener="#{requisitoNaoFuncionalMB.limpar}"
+			update=":formNovoRequisitoNaoFuncional" />
+
+		<br />
+		<br />
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+
+		<h:form id="formLista">
+			<p:dataTable var="requisito" value="#{requisitoNaoFuncionalMB.req}"
+				style="width:600px">
+				<f:facet name="header">  
+			            Requisito Não Funcional
+			        </f:facet>
+
+				<p:column headerText="Descrição" style="width:90%">
+					<h:outputText value="#{requisitoNaoFuncional.descricao}" />
+				</p:column>
+				<p:column headerText="Editar" style="width:5%">
+					<p:commandButton
+						actionListener="#{requisitoNaoFuncionalMB.escolhe}"
+						update=":formEditRequisitoNaoFuncional"
+						oncomplete="modalEditRequisitoNaoFuncional.show();"
+						icon="ui-icon-pencil" />
+				</p:column>
+				<p:column headerText="Remover" style="width:5%">
+					<p:commandButton
+						actionListener="#{requisitoNaoFuncionalMB.escolhe}"
+						update=":formRemoverRequisitoNaoFuncional"
+						oncomplete="modalRemoverRequisitoNaoFuncional.show();"
+						icon="ui-icon-trash" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<p:dialog widgetVar="modalNovoRequisitoNaoFuncional"
+			header="Novo Requisito Não Funcional" showEffect="clip"
+			hideEffect="explode">
+			<h:form id="formNovoRequisitoNaoFuncional">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Descrição" />
+					<p:inputText value="#{requisitoNaoFuncionalMB.req.descricao}"
+						size="100" />
+
+
+					<f:facet name="footer">
+						<p:commandButton value="Gravar"
+							actionListener="#{requisitoNaoFuncionalMB.salvar}"
+							update=":formLista"
+							oncomplete="modalNovoRequisitoNaoFuncional.hide()" />
+						<p:commandButton value="Limpar"
+							actionListener="#{requisitoNaoFuncionalMB.limpar}"
+							update=":formNovoRequisitoNaoFuncional" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog widgetVar="modalEditRequisitoNaoFuncional"
+			header="Editar Requisito Não Funcional" showEffect="clip"
+			hideEffect="explode">
+			<h:form id="formEditRequisitoNaoFuncional">
+				<h:panelGrid columns="4">
+
+					<p:outputLabel value="Descrição" />
+					<p:inputText value="#{requisitoNaoFuncionalMB.req.descricao}"
+						size="100" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Atualizar"
+							actionListener="#{requisitoNaoFuncionalMB.atualizar}"
+							update=":formLista" oncomplete="modalEditRequisitoNaoFuncional.hide()" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog header="Remover Requisito Não Funcional" widgetVar="modalRemoverRequisitoNaoFuncional"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverRequisitoNaoFuncional">
+				<p:panelGrid columns="1">
+					<h:outputLabel
+						value="Tem certeza de que deseja remover o Requisito Não Funcional: #{requisitoNaoFuncionalMB.req.descricao} ?"
+						style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim"
+							actionListener="#{requisitoNaoFuncionalMB.remover}"
+							update=":formLista" oncomplete="modalRemoverRequisitoNaoFuncional.hide()" />
+						<p:commandButton value="Não"
+							oncomplete="modalRemoverRequisitoNaoFuncional.hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:decorate>
+</html>

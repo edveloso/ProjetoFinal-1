@@ -27,5 +27,18 @@ public class RegraDeNegocioDAO extends AbstractHibernateDAO{
 				.setParameter("id", id);
 		return query.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RegraDeNegocio> selecionaTodosPorProjeto(long id){
+		Query query = session.createSQLQuery("select * from regradenegocio where projeto_id=:id")
+				.addEntity(RegraDeNegocio.class)
+				.setParameter("id", id);
+		return query.list();
+	}
+	
+	public String countItensParaCodigo(long id){
+		Query query = session.createSQLQuery("select count(*) from regradenegocio where projeto_id=:id").setParameter("id", id);
+		return query.uniqueResult().toString();
+	}
 
 }

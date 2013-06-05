@@ -27,4 +27,8 @@ public class FluxoDAO extends AbstractHibernateDAO{
 		return query.list();
 	}
 	
+	public String countItensParaCodigo(long id){
+		Query query = session.createSQLQuery("select count(*) from fluxo where casoDeUso_casoDeUso_id=:id").setParameter("id", id);
+		return query.uniqueResult().toString();
+	}
 }

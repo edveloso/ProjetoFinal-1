@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:decorate template="/template/template.xhtml">
+	<ui:define name="title">
+    		Glossário
+    	</ui:define>
+	<ui:define name="conteudo">
+		<p:commandButton value="Novo" onclick="modalNovoGlossario.show();"
+			actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" />
+
+		<br />
+		<br />
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+
+		<h:form id="formLista">
+			<p:dataTable var="glossario" value="#{glossarioMB.glossarios}"
+				style="width:600px">
+				<f:facet name="header">  
+			            Glossário  
+			        </f:facet>
+				<p:column headerText="Termo" style="width:20%">
+					<h:outputText value="#{glossario.sigla}" />
+				</p:column>
+				<p:column headerText="Definição" style="width:70%">
+					<h:outputText value="#{glossario.definicao}" />
+				</p:column>
+				<p:column headerText="Editar" style="width:5%">
+					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
+						update=":formEditGlossario"
+						oncomplete="modalEditGlossario.show();" icon="ui-icon-pencil" />
+				</p:column>
+				<p:column headerText="Remover" style="width:5%">
+					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
+						update=":formRemoverGlossario"
+						oncomplete="modalRemoverGlossario.show();" icon="ui-icon-trash" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formNovoGlossario">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Termo" />
+					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
+
+					<p:outputLabel value="Definição" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{glossarioMB.glossario.definicao}" size="255" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Gravar"
+							actionListener="#{glossarioMB.salvar}" update=":formLista"
+							oncomplete="modalNovoGlossario.hide()" />
+						<p:commandButton value="Limpar"
+							actionListener="#{glossarioMB.limpar}"
+							update=":formNovoGlossario" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog widgetVar="modalEditGlossario" header="Editar Glossario"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formEditGlossario">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Termo" />
+					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
+
+					<p:outputLabel value="Definição" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{glossarioMB.glossario.definicao}" size="255" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Atualizar"
+							actionListener="#{glossarioMB.atualizar}" update=":formLista"
+							oncomplete="modalEditGlossario.hide()" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog header="Remover Glossario" widgetVar="modalRemoverGlossario"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverGlossario">
+				<p:panelGrid columns="1">
+					<h:outputLabel
+						value="Tem certeza de que deseja remover o Glossario: #{glossarioMB.glossario.sigla} ?"
+						style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{glossarioMB.remover}"
+							update=":formLista" oncomplete="modalRemoverGlossario.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemoverGlossario.hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:decorate>
+</html>

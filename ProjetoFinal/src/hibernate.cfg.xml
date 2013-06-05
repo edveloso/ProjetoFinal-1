@@ -23,6 +23,7 @@
 		<mapping class="br.unigranrio.bean.requisito.CasoDeUso"/>
 		<mapping class="br.unigranrio.bean.requisito.CasoDeUsoAtor"/>
 		<mapping class="br.unigranrio.bean.requisito.Fluxo"/>
+		<mapping class="br.unigranrio.bean.requisito.Glossario"/>
 		<mapping class="br.unigranrio.bean.requisito.Passo"/>
 		<mapping class="br.unigranrio.bean.requisito.PosCondicao"/>
 		<mapping class="br.unigranrio.bean.requisito.PreCondicao"/>

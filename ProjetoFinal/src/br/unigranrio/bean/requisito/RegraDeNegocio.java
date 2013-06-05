@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
 @XStreamAlias("regraDeNegocio")
@@ -19,8 +18,10 @@ public class RegraDeNegocio implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;
-	@XStreamOmitField
-	private CasoDeUso casoDeUso;
+	private String codigo;
+	//@XStreamOmitField
+	//private CasoDeUso casoDeUso;
+	private Projeto projeto;
 	
 	public RegraDeNegocio() {
 	}
@@ -43,14 +44,32 @@ public class RegraDeNegocio implements Serializable{
 		this.descricao = descricao;
 	}
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
 	@PrimaryKeyJoinColumn
-	public CasoDeUso getCasoDeUso() {
-		return casoDeUso;
+	public Projeto getProjeto() {
+		return projeto;
 	}
 
-	public void setCasoDeUso(CasoDeUso casoDeUso) {
-		this.casoDeUso = casoDeUso;
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
 	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
+	//@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
+	//@PrimaryKeyJoinColumn
+	//public CasoDeUso getCasoDeUso() {
+		//return casoDeUso;
+	//}
+
+	//public void setCasoDeUso(CasoDeUso casoDeUso) {
+		//this.casoDeUso = casoDeUso;
+	//}
 	
 }

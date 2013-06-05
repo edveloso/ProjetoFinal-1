@@ -41,4 +41,9 @@ public class PassoDAO extends AbstractHibernateDAO{
 		}
 	}
 	
+	public String countItensParaCodigo(long id){
+		Query query = session.createSQLQuery("select count(*) from passo where idFluxo=:id").setParameter("id", id);
+		return query.uniqueResult().toString();
+	}
+	
 }

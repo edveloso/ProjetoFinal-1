@@ -11,8 +11,15 @@ public class CasoDeUsoController {
 	
 	public void gravar(CasoDeUso caso){
 		if (caso.getNome() != null){
-			String codigo = caso.getCodigo();
-			caso.setCodigo("UC"+codigo);
+			int codigo = Integer.parseInt(dao.countItensParaCodigo(caso.getProjeto().getId()));
+			codigo++;
+			if(codigo<10){
+				caso.setCodigo("UC00"+codigo);
+			} else if(codigo <100 && codigo>9){
+				caso.setCodigo("UC0"+codigo);
+			} else if(codigo > 99){
+				caso.setCodigo("UC"+codigo);
+			}
 			dao.gravar(caso);
 		}
 	}

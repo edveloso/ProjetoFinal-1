@@ -57,9 +57,7 @@
 			<p:dialog header="Cadastrar Caso de Uso" widgetVar="modalNovoCaso" showEffect="clip" hideEffect="explode">
 				<h:form id="formNovoCaso">
 	            	 <h:panelGrid columns="2">
-			            <p:outputLabel value="Código" />
-	            		<p:inputText id="codigoCaso" value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" required="true" requiredMessage="O código do caso de uso é obrigatório" />
-	            		<p:outputLabel value="Nome" />
+			            <p:outputLabel value="Nome" />
 	            		<p:inputText id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" size="30" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
 	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
@@ -73,10 +71,6 @@
 	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
 	            		</f:facet>
 	            	</h:panelGrid>
-	            	<p:tooltip for="codigoCaso">
-	            		O código do caso de uso deve ser númerico.<br />
-	            		A codificação será acrescentada depois.
-	            	</p:tooltip>
 	            	<p:tooltip for="nomeCaso">
 		       			1.	Formato do nome: verbo no infinitivo + objeto.<br/>
 						2.	Evite verbos vagos como "fazer" ou "processar". Use um verbo <br />
@@ -89,8 +83,6 @@
 			<p:dialog header="Alterar Caso de Uso" widgetVar="modalEditCaso" showEffect="clip" hideEffect="explode">
 				<h:form id="formEditCaso">
 	            	 <h:panelGrid columns="2">
-			            <p:outputLabel value="Código" />
-	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.codigo}" size="10" />
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />

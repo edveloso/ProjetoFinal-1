@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.ListDataModel;
 
-import br.unigranrio.bean.requisito.CasoDeUso;
+import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.controller.RegraDeNegocioController;
 
@@ -20,8 +20,11 @@ public class RegraDeNegocioMB {
 	private ListDataModel<RegraDeNegocio> list;
 	private RegraDeNegocioController control = new RegraDeNegocioController();
 	
-	@ManagedProperty(value="#{casoDeUsoMB}")
-	private CasoDeUsoMB casoMB;
+	//@ManagedProperty(value="#{casoDeUsoMB}")
+	//private CasoDeUsoMB casoMB;
+	
+	@ManagedProperty(value="#{projetoMB}")
+	private ProjetoMB projetoMB;
 	
 	public RegraDeNegocioMB() {
 	}
@@ -35,12 +38,13 @@ public class RegraDeNegocioMB {
 	}
 
 	public ListDataModel<RegraDeNegocio> getList() {
-		CasoDeUso caso = casoMB.getCasoDeUso();
-		if(caso == null){
+		//CasoDeUso caso = casoMB.getCasoDeUso();
+		Projeto projeto = projetoMB.getProjeto();
+		if(projeto == null){
 			list = new ListDataModel<RegraDeNegocio>();
 		} else {
-			long id = caso.getId();
-			list = new ListDataModel<RegraDeNegocio>(control.selecionaTodosPorCasoDeUso(id));
+			long id = projeto.getId();
+			list = new ListDataModel<RegraDeNegocio>(control.selecionaTodosPorProjeto(id));
 		}
 		return list;
 	}
@@ -49,22 +53,31 @@ public class RegraDeNegocioMB {
 		this.list = list;
 	}
 	
-	public CasoDeUsoMB getCasoMB() {
-		return casoMB;
-	}
+	//public CasoDeUsoMB getCasoMB() {
+		//return casoMB;
+	//}
 
-	public void setCasoMB(CasoDeUsoMB casoMB) {
-		this.casoMB = casoMB;
-	}
-
+	//public void setCasoMB(CasoDeUsoMB casoMB) {
+		//this.casoMB = casoMB;
+	//}
+	
 	public String salvar(){
-		CasoDeUso caso = casoMB.getCasoDeUso();
-		control.gravar(caso, regra);
+		//CasoDeUso caso = casoMB.getCasoDeUso();
+		Projeto projeto = projetoMB.getProjeto();
+		control.gravar(projeto, regra);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Salva com Sucesso", regra.getDescricao()));
 		regra = new RegraDeNegocio();
 		return "updateCasos";
 	}
 	
+	public ProjetoMB getProjetoMB() {
+		return projetoMB;
+	}
+
+	public void setProjetoMB(ProjetoMB projetoMB) {
+		this.projetoMB = projetoMB;
+	}
+
 	public String remover(ActionEvent actionEvent){
 		control.remover(regra.getId());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Removida com Sucesso", ""));

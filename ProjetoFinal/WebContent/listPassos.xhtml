@@ -52,9 +52,6 @@
 			<h:form id="formPasso">
 				<h:panelGrid columns="2">
 
-					<p:outputLabel value="Código" />
-					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
-					
 					<p:outputLabel value="Ator" />
 					<p:selectOneMenu value="#{passoMB.atorId}">
        					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
@@ -84,9 +81,6 @@
 		<p:dialog header="Editar Passo" widgetVar="modalEditPasso" showEffect="clip" hideEffect="explode">
 			<h:form id="formEditPasso">
 				<h:panelGrid id="editPasso" columns="2">
-
-					<p:outputLabel value="Código" />
-					<p:inputText value="#{passoMB.passo.codigo}" size="10" required="true" />
 					
 					<p:outputLabel value="Ator" />
 					<p:selectOneMenu value="#{passoMB.atorId}">

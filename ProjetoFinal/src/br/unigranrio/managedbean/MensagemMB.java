@@ -10,7 +10,7 @@ public class MensagemMB {
 	private String mensagem;
 	
 	public MensagemMB() {	
-		mensagem = "Seja bem vindo! Selecione uma opção abaixo.";
+		mensagem = "Seja bem vindo! Selecione uma opção acima.";
 	}
 		
 	public String getMensagem() {

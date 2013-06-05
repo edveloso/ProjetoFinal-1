@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:decorate template="/template/template.xhtml">
+	<ui:define name="title">
+		Regras De Negócio 
+    	</ui:define>
+	<ui:define name="conteudo">
+		<p:commandButton value="Novo" onclick="modalNovaRegraDeNegocio.show();"
+			actionListener="#{RegraDeNegocioMB.limpar}" update=":formNovaRegraDeNegocio" />
+
+		<br />
+		<br />
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+
+		<h:form id="formLista">
+			<p:dataTable var="regra" value="#{regraDeNegocioMB.list}" style="width:600px">
+				<f:facet name="header">  
+			            Regras De Negócio 
+			        </f:facet>
+			    <p:column headerText="Código" style="width:10%">
+					<h:outputText value="#{regra.codigo}" />
+				</p:column>
+				<p:column headerText="Descrição" style="width:80%">
+					<h:outputText value="#{regra.descricao}" />
+				</p:column>
+				<p:column headerText="Editar" style="width:5%">
+					<p:commandButton actionListener="#{regraDeNegocioMB.escolhe}"
+						update=":formEditRegraDeNegocio"
+						oncomplete="modalEditRegraDeNegocio.show();" icon="ui-icon-pencil" />
+				</p:column>
+				<p:column headerText="Remover" style="width:5%">
+					<p:commandButton actionListener="#{regraDeNegociooMB.escolhe}"
+						update=":formRemoverRegraDeNegocio"
+						oncomplete="modalRemoverRegraDeNegocio.show();" icon="ui-icon-trash" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra De Negocio"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formNovaRegraDeNegocio">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Descrição" />
+					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="80" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Gravar"
+							actionListener="#{regraDeNegocioMB.salvar}" update=":formLista"
+							oncomplete="modalNovaRegraDeNegocio.hide()" />
+						<p:commandButton value="Limpar"
+							actionListener="#{regraDeNegocioMB.limpar}"
+							update=":formNovaRegraDeNegocio" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra De Negocio"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formEditRegraDeNegocio">
+				<h:panelGrid columns="3">
+
+					<p:outputLabel value="Descrição" />
+					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="100" />
+
+					<f:facet name="footer">
+						<p:commandButton value="Atualizar"
+							actionListener="#{regraDeNegocioMB.atualizar}" update=":formLista"
+							oncomplete="modalEditRegraDeNegocio.hide()" />
+					</f:facet>
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog header="Remover Regra De Negocio" widgetVar="modalRemoverRegraDeNegocio"
+			showEffect="clip" hideEffect="explode">
+			<h:form id="formRemoverRegraDeNegocio">
+				<p:panelGrid columns="1">
+					<h:outputLabel
+						value="Tem certeza de que deseja remover a Regra De Negocio: #{regraDeNegocioMB.regra.descricao} ?"
+						style="font:14px" />
+					<f:facet name="footer">
+						<p:commandButton value="Sim" actionListener="#{regraDeNegocioMB.remover}"
+							update=":formLista" oncomplete="modalRemoverRegraDeNegocio.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemoverRegraDeNegocio.hide()" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:decorate>
+</html>

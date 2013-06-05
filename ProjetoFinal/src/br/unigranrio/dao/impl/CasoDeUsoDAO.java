@@ -27,5 +27,9 @@ public class CasoDeUsoDAO extends AbstractHibernateDAO{
 		return query.list();
 	}
 
+	public String countItensParaCodigo(long id){
+		Query query = session.createSQLQuery("select count(*) from casodeuso where projeto_id=:id").setParameter("id", id);
+		return query.uniqueResult().toString();
+	}
 
 }
