@@ -11,7 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 
 @Entity
 @XStreamAlias("requisitoNaoFuncional")
@@ -19,9 +19,11 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
+	private String codigo;
 	private String descricao;
-	@XStreamOmitField
-	private CasoDeUso casoDeUso;
+	//@XStreamOmitField
+	//private CasoDeUso casoDeUso;
+	private Projeto projeto;
 	
 	public RequisitoNaoFuncional() {
 	}
@@ -45,14 +47,32 @@ public class RequisitoNaoFuncional implements Serializable{
 		this.descricao = descricao;
 	}
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
-	@PrimaryKeyJoinColumn
-	public CasoDeUso getCasoDeUso() {
-		return casoDeUso;
+	//@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
+	//@PrimaryKeyJoinColumn
+	//public CasoDeUso getCasoDeUso() {
+	//	return casoDeUso;
+	//}
+
+//	public void setCasoDeUso(CasoDeUso casoDeUso) {
+	//	this.casoDeUso = casoDeUso;
+	//}
+
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setCasoDeUso(CasoDeUso casoDeUso) {
-		this.casoDeUso = casoDeUso;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Projeto.class)
+	@PrimaryKeyJoinColumn
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
 	}
 	
 }

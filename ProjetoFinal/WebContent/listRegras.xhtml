@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/template.xhtml">
 	<ui:define name="title">
-		Regras De Negócio 
+		Regras de Negócio 
     	</ui:define>
 	<ui:define name="conteudo">
 		<p:commandButton value="Novo" onclick="modalNovaRegraDeNegocio.show();"
@@ -19,9 +19,9 @@
 			closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable var="regra" value="#{regraDeNegocioMB.list}" style="width:600px">
+			<p:dataTable var="regra" value="#{regraDeNegocioMB.list}" style="width:800px">
 				<f:facet name="header">  
-			            Regras De Negócio 
+			            Regras de Negócio 
 			        </f:facet>
 			    <p:column headerText="Código" style="width:10%">
 					<h:outputText value="#{regra.codigo}" />
@@ -42,20 +42,19 @@
 			</p:dataTable>
 		</h:form>
 
-		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra De Negocio"
+		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra de Negocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formNovaRegraDeNegocio">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="80" />
+					<p:inputTextarea cols="40" rows="10" value="#{regraDeNegocioMB.regra.descricao}" maxlength="255" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"
 							actionListener="#{regraDeNegocioMB.salvar}" update=":formLista"
 							oncomplete="modalNovaRegraDeNegocio.hide()" />
-						<p:commandButton value="Limpar"
-							actionListener="#{regraDeNegocioMB.limpar}"
+						<p:commandButton value="Limpar" actionListener="#{regraDeNegocioMB.limpar}"
 							update=":formNovaRegraDeNegocio" />
 					</f:facet>
 
@@ -64,13 +63,13 @@
 		</p:dialog>
 
 
-		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra De Negocio"
+		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra de Negocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formEditRegraDeNegocio">
-				<h:panelGrid columns="3">
+				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="100" />
+					<p:inputTextarea cols="40" rows="10" value="#{regraDeNegocioMB.regra.descricao}" maxlength="255" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar"
@@ -88,7 +87,7 @@
 			<h:form id="formRemoverRegraDeNegocio">
 				<p:panelGrid columns="1">
 					<h:outputLabel
-						value="Tem certeza de que deseja remover a Regra De Negocio: #{regraDeNegocioMB.regra.descricao} ?"
+						value="Tem certeza de que deseja remover a Regra de Negocio: #{regraDeNegocioMB.regra.descricao} ?"
 						style="font:14px" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim" actionListener="#{regraDeNegocioMB.remover}"

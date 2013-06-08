@@ -2,6 +2,7 @@ package br.unigranrio.controller;
 
 import java.util.List;
 
+import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.dao.impl.RegraDeNegocioDAO;
@@ -30,6 +31,11 @@ public class RegraDeNegocioController {
 	
 	public void remover(long id){
 		dao.removerPorId(id);
+	}
+	
+	public void atualizar(RegraDeNegocio regra) {
+		dao.atualizar(regra);
+
 	}
 
 }

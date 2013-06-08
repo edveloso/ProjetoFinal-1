@@ -88,4 +88,14 @@ public class RegraDeNegocioMB {
 		regra = list.getRowData();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Escolhida: ", regra.getDescricao()));
 	}
+	
+	public void limpar() {
+		regra = new RegraDeNegocio();
+	}
+	
+	public String atualizar(ActionEvent actionEvent){
+		control.atualizar(regra);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Atualizada com Sucesso", regra.getDescricao()));
+		return "updateCasos";
+	}
 }
