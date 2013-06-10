@@ -3,18 +3,24 @@ package br.unigranrio.controller;
 import java.util.List;
 
 import br.unigranrio.bean.requisito.Glossario;
+import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.dao.impl.GlossarioDAO;
 
 public class GlossarioController {
-	GlossarioDAO dao = new GlossarioDAO();
 	
-	public GlossarioController() {
+	private GlossarioDAO dao = new GlossarioDAO();	
+	
+	public void gravar(Projeto projeto, Glossario glossario){
+		//if (glossario.getDefinicao() != null){
+			//dao.gravar(glossario);
+		glossario.setProjeto(projeto);
+		dao.gravar(glossario);
+	
 	}
 	
-	public void gravar(Glossario glossario){
-		if (glossario.getDefinicao() != null){
-			dao.gravar(glossario);
-		}
+	public List<Glossario> selecionaTodosPorProjeto(long id){
+		return dao.selecionaTodosPorProjeto(id);
 	}
 	
 	public void atualizar(Glossario glossario){
@@ -27,10 +33,6 @@ public class GlossarioController {
 	
 	public Glossario selecionarGlossario(long id){
 		return (Glossario) dao.selecionaPorId(id);
-	}
-	
-	public List<Glossario> retornaTodos(){
-		return dao.retornarTodos();
 	}
 
 }

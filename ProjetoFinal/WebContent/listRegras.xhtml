@@ -19,36 +19,96 @@
 			closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable var="regra" value="#{regraDeNegocioMB.list}" style="width:800px">
+			<p:dataTable id="tblregra" var="regra" value="#{regraDeNegocioMB.list}" paginator="true" rows="10" style="width:600px">
 				<f:facet name="header">  
 			            Regras de Negócio 
 			        </f:facet>
-			    <p:column headerText="Código" style="width:10%">
+			       <!-- tive que retirar p:column headerText="Código" para colocar em <f:facet name="header">
+						<h:outputText value="Código para aparecer na exportação o titulo da exportação na tabela  -->
+			    <p:column style="width:10%">
+
+			    	<f:facet name="header">
+						<h:outputText value="Código" />
+					</f:facet>
 					<h:outputText value="#{regra.codigo}" />
 				</p:column>
-				<p:column headerText="Descrição" style="width:80%">
+				
+				<p:column style="width:80%">
+					<f:facet name="header">
+						<h:outputText value="Descrição" />
+					</f:facet>
 					<h:outputText value="#{regra.descricao}" />
 				</p:column>
-				<p:column headerText="Editar" style="width:5%">
+				<!-- Nestas colunas abaixo tive que colocar exportable="false" para não aparecer na exportação -->
+				<p:column exportable="false" headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{regraDeNegocioMB.escolhe}"
 						update=":formEditRegraDeNegocio"
 						oncomplete="modalEditRegraDeNegocio.show();" icon="ui-icon-pencil" />
 				</p:column>
-				<p:column headerText="Remover" style="width:5%">
+				<p:column exportable="false" headerText="Remover" style="width:5%">
 					<p:commandButton actionListener="#{regraDeNegociooMB.escolhe}"
 						update=":formRemoverRegraDeNegocio"
 						oncomplete="modalRemoverRegraDeNegocio.show();" icon="ui-icon-trash" />
 				</p:column>
 			</p:dataTable>
+			<h:panelGrid columns="2">
+				<p:panel header="Export All Data">
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/excel.png" />
+						<p:dataExporter type="xls" target="tblregra" fileName="regra" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/pdf.png" />
+						<p:dataExporter type="pdf" target="tblregra" fileName="regra" encoding="iso-8859-1" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/csv.png" />
+						<p:dataExporter type="csv" target="tblregra" fileName="regra" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/xml.png" />
+						<p:dataExporter type="xml" target="tblregra" fileName="regra" />
+					</h:commandLink>
+				</p:panel>
+
+				<p:panel header="Export Page Data">
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/excel.png" />
+						<p:dataExporter type="xls" target="tblregra" fileName="regra"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/pdf.png" />
+						<p:dataExporter type="pdf" target="tblregra" fileName="regra"
+							pageOnly="true" encoding="iso-8859-1" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/csv.png" />
+						<p:dataExporter type="csv" target="tblregra" fileName="regra"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/xml.png" />
+						<p:dataExporter type="xml" target="tblregra" fileName="regra"
+							pageOnly="true" />
+					</h:commandLink>
+				</p:panel>
+			</h:panelGrid>
 		</h:form>
 
 		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra de Negocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formNovaRegraDeNegocio">
-				<h:panelGrid columns="1">
+				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="40" rows="10" value="#{regraDeNegocioMB.regra.descricao}" maxlength="255" />
+					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="80" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"
@@ -66,10 +126,10 @@
 		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra de Negocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formEditRegraDeNegocio">
-				<h:panelGrid columns="1">
+				<h:panelGrid columns="3">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="40" rows="10" value="#{regraDeNegocioMB.regra.descricao}" maxlength="255" />
+					<p:inputText value="#{regraDeNegocioMB.regra.descricao}" size="100" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar"

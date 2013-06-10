@@ -19,28 +19,90 @@
 			closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable var="glossario" value="#{glossarioMB.glossarios}"
+			<p:dataTable id="tblglo" var="glossario"
+				value="#{glossarioMB.glossarios}" paginator="true" rows="10"
 				style="width:600px">
 				<f:facet name="header">  
 			            Glossário  
 			        </f:facet>
-				<p:column headerText="Termo" style="width:20%">
+				<!-- tive que retirar p:column headerText="Código" para colocar em <f:facet name="header">
+						<h:outputText value="Código para aparecer na exportação o titulo da exportação na tabela  -->
+				<p:column style="width:20%">
+		
+					<f:facet name="header">
+						<h:outputText value="Termo" />
+					</f:facet>
 					<h:outputText value="#{glossario.sigla}" />
 				</p:column>
-				<p:column headerText="Definição" style="width:70%">
+
+				<p:column style="width:70%">
+					<f:facet name="header">
+						<h:outputText value="Definição" />
+					</f:facet>
 					<h:outputText value="#{glossario.definicao}" />
 				</p:column>
-				<p:column headerText="Editar" style="width:5%">
+				<!-- Nestas colunas abaixo tive que colocar exportable="false" para não aparecer na exportação -->
+				<p:column exportable="false" headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
 						update=":formEditGlossario"
 						oncomplete="modalEditGlossario.show();" icon="ui-icon-pencil" />
 				</p:column>
-				<p:column headerText="Remover" style="width:5%">
+				<p:column exportable="false" headerText="Remover" style="width:5%">
 					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
 						update=":formRemoverGlossario"
 						oncomplete="modalRemoverGlossario.show();" icon="ui-icon-trash" />
 				</p:column>
 			</p:dataTable>
+			<h:panelGrid columns="2">
+				<p:panel header="Export All Data">
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/excel.png" />
+						<p:dataExporter type="xls" target="tblglo" fileName="glossario" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/pdf.png" />
+						<p:dataExporter type="pdf" target="tblglo" fileName="glossario"
+							encoding="iso-8859-1" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/csv.png" />
+						<p:dataExporter type="csv" target="tblglo" fileName="glossario" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/xml.png" />
+						<p:dataExporter type="xml" target="tblglo" fileName="glossario" />
+					</h:commandLink>
+				</p:panel>
+
+				<p:panel header="Export Page Data">
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/excel.png" />
+						<p:dataExporter type="xls" target="tblglo" fileName="glossario"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/pdf.png" />
+						<p:dataExporter type="pdf" target="tblglo" fileName="glossario"
+							pageOnly="true" encoding="iso-8859-1" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/csv.png" />
+						<p:dataExporter type="csv" target="tblglo" fileName="glossario"
+							pageOnly="true" />
+					</h:commandLink>
+
+					<h:commandLink>
+						<p:graphicImage value="/resources/css/images/xml.png" />
+						<p:dataExporter type="xml" target="tblglo" fileName="glossario"
+							pageOnly="true" />
+					</h:commandLink>
+				</p:panel>
+			</h:panelGrid>
 		</h:form>
 
 		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario"
@@ -52,7 +114,8 @@
 					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
 
 					<p:outputLabel value="Definição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{glossarioMB.glossario.definicao}" size="255" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false"
+						value="#{glossarioMB.glossario.definicao}" size="255" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"
@@ -77,7 +140,8 @@
 					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
 
 					<p:outputLabel value="Definição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{glossarioMB.glossario.definicao}" size="255" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false"
+						value="#{glossarioMB.glossario.definicao}" size="255" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar"
@@ -98,9 +162,11 @@
 						value="Tem certeza de que deseja remover o Glossario: #{glossarioMB.glossario.sigla} ?"
 						style="font:14px" />
 					<f:facet name="footer">
-						<p:commandButton value="Sim" actionListener="#{glossarioMB.remover}"
-							update=":formLista" oncomplete="modalRemoverGlossario.hide()" />
-						<p:commandButton value="Não" oncomplete="modalRemoverGlossario.hide()" />
+						<p:commandButton value="Sim"
+							actionListener="#{glossarioMB.remover}" update=":formLista"
+							oncomplete="modalRemoverGlossario.hide()" />
+						<p:commandButton value="Não"
+							oncomplete="modalRemoverGlossario.hide()" />
 					</f:facet>
 				</p:panelGrid>
 			</h:form>
