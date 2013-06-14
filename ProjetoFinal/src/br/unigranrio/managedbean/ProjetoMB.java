@@ -26,26 +26,26 @@ public class ProjetoMB {
 
 	public String salvar() {
 		control.gravar(projeto);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso", projeto.getNome()));  
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso " + projeto.getNome(), null));  
 		return "listProjetos";
 	}
 
 	public String atualizar(ActionEvent actionEvent) {
 		projeto = new Projeto();
 		control.atualizar(projeto);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso", projeto.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso " + projeto.getNome(), null));
 		return "listProjetos";
 	}
 
 	public String remover(ActionEvent actionEvent) {
 		control.remover(projeto.getId());
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Removido com Sucesso", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Removido com Sucesso", null));
 		return "listProjetos";
 	}
 	
 	public void escolheProjeto(ActionEvent actionEvent){
 		projeto = projetos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Escolhido: ", projeto.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Escolhido: " + projeto.getNome(), null));
 		msgMB.setMensagem("Projeto: " + projeto.getId() + " - " + projeto.getNome());
 	}
 

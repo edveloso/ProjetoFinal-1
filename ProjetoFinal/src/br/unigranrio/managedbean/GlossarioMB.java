@@ -24,7 +24,11 @@ public class GlossarioMB {
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 	
+	@ManagedProperty("#{mensagemMB}")
+	private MensagemMB msgMB;
+	
 	public GlossarioMB(){
+		
 	}
 	
 	public Glossario getGlossario() {
@@ -53,7 +57,7 @@ public class GlossarioMB {
 	public String salvar() {
 		Projeto projeto = projetoMB.getProjeto();
 		control.gravar(projeto, glossario);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Salvo com Sucesso", glossario.getDefinicao()));  
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Salvo com Sucesso " + glossario.getSigla(), null));  
 		glossario = new Glossario();
 		return "listGlossarios";
 	}
@@ -68,13 +72,13 @@ public class GlossarioMB {
 	
 	public String remover(ActionEvent actionEvent) {
 		control.remover(glossario.getId());
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Removido com Sucesso", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Removido com Sucesso", null));
 		return "listGlossarios";
 	}
 
 	public void escolheGlossario(ActionEvent actionEvent){
 		glossario = glossarios.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Escolhido: ", glossario.getDefinicao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Escolhido: " + glossario.getSigla(), null));
 	}
 
 	public void limpar(){
@@ -83,8 +87,16 @@ public class GlossarioMB {
 	
 	public String atualizar(ActionEvent actionEvent) {
 		control.atualizar(glossario);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Atualizado com Sucesso", glossario.getDefinicao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Atualizado com Sucesso " + glossario.getSigla(), null));
 		return "listGlossarios";
+	}
+
+	public MensagemMB getMsgMB() {
+		return msgMB;
+	}
+
+	public void setMsgMB(MensagemMB msgMB) {
+		this.msgMB = msgMB;
 	}
 
 }

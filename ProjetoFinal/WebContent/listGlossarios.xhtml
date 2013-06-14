@@ -7,28 +7,19 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/template.xhtml">
 	<ui:define name="title">
-    		Glossário
-    	</ui:define>
+   		<h:outputText value="Glossário" />
+   	</ui:define>
 	<ui:define name="conteudo">
-		<p:commandButton value="Novo" onclick="modalNovoGlossario.show();"
-			actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" />
-
-		<br />
-		<br />
-		<p:messages id="messages" showDetail="true" autoUpdate="true"
-			closable="true" />
+	
+		<p:messages id="messages" autoUpdate="true"	closable="true" />
 
 		<h:form id="formLista">
-			<p:dataTable id="tblglo" var="glossario"
-				value="#{glossarioMB.glossarios}" paginator="true" rows="10"
-				style="width:600px">
+			<p:dataTable id="tblglo" var="glossario" value="#{glossarioMB.glossarios}" paginator="true" rows="10" style="width:600px">
 				<f:facet name="header">  
-			            Glossário  
-			        </f:facet>
-				<!-- tive que retirar p:column headerText="Código" para colocar em <f:facet name="header">
-						<h:outputText value="Código para aparecer na exportação o titulo da exportação na tabela  -->
+		            <h:outputText value="Glossário" />  
+		        </f:facet>
+
 				<p:column style="width:20%">
-		
 					<f:facet name="header">
 						<h:outputText value="Termo" />
 					</f:facet>
@@ -43,14 +34,10 @@
 				</p:column>
 				<!-- Nestas colunas abaixo tive que colocar exportable="false" para não aparecer na exportação -->
 				<p:column exportable="false" headerText="Editar" style="width:5%">
-					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
-						update=":formEditGlossario"
-						oncomplete="modalEditGlossario.show();" icon="ui-icon-pencil" />
+					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}" update=":formEditGlossario" oncomplete="modalEditGlossario.show();" icon="ui-icon-pencil" />
 				</p:column>
 				<p:column exportable="false" headerText="Remover" style="width:5%">
-					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}"
-						update=":formRemoverGlossario"
-						oncomplete="modalRemoverGlossario.show();" icon="ui-icon-trash" />
+					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}" update=":formRemoverGlossario" oncomplete="modalRemoverGlossario.show();" icon="ui-icon-trash" />
 				</p:column>
 			</p:dataTable>
 			<h:panelGrid columns="2">
@@ -104,9 +91,13 @@
 				</p:panel>
 			</h:panelGrid>
 		</h:form>
+		
+		<br />
+		<br />
 
-		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario"
-			showEffect="clip" hideEffect="explode">
+		<p:commandButton value="Novo" onclick="modalNovoGlossario.show();" actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" />
+
+		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario" showEffect="clip" hideEffect="explode">
 			<h:form id="formNovoGlossario">
 				<h:panelGrid columns="2">
 
@@ -114,16 +105,11 @@
 					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
 
 					<p:outputLabel value="Definição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false"
-						value="#{glossarioMB.glossario.definicao}" size="255" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false"	value="#{glossarioMB.glossario.definicao}" size="255" />
 
 					<f:facet name="footer">
-						<p:commandButton value="Gravar"
-							actionListener="#{glossarioMB.salvar}" update=":formLista"
-							oncomplete="modalNovoGlossario.hide()" />
-						<p:commandButton value="Limpar"
-							actionListener="#{glossarioMB.limpar}"
-							update=":formNovoGlossario" />
+						<p:commandButton value="Gravar"	actionListener="#{glossarioMB.salvar}" update=":formLista" oncomplete="modalNovoGlossario.hide()" style="float:right" />
+						<p:commandButton value="Limpar"	actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" style="float:right" />
 					</f:facet>
 
 				</h:panelGrid>
@@ -144,9 +130,7 @@
 						value="#{glossarioMB.glossario.definicao}" size="255" />
 
 					<f:facet name="footer">
-						<p:commandButton value="Atualizar"
-							actionListener="#{glossarioMB.atualizar}" update=":formLista"
-							oncomplete="modalEditGlossario.hide()" />
+						<p:commandButton value="Atualizar" actionListener="#{glossarioMB.atualizar}" update=":formLista" oncomplete="modalEditGlossario.hide()" style="float:right" />
 					</f:facet>
 
 				</h:panelGrid>
@@ -157,18 +141,17 @@
 		<p:dialog header="Remover Glossario" widgetVar="modalRemoverGlossario"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formRemoverGlossario">
-				<p:panelGrid columns="1">
-					<h:outputLabel
-						value="Tem certeza de que deseja remover o Glossario: #{glossarioMB.glossario.sigla} ?"
-						style="font:14px" />
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Tem certeza de que deseja remover o Glossario: " />
+					<h:outputLabel value="#{glossarioMB.glossario.sigla} ?" style="font-size:12px;font-weight:bold" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim"
 							actionListener="#{glossarioMB.remover}" update=":formLista"
-							oncomplete="modalRemoverGlossario.hide()" />
+							oncomplete="modalRemoverGlossario.hide()" style="float:right" />
 						<p:commandButton value="Não"
-							oncomplete="modalRemoverGlossario.hide()" />
+							oncomplete="modalRemoverGlossario.hide()" style="float:right" />
 					</f:facet>
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:form>
 		</p:dialog>
 

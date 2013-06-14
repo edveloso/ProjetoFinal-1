@@ -20,7 +20,7 @@
 			<p:dataTable var="passo" value="#{passoMB.passos}" style="width:800px">
 
 				<f:facet name="header">  
-			            Passos  
+		            Passos  
 		        </f:facet>
 
 				<p:column headerText="Código" style="width:5%">
@@ -58,10 +58,10 @@
        				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
 					
 					<p:outputLabel value="Complemento" />
-					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
+					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." />
 					
 					<p:outputLabel value="Ponto de Extensão" />
 					<p:selectOneMenu value="#{passoMB.casoId}">
@@ -75,6 +75,13 @@
 					</f:facet>
 
 				</h:panelGrid>
+				<p:tooltip for="complementoNovo">
+					1. Procure ser objetivo ao escrever o complemento do passo.<br />
+					2. Evite redundâncias.<br />
+					3. Evite informações desnecessárias.<br />
+					4. Evite o uso de advérbio.<br />
+					5. Evite a definição de código.<br />
+				</p:tooltip>
 			</h:form>
 		</p:dialog>
 		
@@ -88,10 +95,10 @@
        				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" />
+					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
 					
 					<p:outputLabel value="Complemento" />
-					<p:inputText value="#{passoMB.passo.complemento}" size="40" required="true" />
+					<p:inputText id="complementoEditar" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." />
 					
 					<p:outputLabel value="Ponto de Extensão" />
 					<p:selectOneMenu value="#{passoMB.casoId}">
@@ -103,6 +110,13 @@
 					</f:facet>
 
 				</h:panelGrid>
+				<p:tooltip for="complementoEditar">
+					1. Procure ser objetivo ao escrever o complemento do passo.<br />
+					2. Evite redundâncias.<br />
+					3. Evite informações desnecessárias.<br />
+					4. Evite o uso de advérbio.<br />
+					5. Evite a definição de código.<br />
+				</p:tooltip>
 			</h:form>
 		</p:dialog>
 		

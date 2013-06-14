@@ -14,7 +14,7 @@
 
 			<br />
 			<br />
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:messages id="messages" autoUpdate="true" closable="true" />
 
 			<h:form id="formLista">
 				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
@@ -61,9 +61,9 @@
 	            		<p:inputText id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" size="30" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
 	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
-	         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
+         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
 	           				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
-	         				</p:selectOneMenu>
+         				</p:selectOneMenu>
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            		<f:facet name="footer">

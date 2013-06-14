@@ -2,12 +2,10 @@ package br.unigranrio.dao.impl;
 
 import java.util.List;
 
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.unigranrio.bean.requisito.Glossario;
-import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.dao.AbstractHibernateDAO;
 import br.unigranrio.dao.HibernateUtil;
 

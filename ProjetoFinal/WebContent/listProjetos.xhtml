@@ -7,24 +7,21 @@
 	xmlns:f="http://java.sun.com/jsf/core"> 
 	<ui:decorate template="/template/template.xhtml">
 	<ui:define name="title">
-    		Projetos
+   		<h:outputText value="Projetos" />
    	</ui:define>
 	<ui:define name="conteudo">
-		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" />
-
-		<br />
-		<br />
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		
+		<p:messages id="messages" autoUpdate="true" closable="true" />
 
 		<h:form id="formLista">
 			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:600px">
 
-				<f:facet name="header">  
-			            Projetos  
+				<f:facet name="header"> 
+		            <h:outputText value="Projetos" />
 		        </f:facet>
 		        
 				<p:column headerText="Id" style="width:5%">
-					<p:commandLink actionListener="#{projetoMB.escolheProjeto}">
+					<p:commandLink actionListener="#{projetoMB.escolheProjeto}" update=":formLista">
 						<h:outputText value="#{projeto.id}" />
 					</p:commandLink>
 				</p:column>
@@ -36,21 +33,27 @@
 				</p:column>
 				<p:column headerText="Remover" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formRemover" oncomplete="modalRemover.show();" icon="ui-icon-trash" />
-				</p:column>  
-  
+				</p:column>
+
 			</p:dataTable>
+			
 		</h:form>
+		
+		<br />
+		<br />
+		
+		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" />
 
 		<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto" showEffect="clip" hideEffect="explode">
 			<h:form id="formProjeto">
 				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
+					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!"/>
 
 					<f:facet name="footer">
-						<p:commandButton value="Salvar"	actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" />
-						<p:commandButton value="Limpar"	actionListener="#{projetoMB.limpar}" update=":formProjeto" />
+						<p:commandButton value="Salvar" actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" style="float:right" />
+						<p:commandButton value="Limpar" actionListener="#{projetoMB.limpar}" update=":formProjeto" style="float:right" />
 					</f:facet>
 
 				</h:panelGrid>
@@ -62,10 +65,10 @@
 				<h:panelGrid id="editProjeto" columns="2">
 
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" />
+					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!"/>
 
 					<f:facet name="footer">
-						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" />
+						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" style="float:right" />
 					</f:facet>
 
 				</h:panelGrid>
@@ -76,10 +79,10 @@
 			<h:form id="formRemover">
 				<h:panelGrid columns="2">
 					<h:outputText value="Tem certeza de que deseja remover o projeto: " />
-					<p:outputLabel value="#{projetoMB.projeto.nome}" style="font:14px" />
+					<p:outputLabel value="#{projetoMB.projeto.nome}" style="font-weight:bold;font-size:12px" />
 					<f:facet name="footer">
-						<p:commandButton value="Sim" actionListener="#{projetoMB.remover}" update=":formLista" oncomplete="modalRemover.hide()" />
-						<p:commandButton value="Não" oncomplete="modalRemover.hide()" />
+						<p:commandButton value="Não" oncomplete="modalRemover.hide()" style="float:right" />
+						<p:commandButton value="Sim" actionListener="#{projetoMB.remover}" update=":formLista" oncomplete="modalRemover.hide()" style="float:right" />
 					</f:facet>
 				</h:panelGrid>
 			</h:form>

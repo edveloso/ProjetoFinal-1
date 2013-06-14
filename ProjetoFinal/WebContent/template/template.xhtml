@@ -9,12 +9,12 @@
 	<title><ui:insert name="title">Default title</ui:insert></title>
 	<!-- <h:outputStylesheet name="css/jquery-ui-1.10.2.custom.css"/> -->
 	<style>
-		body {font: 12px Arial}
+		body {font-size: 10px}
 	</style>
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="190">
+		<p:layoutUnit position="north" size="130">
 			<h:graphicImage url="/template/resources/img/header_uni.jpg" />
 			<p:menubar>
 				<p:menuitem value="Inicio" url="/index.jsf" />
@@ -25,15 +25,15 @@
 				<p:menuitem value="Casos de Uso" url="/listCasos.jsf" icon="ui-icon-pencil" />
 				<p:menuitem value="Requisitos não Funcionais" url="/listRequisitos.jsf" icon="ui-icon-contact" />
 				<p:menuitem value="Exportações" url="/exportacoes.jsf" icon="ui-icon-script" />
-				<p:menuitem value="Exportações Glossario" url="/exportglo.jsf" icon="ui-icon-script" />
-				</p:menubar>
-			<br />
-			<p:panel styleClass="ui-state-error">
-				<h:outputText value="#{mensagemMB.mensagem}" />
-			</p:panel>
+			</p:menubar>
+			
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
+			<p:panel styleClass="ui-state-error">
+				<h:outputText value="#{mensagemMB.mensagem}" />
+			</p:panel>
+			<br />
 			<ui:insert name="conteudo">
 	    	</ui:insert>
 		</p:layoutUnit>

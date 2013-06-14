@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.bean.requisito.RequisitoNaoFuncional;
 import br.unigranrio.dao.AbstractHibernateDAO;
 import br.unigranrio.dao.HibernateUtil;

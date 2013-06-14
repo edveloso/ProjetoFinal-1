@@ -11,8 +11,7 @@
     	</ui:define>
         <ui:define name="conteudo">
            
-           <!-- <p:growl id="growl" showDetail="true" autoUpdate="true" closable="true" sticky="true" /> -->
-           <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+           <p:messages id="messages" autoUpdate="true" closable="true" />
                       
             <h:form id="formCaso">
 	            <p:fieldset legend="Dados do Caso de Uso">
@@ -81,7 +80,7 @@
            			<h:form id="formInfoCaso2">
             			<h:panelGrid columns="3">
             				<p:outputLabel value="Pré-Condição" />
-            				<p:inputText id="txtpre" value="#{preCondicaoMB.pre.descricao}" />
+            				<p:inputText id="txtpre" value="#{preCondicaoMB.pre.descricao}" required="true" requiredMessage="Por favor preencha a pré-condição" />
             				<p:commandButton value="Gravar" actionListener="#{preCondicaoMB.salvar}" update=":tabCaso:formPre" />
             			</h:panelGrid>
             			<p:tooltip for="txtpre">Descreva uma condição necessária para que o caso de uso seja iniciado.</p:tooltip>
@@ -112,7 +111,7 @@
            			<h:form id="formInfoCaso3">
             			<h:panelGrid columns="3">
             				<p:outputLabel value="Pós-Condição" />
-            				<p:inputText id="txtpos" value="#{posCondicaoMB.pos.descricao}" />
+            				<p:inputText id="txtpos" value="#{posCondicaoMB.pos.descricao}"  required="true" requiredMessage="Por favor preencha a pós-condição" />
             				<p:commandButton value="Gravar" actionListener="#{posCondicaoMB.salvar}" update=":tabCaso:formPos" />
             			</h:panelGrid>
 						<p:tooltip>
@@ -215,7 +214,7 @@
             					<f:selectItem itemLabel="Alternativo" itemValue="Alternativo" />
             				</p:selectOneMenu>
             				<p:outputLabel value="Nome" />
-            				<p:inputText value="#{fluxoMB.fluxo.nome}" />
+            				<p:inputText value="#{fluxoMB.fluxo.nome}" required="true" requiredMessage="Por favor preencha o nome do fluxo." />
             				<p:commandButton value="Gravar" actionListener="#{fluxoMB.salvar}" update=":tabCaso:formFluxo" />
             			</h:panelGrid>
             		</h:form>
