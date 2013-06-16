@@ -26,8 +26,11 @@
 			        <p:column headerText="Código" style="width:10%">
 						<h:outputText value="#{caso.codigo}" />
 					</p:column>
-					<p:column headerText="Nome" style="width:50%">
+					<p:column headerText="Nome" style="width:20%">
 						<h:outputText value="#{caso.nome}" />
+					</p:column>
+					<p:column headerText="Objetivo" style="width:30%">
+						<h:outputText value="#{caso.objetivo}" />
 					</p:column>
 					<p:column headerText="Tipo" style="width:10%">
 						<h:outputText value="#{caso.tipo}" />
@@ -61,14 +64,14 @@
 				<h:form id="formNovoCaso">
 	            	 <h:panelGrid columns="2">
 			            <p:outputLabel value="Nome" />
-	            		<p:inputText id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" size="30" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
+	            		<p:autoComplete id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" completeMethod="#{casoDeUsoMB.complete}" minQueryLength="3" size="40" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
 	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
          					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
 	           				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
          				</p:selectOneMenu>
 	            		<p:outputLabel value="Objetivo" />
-	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
+	            		<p:inputTextarea cols="40" rows="6" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" maxlength="255" />
 	            		<f:facet name="footer">
 	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()"  style="float:right" />
 	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso"  style="float:right" />
@@ -87,14 +90,14 @@
 				<h:form id="formEditCaso">
 	            	 <h:panelGrid columns="2">
 	            		<p:outputLabel value="Nome" />
-	            		<p:inputText value="#{casoDeUsoMB.casoDeUso.nome}" size="30" />
+	            		<p:inputText id="nomeCaso" value="#{casoDeUsoMB.casoDeUso.nome}" size="40" required="true" requiredMessage="O nome do caso de uso é obrigatório" />
 	            		<p:outputLabel value="Tipo Caso de Uso" />
 	            		<p:selectOneMenu value="#{casoDeUsoMB.casoDeUso.tipo}">
 	         					<f:selectItem itemLabel="Concreto" itemValue="Concreto" />  
 	           				<f:selectItem itemLabel="Abstrato" itemValue="Abstrato" /> 
 	         				</p:selectOneMenu>
 	            		<p:outputLabel value="Objetivo" />
-	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
+	            		<p:inputTextarea cols="40" rows="6" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" maxlength="255" />
 	            		<f:facet name="footer">
 	            			<p:commandButton value="Atualizar" actionListener="#{casoDeUsoMB.atualizar}" update=":formLista" oncomplete="modalEditCaso.hide()"  style="float:right" />
 	            		</f:facet>

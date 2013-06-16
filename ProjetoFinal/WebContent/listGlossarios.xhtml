@@ -105,10 +105,10 @@
 				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Termo" />
-					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
+					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" required="true" requiredMessage="É necessário preencher o termo" maxlength="30" />
 
 					<p:outputLabel value="Definição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false"	value="#{glossarioMB.glossario.definicao}" size="255" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false"	value="#{glossarioMB.glossario.definicao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher uma definição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"	actionListener="#{glossarioMB.salvar}" update=":formLista" oncomplete="modalNovoGlossario.hide()" style="float:right" />
@@ -126,11 +126,11 @@
 				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Termo" />
-					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" />
+					<p:inputText value="#{glossarioMB.glossario.sigla}" size="45" maxlength="30" required="true" requiredMessage="É necessário preencher o termo" />
 
 					<p:outputLabel value="Definição" />
 					<p:inputTextarea cols="45" rows="10" autoResize="false"
-						value="#{glossarioMB.glossario.definicao}" size="255" />
+						value="#{glossarioMB.glossario.definicao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher uma definição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{glossarioMB.atualizar}" update=":formLista" oncomplete="modalEditGlossario.hide()" style="float:right" />

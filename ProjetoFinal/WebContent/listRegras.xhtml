@@ -109,7 +109,7 @@
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea id="txtregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" />
+					<p:inputTextarea id="txtregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"	actionListener="#{regraDeNegocioMB.salvar}" update=":formLista"	oncomplete="modalNovaRegraDeNegocio.hide()" style="float:right" />
@@ -130,7 +130,7 @@
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{regraDeNegocioMB.atualizar}" update=":formLista" oncomplete="modalEditRegraDeNegocio.hide()" style="float:right" />
