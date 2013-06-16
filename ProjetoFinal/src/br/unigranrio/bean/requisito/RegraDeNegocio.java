@@ -23,8 +23,6 @@ public class RegraDeNegocio implements Serializable{
 	private Long id;
 	private String descricao;
 	private String codigo;
-	//@XStreamOmitField
-	//private CasoDeUso casoDeUso;
 	@XStreamOmitField
 	private List<CasoDeUsoRegra> casosDeUsoRegra;
 	private Projeto projeto;
@@ -68,7 +66,7 @@ public class RegraDeNegocio implements Serializable{
 		this.codigo = codigo;
 	}
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.regra")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.regra", cascade=CascadeType.REMOVE)
 	public List<CasoDeUsoRegra> getCasoDeUsoRegra() {
 		return casosDeUsoRegra;
 	}
@@ -76,15 +74,5 @@ public class RegraDeNegocio implements Serializable{
 	public void setCasoDeUsoRegra(List<CasoDeUsoRegra> casosDeUsoRegra) {
 		this.casosDeUsoRegra = casosDeUsoRegra;
 	}
-	
-	//@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
-	//@PrimaryKeyJoinColumn
-	//public CasoDeUso getCasoDeUso() {
-		//return casoDeUso;
-	//}
 
-	//public void setCasoDeUso(CasoDeUso casoDeUso) {
-		//this.casoDeUso = casoDeUso;
-	//}
-	
 }

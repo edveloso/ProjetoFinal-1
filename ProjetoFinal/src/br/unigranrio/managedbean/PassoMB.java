@@ -69,7 +69,7 @@ public class PassoMB implements Serializable {
 		passo.setAtor(ator);
 		passo.setPontoDeExtensao(caso);
 		control.gravar(passo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Salvo com Sucesso " + passo.getAcao(), null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Salvo com Sucesso " + passo.getCodigo(), null));
 		passo = new Passo();
 		return "updateCasos";
 	}

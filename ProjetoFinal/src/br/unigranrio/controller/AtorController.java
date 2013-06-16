@@ -17,14 +17,14 @@ public class AtorController {
 		String erro = null;
 		List<Ator> atores = dao.retornarTodos();
 		for (Ator ator2 : atores) {
-			if(ator2.getNome() == ator.getNome()){
+			if(ator2.getNome().equals(ator.getNome())){
 				erro = "Ator já cadastrado";
 				break;
+			} else {
+				erro = null;
 			}
 		}
-		if(ator.getNome().length() > 20){
-			erro = "Nome maior que 20 caracteres, por favor diminua o tamanho do nome do Ator";
-		} else {
+		if(erro == null){
 			ator.setProjeto(projeto);
 			dao.gravar(ator);
 		}

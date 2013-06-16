@@ -25,8 +25,6 @@ public class RequisitoNaoFuncional implements Serializable{
 	private Long id;
 	private String codigo;
 	private String descricao;
-	//@XStreamOmitField
-	//private CasoDeUso casoDeUso;
 	@XStreamOmitField
 	private List<CasoDeUsoRequisito> casosDeUsoRequisito;
 	private Projeto projeto;
@@ -53,16 +51,6 @@ public class RequisitoNaoFuncional implements Serializable{
 		this.descricao = descricao;
 	}
 
-	//@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)
-	//@PrimaryKeyJoinColumn
-	//public CasoDeUso getCasoDeUso() {
-	//	return casoDeUso;
-	//}
-
-//	public void setCasoDeUso(CasoDeUso casoDeUso) {
-	//	this.casoDeUso = casoDeUso;
-	//}
-
 	public String getCodigo() {
 		return codigo;
 	}
@@ -81,7 +69,7 @@ public class RequisitoNaoFuncional implements Serializable{
 		this.projeto = projeto;
 	}
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.requisito")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.requisito", cascade=CascadeType.REMOVE)
 	public List<CasoDeUsoRequisito> getCasoDeUsoRequisito() {
 		return casosDeUsoRequisito;
 	}

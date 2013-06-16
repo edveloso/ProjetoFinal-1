@@ -33,7 +33,7 @@ public class AtorMB implements Serializable {
 		ator.setProjeto(projeto);
 		erro = control.gravar(ator, projeto);
 		if(erro != null){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, " "));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso " + ator.getNome(), null));
 		}

@@ -50,7 +50,7 @@
 				<h:panelGrid columns="2">
 
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!"/>
+					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!" maxlength="50" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Salvar" actionListener="#{projetoMB.salvar}" update=":formLista" oncomplete="modalNovoProjeto.hide()" style="float:right" />
@@ -66,7 +66,7 @@
 				<h:panelGrid id="editProjeto" columns="2">
 
 					<p:outputLabel value="Nome" />
-					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!"/>
+					<p:inputText value="#{projetoMB.projeto.nome}" size="60" required="true" requiredMessage="Um projeto deve ter nome!" maxlength="50" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{projetoMB.atualizar}" update=":formLista" oncomplete="modalEditProjeto.hide()" style="float:right" />
@@ -82,8 +82,8 @@
 					<h:outputText value="Tem certeza de que deseja remover o projeto: " />
 					<p:outputLabel value="#{projetoMB.projeto.nome}" style="font-weight:bold;font-size:12px" />
 					<f:facet name="footer">
-						<p:commandButton value="Não" oncomplete="modalRemover.hide()" style="float:right" />
 						<p:commandButton value="Sim" actionListener="#{projetoMB.remover}" update=":formLista" oncomplete="modalRemover.hide()" style="float:right" />
+						<p:commandButton value="Não" oncomplete="modalRemover.hide()" style="float:right" />
 					</f:facet>
 				</h:panelGrid>
 			</h:form>

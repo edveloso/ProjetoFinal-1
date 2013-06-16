@@ -25,8 +25,13 @@ public class ProjetoMB {
 	private MensagemMB msgMB;
 
 	public String salvar() {
-		control.gravar(projeto);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso " + projeto.getNome(), null));  
+		String erro = null;
+		erro = control.gravar(projeto);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso " + projeto.getNome(), null));
+		}
 		return "listProjetos";
 	}
 

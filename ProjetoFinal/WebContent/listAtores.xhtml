@@ -40,7 +40,7 @@
 	            	<h:panelGrid columns="2">
 		            		            	
 	            		<p:outputLabel value="Nome" />
-	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
+	            		<p:inputText value="#{atorMB.ator.nome}" size="30" required="true" requiredMessage="Um ator deve ter nome" maxlength="20" />
 	            		
 	            		<f:facet name="footer">
 		            		<p:commandButton value="Gravar" actionListener="#{atorMB.salvar}" update=":formLista" oncomplete="modalNovoAtor.hide()" style="float:right" />
@@ -57,7 +57,7 @@
 	            	<h:panelGrid columns="2">
 		            		            	
 	            		<p:outputLabel value="Nome" />
-	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />
+	            		<p:inputText value="#{atorMB.ator.nome}" size="30" required="true" requiredMessage="Um ator deve ter nome" maxlength="20" />
 	            		
 	            		<f:facet name="footer">
 		            		<p:commandButton value="Atualizar" actionListener="#{atorMB.atualizar}" update=":formLista" oncomplete="modalEditAtor.hide()" style="float:right" />

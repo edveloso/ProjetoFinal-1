@@ -13,11 +13,22 @@ public class ProjetoController {
 	public ProjetoController() {
 	}
 	
-	public void gravar(Projeto projeto){
-		if (projeto.getNome() != null){
+	public String gravar(Projeto projeto){
+		String erro = null;
+		List<Projeto> projetos = dao.retornarTodos();
+		for (Projeto projeto2 : projetos) {
+			if(projeto2.getNome().equals(projeto.getNome())){
+				erro = "Projeto com mesmo nome já cadastrado";
+				break;
+			} else {
+				erro = null;
+			}
+		}
+		if (erro == null){
 			dao.gravar(projeto);
 			ator.atorSistema(projeto);
 		}
+		return erro;
 	}
 	
 	public void atualizar(Projeto projeto){

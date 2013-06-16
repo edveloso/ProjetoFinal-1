@@ -63,7 +63,7 @@ public class FluxoMB implements Serializable {
 	}
 	
 	public String remover(ActionEvent actionEvent){
-		control.remover(fluxo.getId());
+		control.remover(fluxoEscolhido.getId());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Removido com Sucesso", ""));
 		return "listAtores";
 	}
