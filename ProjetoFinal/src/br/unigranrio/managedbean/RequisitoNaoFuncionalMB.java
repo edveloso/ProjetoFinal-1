@@ -68,7 +68,7 @@ public class RequisitoNaoFuncionalMB {
 		//control.gravar(caso, req);
 		Projeto projeto = projetoMB.getProjeto();
 		control.gravar(projeto, req);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Salvo com Sucesso", req.getDescricao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Salvo com Sucesso " + req.getDescricao(), null));
 		req = new RequisitoNaoFuncional();
 		return "updateCasos";
 	}
@@ -89,7 +89,7 @@ public class RequisitoNaoFuncionalMB {
 	
 	public void escolhe(){
 		req = list.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Escolhido: ", req.getDescricao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Escolhido: " + req.getDescricao(), null));
 	}
 	
 	public void limpar() {
@@ -98,9 +98,8 @@ public class RequisitoNaoFuncionalMB {
 	
 	public String atualizar(ActionEvent actionEvent){
 		control.atualizar(req);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Atualizado com Sucesso", req.getDescricao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Atualizado com Sucesso " + req.getDescricao(), null));
 		return "updateCasos";
 	}
-	
 	
 }

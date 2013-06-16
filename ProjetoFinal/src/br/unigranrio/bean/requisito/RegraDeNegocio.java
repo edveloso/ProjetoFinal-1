@@ -1,15 +1,19 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
 @XStreamAlias("regraDeNegocio")
@@ -21,6 +25,8 @@ public class RegraDeNegocio implements Serializable{
 	private String codigo;
 	//@XStreamOmitField
 	//private CasoDeUso casoDeUso;
+	@XStreamOmitField
+	private List<CasoDeUsoRegra> casosDeUsoRegra;
 	private Projeto projeto;
 	
 	public RegraDeNegocio() {
@@ -60,6 +66,15 @@ public class RegraDeNegocio implements Serializable{
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.regra")
+	public List<CasoDeUsoRegra> getCasoDeUsoRegra() {
+		return casosDeUsoRegra;
+	}
+
+	public void setCasoDeUsoRegra(List<CasoDeUsoRegra> casosDeUsoRegra) {
+		this.casosDeUsoRegra = casosDeUsoRegra;
 	}
 	
 	//@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = CasoDeUso.class)

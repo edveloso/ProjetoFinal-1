@@ -13,6 +13,11 @@
 		
 		<p:messages id="messages" autoUpdate="true" closable="true" />
 
+		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" />
+
+		<br />
+		<br />
+
 		<h:form id="formLista">
 			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:600px">
 
@@ -39,11 +44,7 @@
 			
 		</h:form>
 		
-		<br />
-		<br />
 		
-		<p:commandButton value="Novo" onclick="modalNovoProjeto.show();" actionListener="#{projetoMB.limpar}" update=":formProjeto" />
-
 		<p:dialog header="Novo Projeto" widgetVar="modalNovoProjeto" showEffect="clip" hideEffect="explode">
 			<h:form id="formProjeto">
 				<h:panelGrid columns="2">

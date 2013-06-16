@@ -1,16 +1,20 @@
 package br.unigranrio.bean.requisito;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 @Entity
@@ -23,6 +27,8 @@ public class RequisitoNaoFuncional implements Serializable{
 	private String descricao;
 	//@XStreamOmitField
 	//private CasoDeUso casoDeUso;
+	@XStreamOmitField
+	private List<CasoDeUsoRequisito> casosDeUsoRequisito;
 	private Projeto projeto;
 	
 	public RequisitoNaoFuncional() {
@@ -73,6 +79,15 @@ public class RequisitoNaoFuncional implements Serializable{
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="pk.requisito")
+	public List<CasoDeUsoRequisito> getCasoDeUsoRequisito() {
+		return casosDeUsoRequisito;
+	}
+
+	public void setCasoDeUsoRequisito(List<CasoDeUsoRequisito> casosDeUsoRequisito) {
+		this.casosDeUsoRequisito = casosDeUsoRequisito;
 	}
 	
 }

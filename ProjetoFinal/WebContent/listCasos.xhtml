@@ -10,12 +10,14 @@
     		Casos de Uso
     	</ui:define>
         <ui:define name="conteudo">
+
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
             <p:commandButton value="Novo" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" oncomplete="modalNovoCaso.show();" />
 
 			<br />
 			<br />
-			<p:messages id="messages" autoUpdate="true" closable="true" />
-
+			
 			<h:form id="formLista">
 				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
 					<f:facet name="header">  
@@ -44,13 +46,14 @@
 			
 			<p:dialog header="Remover Caso de Uso" widgetVar="modalRemoverCaso" showEffect="clip" hideEffect="explode">
 				<h:form id="formRemoverCaso">
-					<p:panelGrid columns="1">
-						<h:outputLabel value="Tem certeza de que deseja remover o caso de uso #{casoDeUsoMB.casoDeUso.nome} ?" style="font:14px" />
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Tem certeza de que deseja remover o caso de uso " />
+						<h:outputLabel value="#{casoDeUsoMB.casoDeUso.nome} ?" style="font-size:12px;font-weight:bold" />
 						<f:facet name="footer">
-							<p:commandButton value="Sim" actionListener="#{casoDeUsoMB.remover}" update=":formLista" oncomplete="modalRemoverCaso.hide()" />
-							<p:commandButton value="Não" oncomplete="modalRemoverCaso.hide()" />
+							<p:commandButton value="Sim" actionListener="#{casoDeUsoMB.remover}" update=":formLista" oncomplete="modalRemoverCaso.hide()"  style="float:right" />
+							<p:commandButton value="Não" oncomplete="modalRemoverCaso.hide()" style="float:right" />
 						</f:facet>
-					</p:panelGrid>
+					</h:panelGrid>
 				</h:form>
 			</p:dialog>
 			
@@ -67,8 +70,8 @@
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            		<f:facet name="footer">
-	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()" />
-	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
+	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.salvar}" update=":formLista" oncomplete="modalNovoCaso.hide()"  style="float:right" />
+	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso"  style="float:right" />
 	            		</f:facet>
 	            	</h:panelGrid>
 	            	<p:tooltip for="nomeCaso">
@@ -93,8 +96,7 @@
 	            		<p:outputLabel value="Objetivo" />
 	            		<p:inputTextarea cols="32" rows="5" autoResize="false" value="#{casoDeUsoMB.casoDeUso.objetivo}" />
 	            		<f:facet name="footer">
-	            			<p:commandButton value="Gravar" actionListener="#{casoDeUsoMB.atualizar}" update=":formLista" oncomplete="modalEditCaso.hide()" />
-	            			<p:commandButton value="Limpar" actionListener="#{casoDeUsoMB.novoCaso}" update=":formNovoCaso" />
+	            			<p:commandButton value="Atualizar" actionListener="#{casoDeUsoMB.atualizar}" update=":formLista" oncomplete="modalEditCaso.hide()"  style="float:right" />
 	            		</f:facet>
 	            	</h:panelGrid>
 	            </h:form>

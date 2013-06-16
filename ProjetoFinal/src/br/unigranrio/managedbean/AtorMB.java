@@ -35,7 +35,7 @@ public class AtorMB implements Serializable {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, " "));
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso", ator.getNome()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Salvo com Sucesso " + ator.getNome(), null));
 		}
 		ator = new Ator();
 		return "listAtores";
@@ -43,7 +43,7 @@ public class AtorMB implements Serializable {
 	
 	public String atualizar(ActionEvent actionEvent){
 		control.atualizar(ator);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Atualizado com Sucesso", ator.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Atualizado com Sucesso " + ator.getNome(), null));
 		return "listAtores";
 	}
 	
@@ -59,7 +59,7 @@ public class AtorMB implements Serializable {
 	
 	public void escolheAtor(ActionEvent actionEvent){
 		ator = atores.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: ", ator.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: " + ator.getNome(), null));
 	}
 
 	public AtorMB() {

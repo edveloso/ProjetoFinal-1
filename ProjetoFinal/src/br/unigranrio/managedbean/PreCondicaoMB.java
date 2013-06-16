@@ -60,7 +60,7 @@ public class PreCondicaoMB {
 	public String salvar(){
 		CasoDeUso caso = casoMB.getCasoDeUso();
 		control.gravar(caso, pre);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Salva com Sucesso", pre.getDescricao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Salva com Sucesso " + pre.getDescricao(), null));
 		pre = new PreCondicao();
 		return "updateCasos";
 	}
@@ -73,6 +73,6 @@ public class PreCondicaoMB {
 	
 	public void escolhe(){
 		pre = list.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Escolhida: ", pre.getDescricao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Escolhida: " + pre.getDescricao(), null));
 	}
 }

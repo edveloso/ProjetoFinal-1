@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
+import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.bean.requisito.RequisitoNaoFuncional;
 import br.unigranrio.dao.impl.RequisitoNaoFuncionalDAO;
 
@@ -38,7 +39,10 @@ public class RequisitoNaoFuncionalController {
 	
 	public void atualizar(RequisitoNaoFuncional req) {
 		dao.atualizar(req);
-
+	}
+	
+	public RequisitoNaoFuncional selecionaRequisitoPorId(long id){
+		return (RequisitoNaoFuncional) dao.selecionaPorId(id);
 	}
 
 }

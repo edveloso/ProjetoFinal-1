@@ -13,6 +13,11 @@
 
 			<p:messages id="messages" autoUpdate="true" closable="true" />
 
+            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" actionListener="#{atorMB.limpar}" update=":formNovoAtor" />
+
+			<br />
+			<br />
+            
 			<h:form id="formLista">
 				<p:dataTable var="ator" value="#{atorMB.atores}" style="width:600px">
 					<f:facet name="header">  
@@ -30,11 +35,6 @@
 				</p:dataTable>
 			</h:form>
 			
-			<br />
-			<br />
-            
-            <p:commandButton value="Novo" onclick="modalNovoAtor.show();" actionListener="#{atorMB.limpar}" update=":formNovoAtor" />
-
 			<p:dialog widgetVar="modalNovoAtor" header="Novo Ator" showEffect="clip" hideEffect="explode">
 				<h:form id="formNovoAtor">
 	            	<h:panelGrid columns="2">
@@ -54,7 +54,7 @@
 			
 			<p:dialog widgetVar="modalEditAtor" header="Editar Ator" showEffect="clip" hideEffect="explode">
 				<h:form id="formEditAtor">
-	            	<h:panelGrid columns="4">
+	            	<h:panelGrid columns="2">
 		            		            	
 	            		<p:outputLabel value="Nome" />
 	            		<p:inputText value="#{atorMB.ator.nome}" size="40" />

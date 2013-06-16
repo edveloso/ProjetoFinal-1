@@ -69,14 +69,14 @@ public class PassoMB implements Serializable {
 		passo.setAtor(ator);
 		passo.setPontoDeExtensao(caso);
 		control.gravar(passo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Salvo com Sucesso", passo.getAcao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Salvo com Sucesso " + passo.getAcao(), null));
 		passo = new Passo();
 		return "updateCasos";
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
 		control.atualizar(passo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Atualizado com Sucesso", passo.getAcao()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Atualizado com Sucesso " + passo.getAcao(), null));
 		return "updateCasos";
 	}
 	
@@ -92,7 +92,7 @@ public class PassoMB implements Serializable {
 	
 	public void escolhe(ActionEvent actionEvent){
 		passo = passos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Escolhido: ", passo.getCodigo().toString()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Escolhido: " + passo.getCodigo().toString(), null));
 	}
 
 	public PassoMB() {

@@ -48,6 +48,10 @@ public class CasoDeUso implements Serializable, Exportavel {
 	@XStreamOmitField
 	private List<CasoDeUsoAtor> casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
 	@XStreamOmitField
+	private List<CasoDeUsoRegra> casosDeUsoRegra = new ArrayList<CasoDeUsoRegra>();
+	@XStreamOmitField
+	private List<CasoDeUsoRequisito> casosDeUsoRequisito = new ArrayList<CasoDeUsoRequisito>();
+	@XStreamOmitField
 	private List<Fluxo> fluxos = new ArrayList<Fluxo>();
 	@XStreamOmitField
 	private List<RegraDeNegocio> regrasDeNegocio = new ArrayList<RegraDeNegocio>();
@@ -135,6 +139,24 @@ public class CasoDeUso implements Serializable, Exportavel {
 
 	public void setCasosDeUsoAtor(List<CasoDeUsoAtor> casosDeUsoAtor) {
 		this.casosDeUsoAtor = casosDeUsoAtor;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.casoDeUso", cascade = CascadeType.ALL)
+	public List<CasoDeUsoRegra> getCasosDeUsoRegra() {
+		return casosDeUsoRegra;
+	}
+
+	public void setCasosDeUsoRegra(List<CasoDeUsoRegra> casosDeUsoRegra) {
+		this.casosDeUsoRegra = casosDeUsoRegra;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.casoDeUso", cascade = CascadeType.ALL)
+	public List<CasoDeUsoRequisito> getCasosDeUsoRequisito() {
+		return casosDeUsoRequisito;
+	}
+
+	public void setCasosDeUsoRequisito(List<CasoDeUsoRequisito> casosDeUsoRequisito) {
+		this.casosDeUsoRequisito = casosDeUsoRequisito;
 	}
 
 	public void addAtor(Ator ator, String tipoAtor) {

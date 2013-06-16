@@ -36,7 +36,7 @@ public class FluxoMB implements Serializable {
 
 	public String adicionaPasso(){
 		fluxoEscolhido = fluxos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: " + fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo(), null));
 		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " >> " + fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo());
 		return "listPassos";
 	}
@@ -47,10 +47,10 @@ public class FluxoMB implements Serializable {
 		fluxo.setCasoDeUso(caso);
 		erro = control.gravar(fluxo);
 		if(erro == null){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Salvo com Sucesso", fluxo.getNome()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Salvo com Sucesso " + fluxo.getNome(), null));
 			fluxo = new Fluxo();
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao salvar o Fluxo", erro));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao salvar o Fluxo " + erro, null));
 		}
 		fluxo = new Fluxo();
 		return "updateCasos";
@@ -58,7 +58,7 @@ public class FluxoMB implements Serializable {
 	
 	public String atualizar(ActionEvent actionEvent){
 		control.atualizar(fluxo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Atualizado com Sucesso", fluxo.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Atualizado com Sucesso " + fluxo.getNome(), null));
 		return "updateCasos";
 	}
 	
@@ -74,7 +74,7 @@ public class FluxoMB implements Serializable {
 	
 	public void escolhe(ActionEvent actionEvent){
 		fluxoEscolhido = fluxos.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: ", fluxoEscolhido.getTipo()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: " + fluxoEscolhido.getTipo(), null));
 	}
 
 	public FluxoMB() {

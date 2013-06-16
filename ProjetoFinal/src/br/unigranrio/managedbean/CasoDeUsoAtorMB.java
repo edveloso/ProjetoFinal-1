@@ -43,7 +43,7 @@ public class CasoDeUsoAtorMB {
 	
 	public void escolhe(ActionEvent actionEvent){
 		casoAtor = listCasoAtor.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: ", casoAtor.getAtor().getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Escolhido: " + casoAtor.getAtor().getNome(), null));
 	}
 	
 	public String remover(ActionEvent actionEvent){
@@ -134,10 +134,12 @@ public class CasoDeUsoAtorMB {
 		casoAtor.setAtor(ator);
 		erro = control.gravar(casoAtor);
 		if(erro == null){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator do Caso de Uso Salvo com Sucesso", casoAtor.getAtor().getNome()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator do Caso de Uso Salvo com Sucesso " + casoAtor.getAtor().getNome(), null));
+			casoAtor = new CasoDeUsoAtor();
 			return "updateCasos";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir Ator do Caso de Uso", erro));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir Ator do Caso de Uso " + erro, null));
+			casoAtor = new CasoDeUsoAtor();
 			return "updateCasos";
 		}
 	}
@@ -148,6 +150,10 @@ public class CasoDeUsoAtorMB {
 
 	public void setAtorId(long atorId) {
 		this.atorId = atorId;
+	}
+	
+	public void limpar(){
+		casoAtor = new CasoDeUsoAtor();
 	}
 
 }

@@ -12,9 +12,14 @@
 	<ui:define name="conteudo">
 	
 		<p:messages id="messages" autoUpdate="true"	closable="true" />
+		
+		<p:commandButton value="Novo" onclick="modalNovoGlossario.show();" actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" />
 
+		<br />
+		<br />
+		
 		<h:form id="formLista">
-			<p:dataTable id="tblglo" var="glossario" value="#{glossarioMB.glossarios}" paginator="true" rows="10" style="width:600px">
+			<p:dataTable id="tblglo" var="glossario" value="#{glossarioMB.glossarios}" style="width:600px">
 				<f:facet name="header">  
 		            <h:outputText value="Glossário" />  
 		        </f:facet>
@@ -40,6 +45,9 @@
 					<p:commandButton actionListener="#{glossarioMB.escolheGlossario}" update=":formRemoverGlossario" oncomplete="modalRemoverGlossario.show();" icon="ui-icon-trash" />
 				</p:column>
 			</p:dataTable>
+			
+			<br />
+			
 			<h:panelGrid columns="2">
 				<p:panel header="Export All Data">
 					<h:commandLink>
@@ -92,11 +100,6 @@
 			</h:panelGrid>
 		</h:form>
 		
-		<br />
-		<br />
-
-		<p:commandButton value="Novo" onclick="modalNovoGlossario.show();" actionListener="#{glossarioMB.limpar}" update=":formNovoGlossario" />
-
 		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario" showEffect="clip" hideEffect="explode">
 			<h:form id="formNovoGlossario">
 				<h:panelGrid columns="2">

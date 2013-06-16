@@ -13,15 +13,19 @@
 		
 		<p:messages id="messages" autoUpdate="true"	closable="true" />
 
+		<p:commandButton value="Novo" onclick="modalNovaRegraDeNegocio.show();" actionListener="#{regraDeNegocioMB.limpar}" update=":formNovaRegraDeNegocio" />
+
+		<br />
+		<br />
+		
 		<h:form id="formLista">
-			<p:dataTable id="tblregra" var="regra" value="#{regraDeNegocioMB.list}" paginator="true" rows="10" style="width:600px">
+			<p:dataTable id="tblregra" var="regra" value="#{regraDeNegocioMB.list}" style="width:600px">
 				<f:facet name="header">  
-			            Regras de Negócio 
-			        </f:facet>
+		            Regras de Negócio 
+		        </f:facet>
 			       <!-- tive que retirar p:column headerText="Código" para colocar em <f:facet name="header">
 						<h:outputText value="Código para aparecer na exportação o titulo da exportação na tabela  -->
 			    <p:column style="width:10%">
-
 			    	<f:facet name="header">
 						<h:outputText value="Código" />
 					</f:facet>
@@ -46,6 +50,9 @@
 						oncomplete="modalRemoverRegraDeNegocio.show();" icon="ui-icon-trash" />
 				</p:column>
 			</p:dataTable>
+			
+			<br />
+			
 			<h:panelGrid columns="2">
 				<p:panel header="Export All Data">
 					<h:commandLink>
@@ -97,17 +104,12 @@
 			</h:panelGrid>
 		</h:form>
 		
-		<br />
-		<br />
-		
-		<p:commandButton value="Novo" onclick="modalNovaRegraDeNegocio.show();" actionListener="#{regraDeNegocioMB.limpar}" update=":formNovaRegraDeNegocio" />
-
 		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra de Negocio" showEffect="clip" hideEffect="explode">
 			<h:form id="formNovaRegraDeNegocio">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" />
+					<p:inputTextarea id="txtregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"	actionListener="#{regraDeNegocioMB.salvar}" update=":formLista"	oncomplete="modalNovaRegraDeNegocio.hide()" style="float:right" />
@@ -115,6 +117,9 @@
 					</f:facet>
 
 				</h:panelGrid>
+				<p:tooltip for="txtregra">
+       				Descreva uma restrição ligada ao domínio da aplicação.
+       			</p:tooltip>
 			</h:form>
 		</p:dialog>
 
@@ -122,7 +127,7 @@
 		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra de Negocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formEditRegraDeNegocio">
-				<h:panelGrid columns="3">
+				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
 					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" />
@@ -140,7 +145,7 @@
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formRemoverRegraDeNegocio">
 				<h:panelGrid columns="1">
-					<h:outputLabel value="Tem certeza de que deseja remover a Regra de Negocio: "	style="font:14px" />
+					<h:outputLabel value="Tem certeza de que deseja remover a Regra de Negocio: " />
 					<h:outputLabel value="#{regraDeNegocioMB.regra.descricao} ?" style="font-size:12px;font-weight:bold" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim" actionListener="#{regraDeNegocioMB.remover}" update=":formLista" oncomplete="modalRemoverRegraDeNegocio.hide()" style="float:right" />

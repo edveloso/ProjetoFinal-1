@@ -40,7 +40,7 @@ public class CasoDeUsoMB {
 	
 	public String atualizaCaso(){
 		casoDeUso = casosDeUso.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: ", casoDeUso.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: " + casoDeUso.getNome(), null));
 		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoDeUso.getCodigo() + " - " + casoDeUso.getNome());
 		return "updateCasos";
 	}
@@ -49,7 +49,7 @@ public class CasoDeUsoMB {
 		Projeto projeto = projetoMB.getProjeto();
 		casoDeUso.setProjeto(projeto);
 		control.gravar(casoDeUso);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Salvo com Sucesso", casoDeUso.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Salvo com Sucesso " + casoDeUso.getNome(), null));
 		casoDeUso = new CasoDeUso();
 		return "addCasos";
 	}
@@ -62,13 +62,13 @@ public class CasoDeUsoMB {
 	
 	public String atualizar(ActionEvent actionEvent){
 		control.atualizar(casoDeUso);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Atualizado com Sucesso", casoDeUso.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Atualizado com Sucesso " + casoDeUso.getNome(), null));
 		return "listCasos";
 	}
 	
 	public void escolheCaso(ActionEvent actionEvent){
 		casoDeUso = casosDeUso.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: ", casoDeUso.getNome()));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso Escolhido: " + casoDeUso.getNome(), null));
 		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoDeUso.getCodigo() + " - " + casoDeUso.getNome());
 	}
 

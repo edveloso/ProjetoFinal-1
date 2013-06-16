@@ -22,6 +22,8 @@
 		<mapping class="br.unigranrio.bean.requisito.Ator"/>
 		<mapping class="br.unigranrio.bean.requisito.CasoDeUso"/>
 		<mapping class="br.unigranrio.bean.requisito.CasoDeUsoAtor"/>
+		<mapping class="br.unigranrio.bean.requisito.CasoDeUsoRegra"/>
+		<mapping class="br.unigranrio.bean.requisito.CasoDeUsoRequisito"/>
 		<mapping class="br.unigranrio.bean.requisito.Fluxo"/>
 		<mapping class="br.unigranrio.bean.requisito.Glossario"/>
 		<mapping class="br.unigranrio.bean.requisito.Passo"/>
