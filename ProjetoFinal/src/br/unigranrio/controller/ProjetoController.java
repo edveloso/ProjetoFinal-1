@@ -31,8 +31,21 @@ public class ProjetoController {
 		return erro;
 	}
 	
-	public void atualizar(Projeto projeto){
-		dao.atualizar(projeto);
+	public String atualizar(Projeto projeto){
+		String erro = null;
+		List<Projeto> projetos = dao.retornarTodos();
+		for (Projeto projeto2 : projetos) {
+			if(projeto2.getNome().equals(projeto.getNome())){
+				erro = "Projeto com mesmo nome já cadastrado";
+				break;
+			} else {
+				erro = null;
+			}
+		}
+		if (erro == null){
+			dao.atualizar(projeto);
+		}
+		return erro;
 	}
 	
 	public void remover(long id){

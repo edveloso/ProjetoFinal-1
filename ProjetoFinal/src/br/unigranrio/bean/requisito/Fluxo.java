@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
@@ -23,6 +24,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
+@Table(name="fluxo")
 @XStreamAlias("fluxo")
 public class Fluxo implements Serializable {
 
@@ -126,7 +128,7 @@ public class Fluxo implements Serializable {
 		
 		if(disparadoPor != null){
 			disparadoPorParaXML.setAcao(disparadoPor.getAcao());
-			disparadoPorParaXML.setAtorParaXML(disparadoPor.getAtorParaXML());
+
 			disparadoPorParaXML.setCodigo(disparadoPor.getCodigo());
 			disparadoPorParaXML.setComplemento(disparadoPor.getComplemento());
 			disparadoPorParaXML.setId(disparadoPor.getId());

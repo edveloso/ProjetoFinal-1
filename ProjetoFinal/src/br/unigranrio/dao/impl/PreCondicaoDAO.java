@@ -21,7 +21,7 @@ public class PreCondicaoDAO extends AbstractHibernateDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<PreCondicao> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from precondicao where casoDeUso_casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from preCondicao where casoDeUso_casoDeUso_id=:id")
 				.addEntity(PreCondicao.class)
 				.setParameter("id", id);
 		return query.list();

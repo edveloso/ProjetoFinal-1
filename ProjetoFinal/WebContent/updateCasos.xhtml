@@ -81,7 +81,7 @@
            			<h:form id="formInfoCaso2">
             			<h:panelGrid columns="2">
             				<p:outputLabel value="Pré-Condição" />
-            				<p:inputText id="txtpre" value="#{preCondicaoMB.pre.descricao}" required="true" requiredMessage="Por favor preencha a pré-condição" size="80" />
+            				<p:inputText id="txtpre" value="#{preCondicaoMB.pre.descricao}" required="true" requiredMessage="Por favor preencha a pré-condição" size="80" maxlenght="255" />
             				<p:outputLabel value=" " />
             				<p:commandButton value="Gravar" actionListener="#{preCondicaoMB.salvar}" update=":tabCaso:formPre" style="float:right" />
             			</h:panelGrid>
@@ -113,7 +113,7 @@
            			<h:form id="formInfoCaso3">
             			<h:panelGrid columns="2">
             				<p:outputLabel value="Pós-Condição" />
-            				<p:inputText id="txtpos" value="#{posCondicaoMB.pos.descricao}"  required="true" requiredMessage="Por favor preencha a pós-condição" size="80" />
+            				<p:inputText id="txtpos" value="#{posCondicaoMB.pos.descricao}"  required="true" requiredMessage="Por favor preencha a pós-condição" size="80" maxlength="255" />
             				<p:outputLabel value=" " />
             				<p:commandButton value="Gravar" actionListener="#{posCondicaoMB.salvar}" update=":tabCaso:formPos" style="float:right" />
             			</h:panelGrid>
@@ -222,7 +222,7 @@
             					<f:selectItem itemLabel="Alternativo" itemValue="Alternativo" />
             				</p:selectOneMenu>
             				<p:outputLabel value="Nome" />
-            				<p:inputText value="#{fluxoMB.fluxo.nome}" required="true" requiredMessage="Por favor preencha o nome do fluxo." />
+            				<p:inputText value="#{fluxoMB.fluxo.nome}" required="true" requiredMessage="Por favor preencha o nome do fluxo" maxlength="80" size="50" />
             				<p:outputLabel value=" " />
             				<p:commandButton value="Gravar" actionListener="#{fluxoMB.salvar}" update=":tabCaso:formFluxo" style="float:right" />
             			</h:panelGrid>
@@ -271,7 +271,7 @@
             <p:dialog header="Remover Pré-Condição" widgetVar="modalRemoverPre" showEffect="clip" hideEffect="explode">
 				<h:form id="formRemoverPre">
 					<h:panelGrid columns="1">
-						<h:outputLabel value="Tem certeza de que deseja remover a pré-condição: " style="font:14px" />
+						<h:outputLabel value="Tem certeza de que deseja remover a pré-condição " />
 						<h:outputLabel value="#{preCondicaoMB.pre.descricao} ?" style="font-size:12px;font-weight:bold" />
 						<f:facet name="footer">
 							<p:commandButton value="Sim" actionListener="#{preCondicaoMB.remover}" update=":tabCaso:formPre" oncomplete="modalRemoverPre.hide()" style="float:right" />

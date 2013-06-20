@@ -21,7 +21,7 @@ public class RequisitoNaoFuncionalDAO extends AbstractHibernateDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<RequisitoNaoFuncional> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from requisitonaofuncional where casoDeUso_casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from requisitoNaoFuncional where casoDeUso_casoDeUso_id=:id")
 				.addEntity(RequisitoNaoFuncional.class)
 				.setParameter("id", id);
 		return query.list();

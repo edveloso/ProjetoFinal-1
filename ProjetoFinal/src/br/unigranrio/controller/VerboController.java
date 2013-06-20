@@ -1,5 +1,6 @@
 package br.unigranrio.controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import javax.servlet.ServletContext;
 public class VerboController {
 
 	ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-	String realPath = context.getRealPath("\\resources\\dic.txt");
+	String realPath = context.getRealPath(File.separator + "resources" + File.separator + "dic.txt");
 	
 	public List<String> recuperaVerbos(){
 		List<String> verbos = new ArrayList<String>();

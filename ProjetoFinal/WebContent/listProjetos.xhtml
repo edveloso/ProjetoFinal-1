@@ -19,7 +19,7 @@
 		<br />
 
 		<h:form id="formLista">
-			<p:dataTable var="projeto" value="#{projetoMB.projetos}" style="width:600px">
+			<p:dataTable var="prj" value="#{projetoMB.projetos}" style="width:600px">
 
 				<f:facet name="header"> 
 		            <h:outputText value="Projetos" />
@@ -27,11 +27,11 @@
 		        
 				<p:column headerText="Id" style="width:5%">
 					<p:commandLink actionListener="#{projetoMB.escolheProjeto}" update=":formLista">
-						<h:outputText value="#{projeto.id}" />
+						<h:outputText value="#{prj.id}" />
 					</p:commandLink>
 				</p:column>
 				<p:column headerText="Nome" style="width:85%">
-					<h:outputText value="#{projeto.nome}" />
+					<h:outputText value="#{prj.nome}" />
 				</p:column>
 				<p:column headerText="Editar" style="width:5%">
 					<p:commandButton actionListener="#{projetoMB.escolheProjeto}" update=":formEditProjeto" oncomplete="modalEditProjeto.show();" icon="ui-icon-pencil" />

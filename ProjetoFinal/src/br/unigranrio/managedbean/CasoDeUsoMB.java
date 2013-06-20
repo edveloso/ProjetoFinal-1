@@ -1,5 +1,8 @@
 package br.unigranrio.managedbean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,6 +14,7 @@ import javax.faces.model.ListDataModel;
 import br.unigranrio.bean.requisito.CasoDeUso;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.controller.CasoDeUsoController;
+import br.unigranrio.controller.VerboController;
 
 @ManagedBean(name="casoDeUsoMB")
 @SessionScoped
@@ -20,6 +24,10 @@ public class CasoDeUsoMB {
 	private ListDataModel<CasoDeUso> casosDeUso;
 	private CasoDeUsoController control = new CasoDeUsoController();
 	
+	private VerboController controlVerbo = new VerboController();
+	List<String> verbos = controlVerbo.recuperaVerbos();
+	List<String> possibilidades = new ArrayList<String>();
+	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 	
@@ -28,6 +36,16 @@ public class CasoDeUsoMB {
 
 	public CasoDeUsoMB() {
 		
+	}
+	
+	public List<String> complete(String query){
+
+		for (String string : verbos) {
+			if(string.toLowerCase().startsWith(query.toLowerCase())){
+				possibilidades.add(string);
+			}
+		}
+		return possibilidades;
 	}
 	
 	public void novoCaso(){

@@ -7,7 +7,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"> <ui:decorate
 	template="/template/template.xhtml">
 	<ui:define name="title">
-    		Passos
+ 		Passos
    	</ui:define>
 	<ui:define name="conteudo">
 		<p:commandButton value="Novo" onclick="modalNovoPasso.show();" actionListener="#{passoMB.limpar}" update=":formPasso" />
@@ -61,7 +61,7 @@
 					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
 					
 					<p:outputLabel value="Complemento" />
-					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." />
+					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
 					
 					<p:outputLabel value="Ponto de Extensão" />
 					<p:selectOneMenu value="#{passoMB.casoId}">
@@ -98,7 +98,7 @@
 					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
 					
 					<p:outputLabel value="Complemento" />
-					<p:inputText id="complementoEditar" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." />
+					<p:inputText id="complementoEditar" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
 					
 					<p:outputLabel value="Ponto de Extensão" />
 					<p:selectOneMenu value="#{passoMB.casoId}">
@@ -134,4 +134,5 @@
 		</p:dialog>
 		
 	</ui:define>
-</ui:decorate> </html>
+</ui:decorate> 
+</html>

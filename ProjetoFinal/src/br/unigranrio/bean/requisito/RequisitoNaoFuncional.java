@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -18,6 +19,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 @Entity
+@Table(name="requisitoNaoFuncional")
 @XStreamAlias("requisitoNaoFuncional")
 public class RequisitoNaoFuncional implements Serializable{
 

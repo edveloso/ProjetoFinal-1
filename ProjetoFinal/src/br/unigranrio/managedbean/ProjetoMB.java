@@ -32,13 +32,19 @@ public class ProjetoMB {
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Salvo com Sucesso " + projeto.getNome(), null));
 		}
+		projeto = new Projeto();
 		return "listProjetos";
 	}
 
 	public String atualizar(ActionEvent actionEvent) {
+		String erro = null;
+		erro = control.atualizar(projeto);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso " + projeto.getNome(), null));
+		}
 		projeto = new Projeto();
-		control.atualizar(projeto);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Projeto Atualizado com Sucesso " + projeto.getNome(), null));
 		return "listProjetos";
 	}
 

@@ -22,7 +22,7 @@ public class RegraDeNegocioDAO extends AbstractHibernateDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<RegraDeNegocio> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from regradenegocio where casoDeUso_casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from regraDeNegocio where casoDeUso_casoDeUso_id=:id")
 				.addEntity(RegraDeNegocio.class)
 				.setParameter("id", id);
 		return query.list();
@@ -30,14 +30,14 @@ public class RegraDeNegocioDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<RegraDeNegocio> selecionaTodosPorProjeto(long id){
-		Query query = session.createSQLQuery("select * from regradenegocio where projeto_id=:id")
+		Query query = session.createSQLQuery("select * from regraDeNegocio where projeto_id=:id")
 				.addEntity(RegraDeNegocio.class)
 				.setParameter("id", id);
 		return query.list();
 	}
 	
 	public String countItensParaCodigo(long id){
-		Query query = session.createSQLQuery("select count(*) from regradenegocio where projeto_id=:id").setParameter("id", id);
+		Query query = session.createSQLQuery("select count(*) from regraDeNegocio where projeto_id=:id").setParameter("id", id);
 		return query.uniqueResult().toString();
 	}
 

@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
+@Table(name="passo")
 @XStreamAlias("passo")
 public class Passo implements Serializable {
  
@@ -24,9 +26,6 @@ public class Passo implements Serializable {
 	private String codigo;
 	@XStreamOmitField
 	private Fluxo fluxo = new Fluxo();	
-	
-	@XStreamOmitField
-	private Ator atorParaXML = new Ator();
 	@XStreamAlias("ator")
 	private Ator ator = new Ator();
 	private String acao;
@@ -103,19 +102,6 @@ public class Passo implements Serializable {
 
 	public void setAtor(Ator ator) {
 		this.ator = ator;
-	}
-	
-	@Transient
-	public Ator getAtorParaXML() {		
-		atorParaXML = new Ator();
-		atorParaXML.setNome(this.ator.getNome());
-		
-		return atorParaXML;
-	}
-	
-	public void setAtorParaXML(Ator atorParaXML) {
-		this.atorParaXML = atorParaXML;
-		
 	}
 
 	public String toString() {

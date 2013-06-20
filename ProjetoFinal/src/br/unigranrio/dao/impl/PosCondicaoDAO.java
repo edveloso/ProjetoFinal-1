@@ -21,7 +21,7 @@ public class PosCondicaoDAO extends AbstractHibernateDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<PosCondicao> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from poscondicao where casoDeUso_casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from posCondicao where casoDeUso_casoDeUso_id=:id")
 				.addEntity(PosCondicao.class)
 				.setParameter("id", id);
 		return query.list();

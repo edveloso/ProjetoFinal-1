@@ -21,14 +21,14 @@ public class CasoDeUsoDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<CasoDeUso> retornaPorProjeto(long id){
-		Query query = session.createSQLQuery("select * from casodeuso where projeto_id=:id")
+		Query query = session.createSQLQuery("select * from casoDeUso where projeto_id=:id")
 				.addEntity(CasoDeUso.class)
 				.setParameter("id", id);
 		return query.list();
 	}
 
 	public String countItensParaCodigo(long id){
-		Query query = session.createSQLQuery("select count(*) from casodeuso where projeto_id=:id").setParameter("id", id);
+		Query query = session.createSQLQuery("select count(*) from casoDeUso where projeto_id=:id").setParameter("id", id);
 		return query.uniqueResult().toString();
 	}
 

@@ -7,6 +7,7 @@ import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -14,6 +15,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 
 @Entity
+@Table(name="casoDeUsoAtor")
 @AssociationOverrides({
 	@AssociationOverride(name = "pk.casoDeUso", 
 		joinColumns = @JoinColumn(name = "casoDeUso_id")),

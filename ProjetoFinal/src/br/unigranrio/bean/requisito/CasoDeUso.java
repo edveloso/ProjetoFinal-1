@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.unigranrio.controller.Exportavel;
@@ -21,6 +22,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 @Entity
+@Table(name="casoDeUso")
 @XStreamAlias("casoDeUso")
 public class CasoDeUso implements Serializable, Exportavel {
 

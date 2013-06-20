@@ -23,7 +23,7 @@ public class CasoDeUsoAtorDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<CasoDeUsoAtor> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from casodeusoator where casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from casoDeUsoAtor where casoDeUso_id=:id")
 				.addEntity(CasoDeUsoAtor.class)
 				.setParameter("id", id);
 		return query.list();
@@ -31,7 +31,7 @@ public class CasoDeUsoAtorDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Ator> selecionaTodosPorAtor(long id){
-		Query query = session.createSQLQuery("select * from casodeusoator where ator_id=:id")
+		Query query = session.createSQLQuery("select * from casoDeUsoAtor where ator_id=:id")
 				.addEntity(CasoDeUsoAtor.class)
 				.setParameter("id", id);
 		return query.list();

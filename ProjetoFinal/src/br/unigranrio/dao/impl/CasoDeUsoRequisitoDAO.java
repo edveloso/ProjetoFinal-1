@@ -23,7 +23,7 @@ public class CasoDeUsoRequisitoDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<CasoDeUsoRequisito> selecionaTodosPorCasoDeUso(long id){
-		Query query = session.createSQLQuery("select * from casodeusorequisito where casoDeUso_id=:id")
+		Query query = session.createSQLQuery("select * from casoDeUsoRequisito where casoDeUso_id=:id")
 				.addEntity(CasoDeUsoRequisito.class)
 				.setParameter("id", id);
 		return query.list();
@@ -31,7 +31,7 @@ public class CasoDeUsoRequisitoDAO extends AbstractHibernateDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<RequisitoNaoFuncional> selecionaTodosPorRequisito(long id){
-		Query query = session.createSQLQuery("select * from casodeusorequisito where requisito_id=:id")
+		Query query = session.createSQLQuery("select * from casoDeUsoRequisito where requisito_id=:id")
 				.addEntity(CasoDeUsoRequisito.class)
 				.setParameter("id", id);
 		return query.list();
