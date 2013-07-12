@@ -64,10 +64,15 @@ public class CasoDeUsoMB {
 	}
 	
 	public String salvar(){
+		String erro = null;
 		Projeto projeto = projetoMB.getProjeto();
 		casoDeUso.setProjeto(projeto);
-		control.gravar(casoDeUso);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Salvo com Sucesso " + casoDeUso.getNome(), null));
+		erro = control.gravar(casoDeUso);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Salvo com Sucesso " + casoDeUso.getNome(), null));
+		}
 		casoDeUso = new CasoDeUso();
 		return "addCasos";
 	}
@@ -79,8 +84,13 @@ public class CasoDeUsoMB {
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
-		control.atualizar(casoDeUso);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Atualizado com Sucesso " + casoDeUso.getNome(), null));
+		String erro = null;
+		erro = control.atualizar(casoDeUso);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Caso de Uso Atualizado com Sucesso " + casoDeUso.getNome(), null));
+		}
 		return "listCasos";
 	}
 	

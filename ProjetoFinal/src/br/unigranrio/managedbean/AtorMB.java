@@ -42,8 +42,13 @@ public class AtorMB implements Serializable {
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
-		control.atualizar(ator);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Atualizado com Sucesso " + ator.getNome(), null));
+		String erro = null;
+		erro = 	control.atualizar(ator);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ator Atualizado com Sucesso " + ator.getNome(), null));
+		}
 		return "listAtores";
 	}
 	

@@ -19,7 +19,7 @@
 			<br />
 			
 			<h:form id="formLista">
-				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:800px">
+				<p:dataTable var="caso" value="#{casoDeUsoMB.casosDeUso}" style="width:900px">
 					<f:facet name="header">  
 			            Casos de Uso  
 			        </f:facet>
@@ -102,6 +102,12 @@
 	            			<p:commandButton value="Atualizar" actionListener="#{casoDeUsoMB.atualizar}" update=":formLista" oncomplete="modalEditCaso.hide()"  style="float:right" />
 	            		</f:facet>
 	            	</h:panelGrid>
+	            	<p:tooltip for="nomeCaso">
+		       			1.	Formato do nome: verbo no infinitivo + objeto.<br/>
+						2.	Evite verbos vagos como "fazer" ou "processar". Use um verbo <br />
+						que ajude no entendimento do objetivo do caso de uso.<br/>
+						3.	Evite usar termos técnicos no nome do caso de uso.
+		       		</p:tooltip>
 	            </h:form>
 			</p:dialog>
 

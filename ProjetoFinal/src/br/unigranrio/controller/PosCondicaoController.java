@@ -10,9 +10,21 @@ public class PosCondicaoController {
 	
 	private PosCondicaoDAO dao = new PosCondicaoDAO();
 	
-	public void gravar(CasoDeUso caso, PosCondicao pos){
-		pos.setCasoDeUso(caso);
-		dao.gravar(pos);
+	public String gravar(CasoDeUso caso, PosCondicao pos){
+		String erro =  null;
+		List<PosCondicao> list = dao.retornarTodos();
+		for (PosCondicao posCondicao2 : list){
+			if(posCondicao2.getDescricao().equals(pos.getDescricao())){
+				erro = "Pós Condição com a mesma descrição já cadastrada";
+				break;
+			}else{
+				erro = null;
+			}
+		}if (erro == null){
+			pos.setCasoDeUso(caso);
+			dao.gravar(pos);	
+		}
+		return erro;
 	}
 	
 	public List<PosCondicao> selecionaTodosPorCasoDeUso(long id){

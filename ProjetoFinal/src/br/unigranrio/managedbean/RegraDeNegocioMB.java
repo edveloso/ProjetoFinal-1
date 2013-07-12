@@ -62,10 +62,15 @@ public class RegraDeNegocioMB {
 	//}
 	
 	public String salvar(){
+		String erro = null;
 		//CasoDeUso caso = casoMB.getCasoDeUso();
 		Projeto projeto = projetoMB.getProjeto();
-		control.gravar(projeto, regra);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Salva com Sucesso" + regra.getDescricao(), null));
+		erro = control.gravar(projeto, regra);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Salva com Sucesso" + regra.getDescricao(), null));
+		}
 		regra = new RegraDeNegocio();
 		return "updateCasos";
 	}
@@ -94,8 +99,13 @@ public class RegraDeNegocioMB {
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
-		control.atualizar(regra);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Atualizada com Sucesso" + regra.getDescricao(), null));
+		String erro = null;
+		erro = control.atualizar(regra);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Atualizada com Sucesso" + regra.getDescricao(), null));
+		}
 		return "updateCasos";
 	}
 }

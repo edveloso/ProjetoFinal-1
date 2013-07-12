@@ -58,9 +58,14 @@ public class PosCondicaoMB {
 	}
 
 	public String salvar(){
+		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		control.gravar(caso, pos);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pós-Condição Salva com Sucesso " + pos.getDescricao(), null));
+		erro = control.gravar(caso, pos);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pós-Condição Salva com Sucesso " + pos.getDescricao(), null));
+		}
 		pos = new PosCondicao();
 		return "updateCasos";
 	}

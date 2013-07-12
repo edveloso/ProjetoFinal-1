@@ -19,7 +19,7 @@
 		<br />
 		
 		<h:form id="formLista">
-			<p:dataTable id="tblglo" var="glossario" value="#{glossarioMB.glossarios}" style="width:600px">
+			<p:dataTable id="tblglo" var="glossario" value="#{glossarioMB.glossarios}" paginator="true" rows="10" style="width:600px">
 				<f:facet name="header">  
 		            <h:outputText value="Glossário" />  
 		        </f:facet>
@@ -49,7 +49,7 @@
 			<br />
 			
 			<h:panelGrid columns="2">
-				<p:panel header="Export All Data">
+				<p:panel header="Exportar Todos os Dados">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblglo" fileName="glossario" />
@@ -72,7 +72,7 @@
 					</h:commandLink>
 				</p:panel>
 
-				<p:panel header="Export Page Data">
+				<p:panel header="Exportar Dados da Página Atual">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblglo" fileName="glossario"
@@ -100,7 +100,7 @@
 			</h:panelGrid>
 		</h:form>
 		
-		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossario" showEffect="clip" hideEffect="explode">
+		<p:dialog widgetVar="modalNovoGlossario" header="Novo Glossário" showEffect="clip" hideEffect="explode">
 			<h:form id="formNovoGlossario">
 				<h:panelGrid columns="2">
 
@@ -120,7 +120,7 @@
 		</p:dialog>
 
 
-		<p:dialog widgetVar="modalEditGlossario" header="Editar Glossario"
+		<p:dialog widgetVar="modalEditGlossario" header="Editar Glossário"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formEditGlossario">
 				<h:panelGrid columns="2">
@@ -141,11 +141,11 @@
 		</p:dialog>
 
 
-		<p:dialog header="Remover Glossario" widgetVar="modalRemoverGlossario"
+		<p:dialog header="Remover Glossário" widgetVar="modalRemoverGlossario"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formRemoverGlossario">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Tem certeza de que deseja remover o Glossario: " />
+					<h:outputLabel value="Tem certeza de que deseja remover o Glossário: " />
 					<h:outputLabel value="#{glossarioMB.glossario.sigla} ?" style="font-size:12px;font-weight:bold" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim"

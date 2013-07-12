@@ -18,7 +18,7 @@
 		<br />
 
 		<h:form id="formLista">
-			<p:dataTable id="tblreq" var="req" value="#{requisitoNaoFuncionalMB.list}" style="width:600px">
+			<p:dataTable id="tblreq" var="req" value="#{requisitoNaoFuncionalMB.list}" paginator="true" rows="10" style="width:600px">
 				<f:facet name="header">  
 			            Requisitos não Funcionais
 			        </f:facet>
@@ -54,7 +54,7 @@
 			<br />
 
 			<h:panelGrid columns="2">
-				<p:panel header="Export All Data">
+				<p:panel header="Exportar Todos os Dados">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblreq" fileName="requisito" />
@@ -76,7 +76,7 @@
 					</h:commandLink>
 				</p:panel>
 
-				<p:panel header="Export Page Data">
+				<p:panel header="Exportar Dados da Página Atual">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblreq" fileName="requisito"
@@ -109,7 +109,7 @@
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{requisitoNaoFuncionalMB.req.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{requisitoNaoFuncionalMB.req.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo descrição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"	actionListener="#{requisitoNaoFuncionalMB.salvar}" update=":formLista" oncomplete="modalNovoRequisitoNaoFuncional.hide()" style="float:right" />
@@ -125,7 +125,7 @@
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{requisitoNaoFuncionalMB.req.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
+					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{requisitoNaoFuncionalMB.req.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo descrição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{requisitoNaoFuncionalMB.atualizar}" update=":formLista" oncomplete="modalEditRequisitoNaoFuncional.hide()" style="float:right" />
@@ -136,7 +136,7 @@
 		</p:dialog>
 
 
-		<p:dialog header="Remover Requisito Não Funcional" widgetVar="modalRemoverRequisitoNaoFuncional" showEffect="clip" hideEffect="explode">
+		<p:dialog header="Remover Requisito não Funcional" widgetVar="modalRemoverRequisitoNaoFuncional" showEffect="clip" hideEffect="explode">
 			<h:form id="formRemoverRequisitoNaoFuncional">
 				<h:panelGrid columns="1">
 					<h:outputLabel value="Tem certeza de que deseja remover o Requisito não Funcional: " />

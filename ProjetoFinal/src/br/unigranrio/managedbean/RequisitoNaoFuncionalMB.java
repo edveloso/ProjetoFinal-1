@@ -66,9 +66,14 @@ public class RequisitoNaoFuncionalMB {
 	public String salvar(){
 		//CasoDeUso caso = casoMB.getCasoDeUso();
 		//control.gravar(caso, req);
+		String erro = null;
 		Projeto projeto = projetoMB.getProjeto();
-		control.gravar(projeto, req);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Salvo com Sucesso " + req.getDescricao(), null));
+		erro = control.gravar(projeto, req);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Salvo com Sucesso " + req.getDescricao(), null));
+		}
 		req = new RequisitoNaoFuncional();
 		return "updateCasos";
 	}
@@ -97,8 +102,13 @@ public class RequisitoNaoFuncionalMB {
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
-		control.atualizar(req);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Atualizado com Sucesso " + req.getDescricao(), null));
+		String erro = null;
+		erro = 	control.atualizar(req);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Atualizado com Sucesso " + req.getDescricao(), null));
+		}
 		return "updateCasos";
 	}
 	

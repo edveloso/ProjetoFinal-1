@@ -10,14 +10,27 @@ public class RegraDeNegocioController {
 	
 	private RegraDeNegocioDAO dao = new RegraDeNegocioDAO();
 	
-	public void gravar(/*CasoDeUso caso,*/ Projeto projeto, RegraDeNegocio regra){
+	public String gravar(/*CasoDeUso caso,*/ Projeto projeto, RegraDeNegocio regra){
 		//regra.setCasoDeUso(caso);
-		int numero = Integer.parseInt(dao.countItensParaCodigo(projeto.getId()));
-		numero++;
-		String codigo = "RN"+numero;
-		regra.setCodigo(codigo);
-		regra.setProjeto(projeto);
-		dao.gravar(regra);
+		String erro = null;
+		List<RegraDeNegocio> list = dao.retornarTodos();
+		for (RegraDeNegocio regraDeNegocio2 : list){
+			if(regraDeNegocio2.getDescricao().equals(regra.getDescricao())){
+				erro = "Regra de Negócio com a mesma descrição já cadastrada";
+				break;
+			}else {
+				erro = null;
+			}
+		}if(erro == null){
+			int numero = Integer.parseInt(dao.countItensParaCodigo(projeto.getId()));
+			numero++;
+			String codigo = "RN"+numero;
+			regra.setCodigo(codigo);
+			regra.setProjeto(projeto);
+			dao.gravar(regra);
+		}
+		return erro;
+		
 	}
 	
 	public List<RegraDeNegocio> selecionaTodosPorCasoDeUso(long id){
@@ -32,8 +45,20 @@ public class RegraDeNegocioController {
 		dao.removerPorId(id);
 	}
 	
-	public void atualizar(RegraDeNegocio regra) {
-		dao.atualizar(regra);
+	public String atualizar(RegraDeNegocio regra) {
+		String erro = null;
+		List<RegraDeNegocio> list = dao.retornarTodos();
+		for (RegraDeNegocio regraDeNegocio2 : list){
+			if(regraDeNegocio2.getDescricao().equals(regra.getDescricao())){
+				erro = "Regra de Negócio com a mesma descrição já cadastrada";
+				break;
+			}else {
+				erro = null;
+			}
+		}if(erro == null){
+			dao.atualizar(regra);
+		}
+		return erro;
 
 	}
 	

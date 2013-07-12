@@ -58,9 +58,14 @@ public class PreCondicaoMB {
 	}
 
 	public String salvar(){
+		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		control.gravar(caso, pre);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Salva com Sucesso " + pre.getDescricao(), null));
+		erro = control.gravar(caso, pre);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Salva com Sucesso " + pre.getDescricao(), null));
+		}
 		pre = new PreCondicao();
 		return "updateCasos";
 	}

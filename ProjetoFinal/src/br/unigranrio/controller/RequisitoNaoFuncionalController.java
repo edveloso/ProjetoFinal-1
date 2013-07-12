@@ -12,16 +12,29 @@ public class RequisitoNaoFuncionalController {
 	
 	private RequisitoNaoFuncionalDAO dao = new RequisitoNaoFuncionalDAO();
 	
-	public void gravar(Projeto projeto, RequisitoNaoFuncional req){
+	public String gravar(Projeto projeto, RequisitoNaoFuncional req){
 	//public void gravar(CasoDeUso caso, RequisitoNaoFuncional req){
 		//req.setCasoDeUso(caso);
 		//dao.gravar(req);
-		int numero = Integer.parseInt(dao.countItensParaCodigo(projeto.getId()));
-		numero++;
-		String codigo = "RNF"+numero;
-		req.setCodigo(codigo);
-		req.setProjeto(projeto);
-		dao.gravar(req);
+		String erro = null;
+		List<RequisitoNaoFuncional> list = dao.retornarTodos();
+		for (RequisitoNaoFuncional requisitoNaoFuncional2 : list){
+			if(requisitoNaoFuncional2.getDescricao().equals(req.getDescricao())){
+				erro = "Requisito não Funcional com a mesma descrição já cadastrada";
+				break;
+			}else {
+				erro = null;
+			}
+		}
+		if (erro == null){
+			int numero = Integer.parseInt(dao.countItensParaCodigo(projeto.getId()));
+			numero++;
+			String codigo = "RNF"+numero;
+			req.setCodigo(codigo);
+			req.setProjeto(projeto);
+			dao.gravar(req);
+		}
+		return erro;
 	}
 	
 	public List<RequisitoNaoFuncional> selecionaTodosPorCasoDeUso(long id){
@@ -37,8 +50,21 @@ public class RequisitoNaoFuncionalController {
 		dao.removerPorId(id);
 	}
 	
-	public void atualizar(RequisitoNaoFuncional req) {
+	public String atualizar(RequisitoNaoFuncional req) {
+		String erro = null;
+		List<RequisitoNaoFuncional> list = dao.retornarTodos();
+		for (RequisitoNaoFuncional requisitoNaoFuncional2 : list){
+			if(requisitoNaoFuncional2.getDescricao().equals(req.getDescricao())){
+				erro = "Requisito não Funcional com a mesma descrição já cadastrada";
+				break;
+			}else {
+				erro = null;
+			}
+		}
+		if (erro == null){
 		dao.atualizar(req);
+		}
+		return erro;
 	}
 	
 	public RequisitoNaoFuncional selecionaRequisitoPorId(long id){

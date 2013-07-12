@@ -19,7 +19,7 @@
 		<br />
 		
 		<h:form id="formLista">
-			<p:dataTable id="tblregra" var="regra" value="#{regraDeNegocioMB.list}" style="width:600px">
+			<p:dataTable id="tblregra" var="regra" value="#{regraDeNegocioMB.list}" paginator="true" rows="10" style="width:600px">
 				<f:facet name="header">  
 		            Regras de Negócio 
 		        </f:facet>
@@ -54,7 +54,7 @@
 			<br />
 			
 			<h:panelGrid columns="2">
-				<p:panel header="Export All Data">
+				<p:panel header="Exportar Todos os Dados">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblregra" fileName="regra" />
@@ -76,7 +76,7 @@
 					</h:commandLink>
 				</p:panel>
 
-				<p:panel header="Export Page Data">
+				<p:panel header="Exportar Dados da Página Atual">
 					<h:commandLink>
 						<p:graphicImage value="/resources/css/images/excel.png" />
 						<p:dataExporter type="xls" target="tblregra" fileName="regra"
@@ -104,12 +104,12 @@
 			</h:panelGrid>
 		</h:form>
 		
-		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra de Negocio" showEffect="clip" hideEffect="explode">
+		<p:dialog widgetVar="modalNovaRegraDeNegocio" header="Nova Regra de Negócio" showEffect="clip" hideEffect="explode">
 			<h:form id="formNovaRegraDeNegocio">
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea id="txtregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
+					<p:inputTextarea id="txtregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo descrição" />
 
 					<f:facet name="footer">
 						<p:commandButton value="Gravar"	actionListener="#{regraDeNegocioMB.salvar}" update=":formLista"	oncomplete="modalNovaRegraDeNegocio.hide()" style="float:right" />
@@ -124,28 +124,30 @@
 		</p:dialog>
 
 
-		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra de Negocio"
-			showEffect="clip" hideEffect="explode">
+		<p:dialog widgetVar="modalEditRegraDeNegocio" header="Editar Regra de Negócio" showEffect="clip" hideEffect="explode">
 			<h:form id="formEditRegraDeNegocio">
 				<h:panelGrid columns="1">
 
 					<p:outputLabel value="Descrição" />
-					<p:inputTextarea cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo Descrição" />
+					<p:inputTextarea id="txregra" cols="45" rows="10" autoResize="false" value="#{regraDeNegocioMB.regra.descricao}" size="255" maxlength="255" required="true" requiredMessage="É necessário preencher o campo descrição"/>
 
 					<f:facet name="footer">
 						<p:commandButton value="Atualizar" actionListener="#{regraDeNegocioMB.atualizar}" update=":formLista" oncomplete="modalEditRegraDeNegocio.hide()" style="float:right" />
 					</f:facet>
 
 				</h:panelGrid>
+				<p:tooltip for="txregra">
+       				Descreva uma restrição ligada ao domínio da aplicação.
+       			</p:tooltip>
 			</h:form>
 		</p:dialog>
 
 
-		<p:dialog header="Remover Regra De Negocio" widgetVar="modalRemoverRegraDeNegocio"
+		<p:dialog header="Remover Regra de Negócio" widgetVar="modalRemoverRegraDeNegocio"
 			showEffect="clip" hideEffect="explode">
 			<h:form id="formRemoverRegraDeNegocio">
 				<h:panelGrid columns="1">
-					<h:outputLabel value="Tem certeza de que deseja remover a Regra de Negocio: " />
+					<h:outputLabel value="Tem certeza de que deseja remover a Regra de Negócio: " />
 					<h:outputLabel value="#{regraDeNegocioMB.regra.descricao} ?" style="font-size:12px;font-weight:bold" />
 					<f:facet name="footer">
 						<p:commandButton value="Sim" actionListener="#{regraDeNegocioMB.remover}" update=":formLista" oncomplete="modalRemoverRegraDeNegocio.hide()" style="float:right" />

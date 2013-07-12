@@ -55,9 +55,14 @@ public class GlossarioMB {
 	}
 	
 	public String salvar() {
+		String erro = null;
 		Projeto projeto = projetoMB.getProjeto();
-		control.gravar(projeto, glossario);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Salvo com Sucesso " + glossario.getSigla(), null));  
+		erro = control.gravar(projeto, glossario);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));			
+		} else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Salvo com Sucesso " + glossario.getSigla(), null));
+		}
 		glossario = new Glossario();
 		return "listGlossarios";
 	}
@@ -86,8 +91,14 @@ public class GlossarioMB {
 	}
 	
 	public String atualizar(ActionEvent actionEvent) {
-		control.atualizar(glossario);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Atualizado com Sucesso " + glossario.getSigla(), null));
+		String erro = null;
+		erro = 	control.atualizar(glossario);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Atualizado com Sucesso " + glossario.getSigla(), null));
+		}
+		glossario = new Glossario();
 		return "listGlossarios";
 	}
 

@@ -58,7 +58,7 @@
        				</p:selectOneMenu>
 					
 					<p:outputLabel value="Ação" />
-					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
+					<p:autoComplete id="compl" value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." scrollHeight = "150" />
 					
 					<p:outputLabel value="Complemento" />
 					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
@@ -75,6 +75,9 @@
 					</f:facet>
 
 				</h:panelGrid>
+				<p:tooltip for="compl">
+					Informe a ação que será executada pelo ator neste passo.
+				</p:tooltip>
 				<p:tooltip for="complementoNovo">
 					1. Procure ser objetivo ao escrever o complemento do passo.<br />
 					2. Evite redundâncias.<br />

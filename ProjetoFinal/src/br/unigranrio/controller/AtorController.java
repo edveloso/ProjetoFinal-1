@@ -18,7 +18,7 @@ public class AtorController {
 		List<Ator> atores = dao.retornarTodos();
 		for (Ator ator2 : atores) {
 			if(ator2.getNome().equals(ator.getNome())){
-				erro = "Ator já cadastrado";
+				erro = "Ator jï¿½ cadastrado";
 				break;
 			} else {
 				erro = null;
@@ -31,9 +31,21 @@ public class AtorController {
 		return erro;
 	}
 	
-	public void atualizar(Ator ator) {
-		dao.atualizar(ator);
-
+	public String atualizar(Ator ator) {
+		String erro = null;
+		List<Ator> atores = dao.retornarTodos();
+		for (Ator ator2 : atores) {
+			if(ator2.getNome().equals(ator.getNome())){
+				erro = "Ator jÃ¡ cadastrado";
+				break;
+			} else {
+				erro = null;
+			}
+		}
+		if(erro == null){
+			dao.atualizar(ator);
+		}
+		return erro;
 	}
 
 	public void remover(long id) {
