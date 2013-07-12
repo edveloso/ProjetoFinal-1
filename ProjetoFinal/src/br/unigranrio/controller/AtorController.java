@@ -3,6 +3,7 @@ package br.unigranrio.controller;
 import java.util.List;
 
 import br.unigranrio.bean.requisito.Ator;
+import br.unigranrio.bean.requisito.CasoDeUsoAtor;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.dao.impl.AtorDAO;
 
@@ -18,7 +19,7 @@ public class AtorController {
 		List<Ator> atores = dao.retornarTodos();
 		for (Ator ator2 : atores) {
 			if(ator2.getNome().equals(ator.getNome())){
-				erro = "Ator já cadastrado";
+				erro = "Ator jï¿½ cadastrado";
 				break;
 			} else {
 				erro = null;
@@ -36,7 +37,7 @@ public class AtorController {
 		List<Ator> atores = dao.retornarTodos();
 		for (Ator ator2 : atores) {
 			if(ator2.getNome().equals(ator.getNome())){
-				erro = "Ator já cadastrado";
+				erro = "Ator jï¿½ cadastrado";
 				break;
 			} else {
 				erro = null;
@@ -65,5 +66,9 @@ public class AtorController {
 	
 	public Ator selecionaAtorPorId(long id){
 		return (Ator) dao.selecionaPorId(id);
+	}
+	
+	public CasoDeUsoAtor selecionaAtorPorPasso(long id){
+		return dao.retornaPorPasso(id);
 	}
 }

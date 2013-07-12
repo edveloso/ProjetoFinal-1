@@ -139,6 +139,9 @@ public class PassoMB implements Serializable {
 
 	public List<CasoDeUsoAtor> getListAtores() {
 		listAtores = casoDeUsoAtorMB.getlistAtoresCaso();
+		Long id = fluxoMB.getFluxoEscolhido().getId();
+		CasoDeUsoAtor ator = controlAtor.selecionaAtorPorPasso(id);
+		listAtores.remove(ator);
 		return listAtores;
 	}
 

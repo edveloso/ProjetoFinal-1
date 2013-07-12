@@ -50,20 +50,21 @@
 
 		<p:dialog header="Novo Passo" widgetVar="modalNovoPasso" showEffect="clip" hideEffect="explode">
 			<h:form id="formPasso">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="4">
 
 					<p:outputLabel value="Ator" />
+					<p:outputLabel value="Ação" />
+					<p:outputLabel value="Complemento" />
+					<p:outputLabel value="Ponto de Extensão" />					
+										
 					<p:selectOneMenu value="#{passoMB.atorId}">
        					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
        				</p:selectOneMenu>
 					
-					<p:outputLabel value="Ação" />
 					<p:autoComplete id="compl" value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." scrollHeight = "150" />
-					
-					<p:outputLabel value="Complemento" />
+
 					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
-					
-					<p:outputLabel value="Ponto de Extensão" />
+
 					<p:selectOneMenu value="#{passoMB.casoId}">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
        					<f:selectItems value="#{passoMB.listCasos}" var="caso" itemLabel="#{caso.nome}" itemValue="#{caso.id}" />
@@ -90,20 +91,21 @@
 		
 		<p:dialog header="Editar Passo" widgetVar="modalEditPasso" showEffect="clip" hideEffect="explode">
 			<h:form id="formEditPasso">
-				<h:panelGrid id="editPasso" columns="2">
+				<h:panelGrid id="editPasso" columns="4">
 					
 					<p:outputLabel value="Ator" />
+					<p:outputLabel value="Ação" />
+					<p:outputLabel value="Complemento" />										
+					<p:outputLabel value="Ponto de Extensão" />
+										
 					<p:selectOneMenu value="#{passoMB.atorId}">
        					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
        				</p:selectOneMenu>
-					
-					<p:outputLabel value="Ação" />
+
 					<p:autoComplete value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." />
-					
-					<p:outputLabel value="Complemento" />
+
 					<p:inputText id="complementoEditar" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
-					
-					<p:outputLabel value="Ponto de Extensão" />
+
 					<p:selectOneMenu value="#{passoMB.casoId}">
        					<f:selectItems value="#{passoMB.listCasos}" var="caso" itemLabel="#{caso.nome}" itemValue="#{caso.id}" />
        				</p:selectOneMenu>

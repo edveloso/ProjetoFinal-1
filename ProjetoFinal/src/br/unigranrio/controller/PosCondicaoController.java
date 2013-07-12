@@ -24,7 +24,7 @@ public class PosCondicaoController {
 		}if (erro == null){
 			int numero = Integer.parseInt(dao.countItensParaCodigo(pos.getCasoDeUso().getId()));
 			numero++;
-			String codigo = "PoC"+numero;
+			String codigo = "POS"+numero;
 			pos.setCodigo(codigo);
 			dao.gravar(pos);	
 		}

@@ -18,7 +18,7 @@ public class FluxoController {
 		if(fluxo.getTipo().equals("Principal") && !fluxos.isEmpty()){
 			for (Fluxo fluxo2 : fluxos) {
 				if(fluxo.getTipo().equals(fluxo2.getTipo())){
-					erro = "Não se pode cadastrar mais de um fluxo do tipo 'Principal'";
+					erro = "Nï¿½o se pode cadastrar mais de um fluxo do tipo 'Principal'";
 					break;
 				}
 			}
@@ -34,7 +34,6 @@ public class FluxoController {
 	
 	public void atualizar(Fluxo fluxo) {
 		dao.atualizar(fluxo);
-
 	}
 
 	public void remover(long id) {

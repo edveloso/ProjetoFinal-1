@@ -25,7 +25,7 @@ public class PreCondicaoController {
 		if (erro == null){
 			int numero = Integer.parseInt(dao.countItensParaCodigo(pre.getCasoDeUso().getId()));
 			numero++;
-			String codigo = "PrC"+numero;
+			String codigo = "PRE"+numero;
 			pre.setCodigo(codigo);
 			dao.gravar(pre);	
 		}

@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import br.unigranrio.bean.requisito.Ator;
+import br.unigranrio.bean.requisito.CasoDeUsoAtor;
 import br.unigranrio.dao.AbstractHibernateDAO;
 import br.unigranrio.dao.HibernateUtil;
 
@@ -29,6 +30,13 @@ public class AtorDAO extends AbstractHibernateDAO{
 				.addEntity(Ator.class)
 				.setParameter("id", id);
 		return query.list();
+	}
+	
+	public CasoDeUsoAtor retornaPorPasso(long id){
+		Query query = session.createSQLQuery("select a.* from passo p, casoDeUsoAtor a where p.ator_ator_id = a.ator_id and idFluxo=:id order by p.id desc limit 0,1")
+				.addEntity(CasoDeUsoAtor.class)
+				.setParameter("id", id);
+		return (CasoDeUsoAtor) query.uniqueResult();
 	}
 
 }
