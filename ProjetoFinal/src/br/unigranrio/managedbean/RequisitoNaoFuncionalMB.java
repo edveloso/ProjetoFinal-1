@@ -72,7 +72,7 @@ public class RequisitoNaoFuncionalMB {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Salvo com Sucesso " + req.getDescricao(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito não Funcional Salvo com Sucesso " + req.getDescricao(), null));
 		}
 		req = new RequisitoNaoFuncional();
 		return "updateCasos";
@@ -88,13 +88,13 @@ public class RequisitoNaoFuncionalMB {
 	
 	public String remover(ActionEvent actionEvent){
 		control.remover(req.getId());
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Removido com Sucesso", ""));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito não Funcional Removido com Sucesso", ""));
 		return "updateCasos";
 	}
 	
 	public void escolhe(){
 		req = list.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Escolhido: " + req.getDescricao(), null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito não Funcional Escolhido: " + req.getDescricao(), null));
 	}
 	
 	public void limpar() {
@@ -107,7 +107,7 @@ public class RequisitoNaoFuncionalMB {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito Não Funcional Atualizado com Sucesso " + req.getDescricao(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Requisito não Funcional Atualizado com Sucesso " + req.getDescricao(), null));
 		}
 		return "updateCasos";
 	}

@@ -3,6 +3,7 @@ package br.unigranrio.controller;
 import java.util.List;
 
 import br.unigranrio.bean.requisito.CasoDeUso;
+import br.unigranrio.bean.requisito.PosCondicao;
 import br.unigranrio.bean.requisito.PreCondicao;
 import br.unigranrio.dao.impl.PreCondicaoDAO;
 
@@ -15,7 +16,7 @@ public class PreCondicaoController {
 		List<PreCondicao> list = dao.retornarTodos();
 		for (PreCondicao preCondicao2 : list){
 			if(preCondicao2.getDescricao().equals(pre.getDescricao())){
-				erro = "Pré-condição com a mesma descrição já cadastrada";
+				erro = "Pré-Condição com a mesma descrição já cadastrada";
 				break;
 			} else {
 				erro = null;
@@ -26,6 +27,24 @@ public class PreCondicaoController {
 			dao.gravar(pre);	
 		}
 		return erro;
+	}
+	
+	public String atualizar(CasoDeUso caso, PreCondicao pre){
+		String erro = null;
+		List<PreCondicao> list = dao.retornarTodos();
+		for (PreCondicao preCondicao2 : list){
+			if(preCondicao2.getDescricao().equals(pre.getDescricao())){
+				erro = "Pré-Condição com a mesma descrição já cadastrada";
+				break;
+			} else {
+				erro = null;
+			}
+		}
+		if (erro == null){
+			dao.atualizar(pre);
+		}
+		return erro;
+
 	}
 	
 	public List<PreCondicao> selecionaTodosPorCasoDeUso(long id){

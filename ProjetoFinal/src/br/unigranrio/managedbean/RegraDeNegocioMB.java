@@ -104,7 +104,7 @@ public class RegraDeNegocioMB {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Atualizada com Sucesso" + regra.getDescricao(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Regra de Negócio Atualizada com Sucesso " + regra.getDescricao(), null));
 		}
 		return "updateCasos";
 	}

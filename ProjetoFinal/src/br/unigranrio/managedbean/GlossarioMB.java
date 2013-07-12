@@ -61,7 +61,7 @@ public class GlossarioMB {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));			
 		} else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Salvo com Sucesso " + glossario.getSigla(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossário Salvo com Sucesso " + glossario.getSigla(), null));
 		}
 		glossario = new Glossario();
 		return "listGlossarios";
@@ -77,13 +77,13 @@ public class GlossarioMB {
 	
 	public String remover(ActionEvent actionEvent) {
 		control.remover(glossario.getId());
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Removido com Sucesso", null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossário Removido com Sucesso", null));
 		return "listGlossarios";
 	}
 
 	public void escolheGlossario(ActionEvent actionEvent){
 		glossario = glossarios.getRowData();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Escolhido: " + glossario.getSigla(), null));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossário Escolhido: " + glossario.getSigla(), null));
 	}
 
 	public void limpar(){
@@ -96,7 +96,7 @@ public class GlossarioMB {
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossario Atualizado com Sucesso " + glossario.getSigla(), null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Glossário Atualizado com Sucesso " + glossario.getSigla(), null));
 		}
 		glossario = new Glossario();
 		return "listGlossarios";

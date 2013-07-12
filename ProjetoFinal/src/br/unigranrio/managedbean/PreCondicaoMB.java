@@ -70,6 +70,18 @@ public class PreCondicaoMB {
 		return "updateCasos";
 	}
 	
+	public String atualizar(){
+		String erro = null;
+		CasoDeUso caso = casoMB.getCasoDeUso();
+		erro = control.atualizar(caso, pre);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Atualizada com Sucesso " + pre.getDescricao(), null));
+		}
+		return "updateCasos";
+	}
+	
 	public String remover(ActionEvent actionEvent){
 		control.remover(pre.getId());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pré-Condição Removida com Sucesso", ""));

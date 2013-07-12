@@ -70,6 +70,18 @@ public class PosCondicaoMB {
 		return "updateCasos";
 	}
 	
+	public String atualizar(){
+		String erro = null;
+		CasoDeUso caso = casoMB.getCasoDeUso();
+		erro = control.atualizar(caso, pos);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pós-Condição Atualizada com Sucesso " + pos.getDescricao(), null));
+		}
+		return "updateCasos";
+	}
+	
 	public String remover(ActionEvent actionEvent){
 		control.remover(pos.getId());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pós-Condição Removida com Sucesso", ""));

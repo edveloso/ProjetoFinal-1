@@ -36,8 +36,8 @@
             </h:form>
             
             <br /><br />
-            
-           	<p:tabView id="tabCaso" dynamic="true">
+            <p:fieldset legend="Detalhes do Caso de Uso">
+              	<p:tabView id="tabCaso" dynamic="true">
            	
            		<p:tab title="Atores">
            	
@@ -49,8 +49,8 @@
             				</p:selectOneMenu>
             				<p:outputLabel value="Tipo de Ator" />
             				<p:selectOneMenu value="#{casoDeUsoAtorMB.casoAtor.tipoAtor}">
-	          					<f:selectItem itemLabel="Primário" itemValue="Primario" />  
-	            				<f:selectItem itemLabel="Secundário" itemValue="Secundario" /> 
+	          					<f:selectItem itemLabel="Primário" itemValue="Primário" />  
+	            				<f:selectItem itemLabel="Secundário" itemValue="Secundário" /> 
 	          				</p:selectOneMenu>
 	          				<p:outputLabel value=" " />
             				<p:commandButton value="Gravar" actionListener="#{casoDeUsoAtorMB.salvar}" update=":tabCaso:formAtores" style="float:right" />
@@ -99,6 +99,9 @@
 							<p:column headerText="Pré-Condição" style="width:75%">
 								<h:outputText value="#{precondicao.descricao}" />
 							</p:column>
+							<p:column headerText="Editar" style="width:5%">
+								<p:commandButton actionListener="#{preCondicaoMB.escolhe}" update=":formEditPre" oncomplete="modalEditPre.show();" icon="ui-icon-pencil" />
+							</p:column>
 							<p:column headerText="Remover" style="width:10%">
 								<p:commandButton actionListener="#{preCondicaoMB.escolhe}" update=":formRemoverPre" oncomplete="modalRemoverPre.show();" icon="ui-icon-trash" />
 							</p:column>
@@ -133,6 +136,9 @@
 							</p:column>
 							<p:column headerText="Pós-Condição" style="width:75%">
 								<h:outputText value="#{poscondicao.descricao}" />
+							</p:column>
+							<p:column headerText="Editar" style="width:5%">
+								<p:commandButton actionListener="#{posCondicaoMB.escolhe}" update=":formEditPos" oncomplete="modalEditPos.show();" icon="ui-icon-pencil" />
 							</p:column>
 							<p:column headerText="Remover" style="width:10%">
 								<p:commandButton actionListener="#{posCondicaoMB.escolhe}" update=":formRemoverPos" oncomplete="modalRemoverPos.show();" icon="ui-icon-trash" />
@@ -177,11 +183,11 @@
            		</p:tab>
            		
            		
-           		<p:tab title="Requisito Não Funcional">
+           		<p:tab title="Requisito não Funcional">
            	
            			<h:form id="formInfoCaso6">
             			<h:panelGrid columns="2">
-            				<p:outputLabel value="Requisito Não Funcional" />
+            				<p:outputLabel value="Requisito não Funcional" />
             				<p:selectOneMenu value="#{casoDeUsoRequisitoMB.requisitoId}">
             					<f:selectItem itemLabel="Selecione" itemValue="" />
             					<f:selectItems value="#{casoDeUsoRequisitoMB.listRequisitos}" var="requisito" itemLabel="#{requisito.codigo} - #{requisito.descricao}" itemValue="#{requisito.id}" />
@@ -194,12 +200,12 @@
             		<h:form id="formRequisito">
             			<p:dataTable var="requisito" value="#{casoDeUsoRequisitoMB.listCasoRequisito}">
             				<f:facet name="header">
-            					Requisitos Não Funcionais
+            					Requisitos não Funcionais
             				</f:facet>
             				<p:column headerText="Número" style="width:15%">
 								<h:outputText value="#{requisito.requisito.codigo}" />
 							</p:column>
-							<p:column headerText="Requisito Não Funcional" style="width:75%">
+							<p:column headerText="Requisito não Funcional" style="width:75%">
 								<h:outputText value="#{requisito.requisito.descricao}" />
 							</p:column>
 							<p:column headerText="Remover" style="width:10%">
@@ -218,13 +224,13 @@
             				<p:outputLabel value="Tipo" />
             				<p:selectOneMenu value="#{fluxoMB.fluxo.tipo}">
             					<f:selectItem itemLabel="Principal" itemValue="Principal" />
-            					<f:selectItem itemLabel="Exceção" itemValue="Excecao" />
+            					<f:selectItem itemLabel="Exceção" itemValue="Exceção" />
             					<f:selectItem itemLabel="Alternativo" itemValue="Alternativo" />
             				</p:selectOneMenu>
             				<p:outputLabel value="Nome" />
-            				<p:inputText value="#{fluxoMB.fluxo.nome}" required="true" requiredMessage="Por favor preencha o nome do fluxo" maxlength="80" size="50" />
+            				<p:inputText value="#{fluxoMB.fluxo.nome}"  maxlength="80" size="50" />
             				<p:outputLabel value=" " />
-            				<p:commandButton value="Gravar" actionListener="#{fluxoMB.salvar}" update=":tabCaso:formFluxo" style="float:right" />
+            				<p:commandButton value="Gravar" actionListener="#{fluxoMB.salvar}" update=":tabCaso:formFluxo" required="true" requiredMessage="Por favor preencha o nome do fluxo" style="float:right" />
             			</h:panelGrid>
             		</h:form>
            	
@@ -253,7 +259,7 @@
            		
            		</p:tab>
            	</p:tabView>
-            
+            </p:fieldset>
             
             <p:dialog header="Remover Ator" widgetVar="modalRemoverAtor" showEffect="clip" hideEffect="explode">
 				<h:form id="formRemoverAtor">
@@ -267,6 +273,17 @@
 					</h:panelGrid>
 				</h:form>
 			</p:dialog>
+			
+			<p:dialog header="Editar Pré-Condição" widgetVar="modalEditPre" showEffect="clip" hideEffect="explode">
+			<h:form id="formEditPre">
+				<h:panelGrid id="editPre" columns="1">
+					<p:outputLabel value="Descrição" />
+						<p:inputText id="txtpre" value="#{preCondicaoMB.pre.descricao}" required="true" requiredMessage="Por favor preencha a pré-condição" size="80" maxlenght="255" />
+						<p:commandButton value="Atualizar" actionListener="#{preCondicaoMB.atualizar}" update=":tabCaso:formPre" oncomplete="modalEditPre.hide()" style="float:right" />
+				</h:panelGrid>
+            	<p:tooltip for="txtpre">Descreva uma condição necessária para que o caso de uso seja iniciado.</p:tooltip>
+			</h:form>
+			</p:dialog>
             
             <p:dialog header="Remover Pré-Condição" widgetVar="modalRemoverPre" showEffect="clip" hideEffect="explode">
 				<h:form id="formRemoverPre">
@@ -279,6 +296,20 @@
 						</f:facet>
 					</h:panelGrid>
 				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Editar Pós-Condição" widgetVar="modalEditPos" showEffect="clip" hideEffect="explode">
+			<h:form id="formEditPos">
+				<h:panelGrid id="editPos" columns="1">
+					<p:outputLabel value="Descrição" />
+						<p:inputText id="txtpos" value="#{posCondicaoMB.pos.descricao}" required="true" requiredMessage="Por favor preencha a pós-condição" size="80" maxlenght="255" />
+						<p:commandButton value="Atualizar" actionListener="#{posCondicaoMB.atualizar}" update=":tabCaso:formPos" oncomplete="modalEditPos.hide()" style="float:right" />
+				</h:panelGrid>
+            	<p:tooltip for="txtpos">
+							Descreva o bem tangível alcançado após a execução do caso de uso. <br/>
+							Pós-condições são condições que podem ser garantidas como verdadeiras ao final do caso de uso.
+				</p:tooltip>	
+			</h:form>
 			</p:dialog>
 			
 			<p:dialog header="Remover Pós-Condição" widgetVar="modalRemoverPos" showEffect="clip" hideEffect="explode">
