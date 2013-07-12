@@ -10,9 +10,7 @@
     		Casos de Uso
     	</ui:define>
         <ui:define name="conteudo">
-           
-           <p:messages id="messages" autoUpdate="true" closable="true" />
-                      
+           <p:messages id="messages" autoUpdate="true" closable="true" />       
             <h:form id="formCaso">
 	            <p:fieldset legend="Dados do Caso de Uso">
 	            	 <p:panelGrid>
@@ -93,8 +91,8 @@
             				<f:facet name="header">
             					Pré-Condições
             				</f:facet>
-            				<p:column headerText="Número" style="width:15%">
-								<h:outputText value="#{precondicao.id}" />
+            				<p:column headerText="Código" style="width:15%">
+								<h:outputText value="#{precondicao.codigo}" />
 							</p:column>
 							<p:column headerText="Pré-Condição" style="width:75%">
 								<h:outputText value="#{precondicao.descricao}" />
@@ -131,8 +129,8 @@
             				<f:facet name="header">
             					Pós-Condições
             				</f:facet>
-            				<p:column headerText="Número" style="width:15%">
-								<h:outputText value="#{poscondicao.id}" />
+            				<p:column headerText="Código" style="width:15%">
+								<h:outputText value="#{poscondicao.codigo}" />
 							</p:column>
 							<p:column headerText="Pós-Condição" style="width:75%">
 								<h:outputText value="#{poscondicao.descricao}" />

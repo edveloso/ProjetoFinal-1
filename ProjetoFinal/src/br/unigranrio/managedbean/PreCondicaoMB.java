@@ -60,7 +60,8 @@ public class PreCondicaoMB {
 	public String salvar(){
 		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		erro = control.gravar(caso, pre);
+		pre.setCasoDeUso(caso);
+		erro = control.gravar(pre);
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
@@ -73,7 +74,8 @@ public class PreCondicaoMB {
 	public String atualizar(){
 		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		erro = control.atualizar(caso, pre);
+		pre.setCasoDeUso(caso);
+		erro = control.atualizar(pre);
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {

@@ -11,29 +11,32 @@ public class PosCondicaoController {
 	
 	private PosCondicaoDAO dao = new PosCondicaoDAO();
 	
-	public String gravar(CasoDeUso caso, PosCondicao pos){
+	public String gravar(PosCondicao pos){
 		String erro =  null;
 		List<PosCondicao> list = dao.retornarTodos();
 		for (PosCondicao posCondicao2 : list){
 			if(posCondicao2.getDescricao().equals(pos.getDescricao())){
-				erro = "Pós-Condição com a mesma descrição já cadastrada";
+				erro = "Pï¿½s-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
 				break;
 			}else{
 				erro = null;
 			}
 		}if (erro == null){
-			pos.setCasoDeUso(caso);
+			int numero = Integer.parseInt(dao.countItensParaCodigo(pos.getCasoDeUso().getId()));
+			numero++;
+			String codigo = "PoC"+numero;
+			pos.setCodigo(codigo);
 			dao.gravar(pos);	
 		}
 		return erro;
 	}
 	
-	public String atualizar(CasoDeUso caso, PosCondicao pos) {
+	public String atualizar(PosCondicao pos) {
 		String erro = null;
 		List<PosCondicao> list = dao.retornarTodos();
 		for (PosCondicao posCondicao2 : list){
 			if(posCondicao2.getDescricao().equals(pos.getDescricao())){
-				erro = "Pós-Condição com a mesma descrição já cadastrada";
+				erro = "Pï¿½s-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
 				break;
 			}else {
 				erro = null;

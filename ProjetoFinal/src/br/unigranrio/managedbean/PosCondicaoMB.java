@@ -60,7 +60,8 @@ public class PosCondicaoMB {
 	public String salvar(){
 		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		erro = control.gravar(caso, pos);
+		pos.setCasoDeUso(caso);
+		erro = control.gravar(pos);
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {
@@ -73,7 +74,8 @@ public class PosCondicaoMB {
 	public String atualizar(){
 		String erro = null;
 		CasoDeUso caso = casoMB.getCasoDeUso();
-		erro = control.atualizar(caso, pos);
+		pos.setCasoDeUso(caso);
+		erro = control.atualizar(pos);
 		if(erro != null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
 		} else {

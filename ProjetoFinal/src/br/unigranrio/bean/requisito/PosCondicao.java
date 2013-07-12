@@ -21,6 +21,7 @@ public class PosCondicao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descricao;
+	private String codigo;
 	@XStreamOmitField
 	private CasoDeUso casoDeUso;
 	
@@ -53,6 +54,14 @@ public class PosCondicao implements Serializable{
 	
 	public void setCasoDeUso(CasoDeUso casoDeUso) {
 		this.casoDeUso = casoDeUso;
+	}
+	
+	public String getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 }

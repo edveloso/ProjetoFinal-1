@@ -26,5 +26,10 @@ public class PreCondicaoDAO extends AbstractHibernateDAO{
 				.setParameter("id", id);
 		return query.list();
 	}
+	
+	public String countItensParaCodigo(long id){
+		Query query = session.createSQLQuery("select count(*) from preCondicao where casoDeUso_casoDeUso_id=:id").setParameter("id", id);
+		return query.uniqueResult().toString();
+	}
 
 }
