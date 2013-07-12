@@ -14,10 +14,10 @@
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" size="130">
-			<h:graphicImage url="/template/resources/img/header_uni.jpg" />
+		<p:layoutUnit position="north" size="125">
+			<h:graphicImage url="/template/resources/img/header_uni.jpg"/>
 			<p:menubar>
-				<p:menuitem value="Inicio" url="/index.jsf" />
+				<p:menuitem value="Início" url="/index.jsf" />
 				<p:menuitem value="Projetos" url="/listProjetos.jsf" icon="ui-icon-document" />
 				<p:menuitem value="Glossário" url="/listGlossarios.jsf" icon="ui-icon-contact" />
 				<p:menuitem value="Regras de Negócio" url="/listRegras.jsf" icon="ui-icon-contact" />
@@ -26,21 +26,15 @@
 				<p:menuitem value="Requisitos não Funcionais" url="/listRequisitos.jsf" icon="ui-icon-contact" />
 				<p:menuitem value="Exportações" url="/exportacoes.jsf" icon="ui-icon-script" />
 			</p:menubar>
-			
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-			
 			<p:panel styleClass="ui-state-error">
 				<h:outputText value="#{mensagemMB.mensagem}" />
 			</p:panel>
-			
 			<br />
 			<ui:insert name="conteudo">
 	    	</ui:insert>
-		</p:layoutUnit>
-
-		<p:layoutUnit position="south">
 		</p:layoutUnit>
 	</p:layout>
 </h:body> 
