@@ -19,6 +19,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class PreCondicao implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String descricao;
 	private String codigo;

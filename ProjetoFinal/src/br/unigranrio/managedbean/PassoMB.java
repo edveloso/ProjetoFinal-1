@@ -66,7 +66,7 @@ public class PassoMB implements Serializable {
 		Fluxo fluxo = fluxoMB.getFluxoEscolhido();
 		System.out.println("Fluxo: " + fluxo.getNome());
 		passo.setFluxo(fluxo);
-		passo.setAtor(ator);
+		passo.setAtor(ator.getNome());
 		passo.setPontoDeExtensao(caso);
 		control.gravar(passo);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Passo Salvo com Sucesso " + passo.getCodigo(), null));
@@ -140,7 +140,8 @@ public class PassoMB implements Serializable {
 	public List<CasoDeUsoAtor> getListAtores() {
 		listAtores = casoDeUsoAtorMB.getlistAtoresCaso();
 		Long id = fluxoMB.getFluxoEscolhido().getId();
-		CasoDeUsoAtor ator = controlAtor.selecionaAtorPorPasso(id);
+		Long idProjeto = projetoMB.getProjeto().getId();
+		CasoDeUsoAtor ator = controlAtor.selecionaAtorPorPasso(id, idProjeto);
 		listAtores.remove(ator);
 		return listAtores;
 	}

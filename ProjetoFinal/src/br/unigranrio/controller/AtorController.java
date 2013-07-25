@@ -68,7 +68,7 @@ public class AtorController {
 		return (Ator) dao.selecionaPorId(id);
 	}
 	
-	public CasoDeUsoAtor selecionaAtorPorPasso(long id){
-		return dao.retornaPorPasso(id);
+	public CasoDeUsoAtor selecionaAtorPorPasso(long id, long idProjeto){
+		return dao.retornaPorPasso(id, idProjeto);
 	}
 }

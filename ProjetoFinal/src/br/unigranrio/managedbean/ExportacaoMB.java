@@ -82,7 +82,7 @@ public class ExportacaoMB {
 
 	/*public String novo() {
 
-		String mensagem = "Exportações";
+		String mensagem = "Exportaï¿½ï¿½es";
 		this.casoDeUso = new CasoDeUso();
 
 		// Pega o ID do projeto
@@ -94,21 +94,21 @@ public class ExportacaoMB {
 			casoDeUso.setProjeto(projetoMB.getProjeto());
 
 			if (casoDeUso.getProjeto().getId() != null) {
-				mensagem = casoDeUso.getProjeto().getNome() + " >> Exportações";
+				mensagem = casoDeUso.getProjeto().getNome() + " >> Exportaï¿½ï¿½es";
 
 				this.listCasoDeUso = (ListDataModel<CasoDeUso>) casoControl.selecionarTodosProjeto(casoDeUso.getProjeto().getId());
 				temProjeto = true;
 			}
 		}
 
-		// Muda o texto do Cabeçalho
+		// Muda o texto do Cabeï¿½alho
 		MensagemMB principal = (MensagemMB) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("principalMB");
 
 		if (principal != null)
 			principal.setMensagem(mensagem);
 
 		if (!temProjeto)
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Projeto não selecionado!", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Projeto nï¿½o selecionado!", null));
 
 		return "novaExportacao";
 	}*/
@@ -126,10 +126,10 @@ public class ExportacaoMB {
 			for (Fluxo fluxo : fluxos) {
 				List<Passo> passos = passoControl.selecionarTodosFluxo(fluxo.getId());
 				fluxo.setPassosParaXML(passos);
-				System.out.println(fluxo.getNome());
-				for (Passo passo : passos) {
-					System.out.println(passo.getPassoAsString());
-				}
+//				System.out.println(fluxo.getNome());
+//				for (Passo passo : passos) {
+//					System.out.println(passo.getPassoAsString());
+//				}
 			}
 			
 
@@ -145,13 +145,15 @@ public class ExportacaoMB {
 			ucExp.setTipo(casoDeUso.getTipo());
 			ucExp.setPreCondicoesParaXML(preControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
 			ucExp.setPosCondicoesParaXML(posControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
-			ucExp.setRegrasDeNegocioParaXML(regraControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
-			ucExp.setRequisitosNaoFuncionais(reqControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
+			ucExp.setRegrasDeNegocioParaXML(casoDeUso.getRegrasDeNegocioParaXML());
+			ucExp.setRequisitosNaoFuncionaisParaXML(casoDeUso.getRequisitosNaoFuncionaisParaXML());
+			//ucExp.setRegrasDeNegocioParaXML(regraControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
+			//ucExp.setRequisitosNaoFuncionais(reqControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
 
 			link = exportador.exportar(ucExp);
 		}
 
-		return "novaExportacao";
+		return "exportacoes";
 	}
 
 	public ListDataModel<CasoDeUso> getListCasoDeUso() {

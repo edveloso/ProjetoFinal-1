@@ -22,11 +22,13 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class RegraDeNegocio implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String descricao;
 	private String codigo;
 	@XStreamOmitField
 	private List<CasoDeUsoRegra> casosDeUsoRegra;
+	@XStreamOmitField
 	private Projeto projeto;
 	
 	public RegraDeNegocio() {

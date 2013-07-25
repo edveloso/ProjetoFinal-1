@@ -18,7 +18,7 @@ public class FluxoController {
 		if(fluxo.getTipo().equals("Principal") && !fluxos.isEmpty()){
 			for (Fluxo fluxo2 : fluxos) {
 				if(fluxo.getTipo().equals(fluxo2.getTipo())){
-					erro = "Nï¿½o se pode cadastrar mais de um fluxo do tipo 'Principal'";
+					erro = "Não se pode cadastrar mais de um fluxo do tipo 'Principal'";
 					break;
 				}
 			}
@@ -32,8 +32,24 @@ public class FluxoController {
 		return erro;
 	}
 	
-	public void atualizar(Fluxo fluxo) {
-		dao.atualizar(fluxo);
+	public String atualizar(Fluxo fluxo) {
+		String erro = null;
+		List<Fluxo> fluxos = dao.retornaPorCaso(fluxo.getCasoDeUso().getId());
+		if(fluxo.getTipo().equals("Principal") && !fluxos.isEmpty()){
+			for (Fluxo fluxo2 : fluxos) {
+				if(fluxo.getTipo().equals(fluxo2.getTipo())){
+					erro = "Não se pode cadastrar mais de um fluxo do tipo 'Principal'";
+					break;
+				}
+			}
+		} else {
+			int numero = Integer.parseInt(dao.countItensParaCodigo(fluxo.getCasoDeUso().getId()));
+			numero++;
+			String codigo = "F"+numero;
+			fluxo.setCodigo(codigo);
+			dao.atualizar(fluxo);
+		}
+		return erro;
 	}
 
 	public void remover(long id) {

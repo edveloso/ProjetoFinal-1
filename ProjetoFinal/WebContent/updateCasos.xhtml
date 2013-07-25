@@ -181,7 +181,7 @@
            		</p:tab>
            		
            		
-           		<p:tab title="Requisito não Funcional">
+           		<p:tab title="Requisitos não Funcionais">
            	
            			<h:form id="formInfoCaso6">
             			<h:panelGrid columns="2">
@@ -249,6 +249,9 @@
            					<p:column headerText="Passos" style="width:10%">
            						<p:commandButton action="#{fluxoMB.adicionaPasso}" icon="ui-icon-plusthick" />
            					</p:column>
+           					<p:column headerText="Editar" style="width:5%">
+								<p:commandButton actionListener="#{fluxoMB.escolhe}" update=":formEditFluxo" oncomplete="modalEditFluxo.show();" icon="ui-icon-pencil" />
+							</p:column>
            					<p:column headerText="Remover" style="width:10%">
            						<p:commandButton actionListener="#{fluxoMB.escolhe}" update=":formRemoverFluxo" oncomplete="modalRemoverFluxo.show();" icon="ui-icon-trash" />
            					</p:column>
@@ -347,6 +350,16 @@
 						</f:facet>
 					</h:panelGrid>
 				</h:form>
+			</p:dialog>
+			
+			<p:dialog header="Editar Fluxo" widgetVar="modalEditFluxo" showEffect="clip" hideEffect="explode">
+			<h:form id="formEditFluxo">
+				<h:panelGrid id="editFluxo" columns="1">
+					<p:outputLabel value="Nome" />
+						<p:inputText id="txtflux" value="#{fluxoMB.fluxoEscolhido.nome}" required="true" requiredMessage="Por favor preencha o nome do Fluxo" size="80" maxlenght="255" />
+						<p:commandButton value="Atualizar" actionListener="#{fluxoMB.atualizar}" update=":tabCaso:formFluxo" oncomplete="modalEditFluxo.hide()" style="float:right" />
+				</h:panelGrid>
+			</h:form>
 			</p:dialog>
 			
 			<p:dialog header="Remover Fluxo" widgetVar="modalRemoverFluxo" showEffect="clip" hideEffect="explode">

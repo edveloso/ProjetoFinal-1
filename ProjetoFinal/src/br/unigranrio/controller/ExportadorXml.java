@@ -21,15 +21,12 @@ public class ExportadorXml implements Exportador {
 
 		CasoDeUso casoDeUso = (CasoDeUso) exCasoDeUso;
 
-		ServletContext context = (ServletContext) FacesContext
-				.getCurrentInstance().getExternalContext().getContext();
-
-		String path = context.getRealPath("\\");
-		// String path = "C:\\Users\\Marcos\\Downloads\\";
-
-		String nomeArquivo = path + File.separator + casoDeUso.getCodigo()
-				+ " - " + casoDeUso.getNome() + ".xml";
-
+		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		String path = context.getRealPath("/");
+		System.out.println(path);
+		//String path = "C:\\Users\\Marcos\\Downloads\\";
+		String nomeArquivo = path + File.separator + casoDeUso.getCodigo()	+ " - " + casoDeUso.getNome() + ".xml";
+		System.out.println(nomeArquivo);
 		File arquivoXml = new File(nomeArquivo);
 
 		try {
@@ -49,8 +46,7 @@ public class ExportadorXml implements Exportador {
 	public void processarAnotacoes() {
 
 		try {
-			Class[] classes = ClassFinder
-					.getClasses("br.unigranrio.bean.requisito");
+			Class[] classes = ClassFinder.getClasses("br.unigranrio.bean.requisito");
 			xstream.processAnnotations(classes);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

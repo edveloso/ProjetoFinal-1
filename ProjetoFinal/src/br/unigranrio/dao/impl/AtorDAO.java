@@ -32,10 +32,11 @@ public class AtorDAO extends AbstractHibernateDAO{
 		return query.list();
 	}
 	
-	public CasoDeUsoAtor retornaPorPasso(long id){
-		Query query = session.createSQLQuery("select a.* from passo p, casoDeUsoAtor a where p.ator_ator_id = a.ator_id and idFluxo=:id order by p.id desc limit 0,1")
+	public CasoDeUsoAtor retornaPorPasso(long id, long idProjeto){
+		Query query = session.createSQLQuery("select ca.* from passo p, casoDeUsoAtor ca, ator a where p.ator = a.nome and a.ator_id = ca.ator_id and p.idFluxo=:id and a.projeto_id=:idProjeto order by p.id desc limit 0,1")
 				.addEntity(CasoDeUsoAtor.class)
-				.setParameter("id", id);
+				.setParameter("id", id)
+				.setParameter("idProjeto", idProjeto);
 		return (CasoDeUsoAtor) query.uniqueResult();
 	}
 

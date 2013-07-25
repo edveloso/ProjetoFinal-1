@@ -22,12 +22,13 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class Passo implements Serializable {
  
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String codigo;
 	@XStreamOmitField
 	private Fluxo fluxo = new Fluxo();	
 	@XStreamAlias("ator")
-	private Ator ator = new Ator();
+	private String ator;
 	private String acao;
 	private String complemento;
 	private CasoDeUso pontoDeExtensao;
@@ -94,13 +95,13 @@ public class Passo implements Serializable {
 		this.pontoDeExtensao = pontoDeExtensao;
 	}
 
-	@ManyToOne
-	@PrimaryKeyJoinColumn(name="idAtor")
-	public Ator getAtor() {
+	//@ManyToOne
+	//@PrimaryKeyJoinColumn(name="idAtor")
+	public String getAtor() {
 		return ator;
 	}
 
-	public void setAtor(Ator ator) {
+	public void setAtor(String ator) {
 		this.ator = ator;
 	}
 
@@ -110,7 +111,7 @@ public class Passo implements Serializable {
 	
 	@Transient
 	public String getPassoAsString() {
-		String passoCompleto = this.getCodigo() + " " + this.getAtor().getNome() + " " + this.getAcao() + " " + this.getComplemento(); 
+		String passoCompleto = this.getCodigo() + " " + this.getAtor() + " " + this.getAcao() + " " + this.getComplemento(); 
 		return passoCompleto;
 	}
 }

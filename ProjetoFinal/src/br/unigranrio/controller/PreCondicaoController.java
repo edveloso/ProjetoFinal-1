@@ -16,7 +16,7 @@ public class PreCondicaoController {
 		List<PreCondicao> list = dao.retornarTodos();
 		for (PreCondicao preCondicao2 : list){
 			if(preCondicao2.getDescricao().equals(pre.getDescricao())){
-				erro = "Prï¿½-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
+				erro = "Pré-Condição com a mesma descrição já cadastrada";
 				break;
 			} else {
 				erro = null;
@@ -25,7 +25,7 @@ public class PreCondicaoController {
 		if (erro == null){
 			int numero = Integer.parseInt(dao.countItensParaCodigo(pre.getCasoDeUso().getId()));
 			numero++;
-			String codigo = "PRE"+numero;
+			String codigo = "PrC"+numero;
 			pre.setCodigo(codigo);
 			dao.gravar(pre);	
 		}
@@ -37,7 +37,7 @@ public class PreCondicaoController {
 		List<PreCondicao> list = dao.retornarTodos();
 		for (PreCondicao preCondicao2 : list){
 			if(preCondicao2.getDescricao().equals(pre.getDescricao())){
-				erro = "Prï¿½-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
+				erro = "Pré-Condição com a mesma descrição já cadastrada";
 				break;
 			} else {
 				erro = null;

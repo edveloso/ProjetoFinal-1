@@ -24,11 +24,13 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class RequisitoNaoFuncional implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String codigo;
 	private String descricao;
 	@XStreamOmitField
 	private List<CasoDeUsoRequisito> casosDeUsoRequisito;
+	@XStreamOmitField
 	private Projeto projeto;
 	
 	public RequisitoNaoFuncional() {

@@ -44,8 +44,10 @@ public class CasoDeUso implements Serializable, Exportavel {
 	private List<PreCondicao> preCondicoesParaXML = new ArrayList<PreCondicao>();
 	@XStreamAlias("posCondicoes")
 	private List<PosCondicao> posCondicoesParaXML = new ArrayList<PosCondicao>();
-	@XStreamAlias("regrasDeNegorio")
+	@XStreamAlias("regrasDeNegocio")
 	private List<RegraDeNegocio> regrasDeNegocioParaXML = new ArrayList<RegraDeNegocio>();
+	@XStreamAlias("requisitosNaoFuncionais")
+	private List<RequisitoNaoFuncional> requisitosNaoFuncionaisParaXML = new ArrayList<RequisitoNaoFuncional>();
 
 	@XStreamOmitField
 	private List<CasoDeUsoAtor> casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
@@ -64,9 +66,15 @@ public class CasoDeUso implements Serializable, Exportavel {
 	@XStreamOmitField
 	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
 
+	
+
 	public CasoDeUso() {
 	}
 
+	/**
+	 * GET e SET dos atributos simples do objeto para persistência.
+	 */
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "casoDeUso_id")
@@ -120,6 +128,12 @@ public class CasoDeUso implements Serializable, Exportavel {
 		this.tipo = tipo;
 	}
 
+	
+	
+	
+	/**
+	 * GET e SET dos atributos para escrita do XML
+	 */
 	@Transient
 	public List<Ator> getAtores() {
 		for (CasoDeUsoAtor ucAtor : casosDeUsoAtor) {
@@ -134,6 +148,94 @@ public class CasoDeUso implements Serializable, Exportavel {
 		this.atores = atores;
 	}
 
+	@Transient
+	public List<Fluxo> getFluxosParaXML() {
+
+		for (Fluxo fluxo : getFluxos()) {
+			Fluxo flx = new Fluxo();
+			flx.setNome(fluxo.getNome());
+			flx.setDisparadoPorParaXML(fluxo.getDisparadoPorParaXML());
+			flx.setPassosParaXML(fluxo.getPassosParaXML());
+			flx.setTipo(fluxo.getTipo());
+			fluxosParaXML.add(flx);
+		}
+
+		return fluxosParaXML;
+	}
+
+	public void setFluxosParaXML(List<Fluxo> fluxosParaXML) {
+		this.fluxosParaXML = fluxosParaXML;
+	}
+	
+	@Transient
+	public List<PreCondicao> getPreCondicoesParaXML() {
+		for (PreCondicao pre : getPreCondicoes()) {
+			PreCondicao preCond = new PreCondicao();
+			preCond.setDescricao(pre.getDescricao());
+			preCondicoesParaXML.add(preCond);
+		}
+
+		return preCondicoesParaXML;
+	}
+
+	public void setPreCondicoesParaXML(List<PreCondicao> preCondicoesParaXML) {
+		this.preCondicoesParaXML = preCondicoesParaXML;
+	}
+
+	@Transient
+	public List<PosCondicao> getPosCondicoesParaXML() {
+		for (PosCondicao pos : getPosCondicoes()) {
+			PosCondicao posCond = new PosCondicao();
+			posCond.setDescricao(pos.getDescricao());
+			posCondicoesParaXML.add(posCond);
+		}
+
+		return posCondicoesParaXML;
+	}
+	
+	public void setPosCondicoesParaXML(List<PosCondicao> posCondicoesParaXML) {
+		this.posCondicoesParaXML = posCondicoesParaXML;
+	}
+	
+	@Transient
+	public List<RegraDeNegocio> getRegrasDeNegocioParaXML() {
+		for (CasoDeUsoRegra rn : getCasosDeUsoRegra()) {
+			RegraDeNegocio regra = rn.getRegra();
+			//regra.setDescricao(rn.getDescricao());
+			regrasDeNegocioParaXML.add(regra);
+		}
+
+		return regrasDeNegocioParaXML;
+	}
+
+	public void setRegrasDeNegocioParaXML(
+			List<RegraDeNegocio> regrasDeNegocioParaXML) {
+		this.regrasDeNegocioParaXML = regrasDeNegocioParaXML;
+	}
+	
+	@Transient
+	public List<RequisitoNaoFuncional> getRequisitosNaoFuncionaisParaXML() {
+		for (CasoDeUsoRequisito rnf : getCasosDeUsoRequisito()) {
+			RequisitoNaoFuncional req = rnf.getRequisito();
+			req.setCodigo(rnf.getRequisito().getCodigo());
+			req.setDescricao(rnf.getRequisito().getDescricao());
+			//req.setDescricao(rnf.getDescricao());
+			requisitosNaoFuncionaisParaXML.add(req);
+		}
+		return requisitosNaoFuncionaisParaXML;
+	}
+	
+	public void setRequisitosNaoFuncionaisParaXML(
+			List<RequisitoNaoFuncional> requisitosNaoFuncionaisParaXML) {
+		this.requisitosNaoFuncionaisParaXML = requisitosNaoFuncionaisParaXML;
+	}
+	
+	
+	
+	
+	/**
+	 * GET e SET dos atributos complexos do objeto para persistência.
+	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.casoDeUso", cascade = CascadeType.ALL)
 	public List<CasoDeUsoAtor> getCasosDeUsoAtor() {
 		return casosDeUsoAtor;
@@ -160,89 +262,14 @@ public class CasoDeUso implements Serializable, Exportavel {
 	public void setCasosDeUsoRequisito(List<CasoDeUsoRequisito> casosDeUsoRequisito) {
 		this.casosDeUsoRequisito = casosDeUsoRequisito;
 	}
+	
 
-	public void addAtor(Ator ator, String tipoAtor) {
+	
 
-		CasoDeUsoAtor associacao = new CasoDeUsoAtor();
-		associacao.setAtor(ator);
-		associacao.setCasoDeUso(this);
-		associacao.setTipoAtor(tipoAtor);
-
-		casosDeUsoAtor.add(associacao);
-	}
-
-	public void removeAtor(Ator ator) {
-		for (CasoDeUsoAtor casoUsoAtor : casosDeUsoAtor)
-			if (casoUsoAtor.getAtor().equals(ator)) {
-				casosDeUsoAtor.remove(casoUsoAtor);
-				break;
-			}
-	}
-
-	@Transient
-	public List<Fluxo> getFluxosParaXML() {
-
-		for (Fluxo fluxo : getFluxos()) {
-			Fluxo flx = new Fluxo();
-			flx.setNome(fluxo.getNome());
-			flx.setDisparadoPorParaXML(fluxo.getDisparadoPorParaXML());
-			flx.setPassosParaXML(fluxo.getPassosParaXML());
-			flx.setTipo(fluxo.getTipo());
-			fluxosParaXML.add(flx);
-		}
-
-		return fluxosParaXML;
-	}
-
-	public void setFluxosParaXML(List<Fluxo> fluxosParaXML) {
-		this.fluxosParaXML = fluxosParaXML;
-	}
-
-	@Transient
-	public List<PreCondicao> getPreCondicoesParaXML() {
-		for (PreCondicao pre : getPreCondicoes()) {
-			PreCondicao preCond = new PreCondicao();
-			preCond.setDescricao(pre.getDescricao());
-			preCondicoesParaXML.add(preCond);
-		}
-
-		return preCondicoesParaXML;
-	}
-
-	public void setPreCondicoesParaXML(List<PreCondicao> preCondicoesParaXML) {
-		this.preCondicoesParaXML = preCondicoesParaXML;
-	}
-
-	@Transient
-	public List<PosCondicao> getPosCondicoesParaXML() {
-		for (PosCondicao pos : getPosCondicoes()) {
-			PosCondicao posCond = new PosCondicao();
-			posCond.setDescricao(pos.getDescricao());
-			posCondicoesParaXML.add(posCond);
-		}
-
-		return posCondicoesParaXML;
-	}
-
-	public void setPosCondicoesParaXML(List<PosCondicao> posCondicoesParaXML) {
-		this.posCondicoesParaXML = posCondicoesParaXML;
-	}
-
-	@Transient
-	public List<RegraDeNegocio> getRegrasDeNegocioParaXML() {
-		for (RegraDeNegocio rn : getRegrasDeNegocio()) {
-			RegraDeNegocio regra = new RegraDeNegocio();
-			regra.setDescricao(rn.getDescricao());
-			regrasDeNegocioParaXML.add(regra);
-		}
-
-		return regrasDeNegocioParaXML;
-	}
-
-	public void setRegrasDeNegocioParaXML(
-			List<RegraDeNegocio> regrasDeNegocioParaXML) {
-		this.regrasDeNegocioParaXML = regrasDeNegocioParaXML;
-	}
+	
+	/**
+	 * GET e SET dos atributos auxiliares para preenchimento dos atributos complexos de geração de XML
+	 */
 
 	@Transient
 	public List<Fluxo> getFluxos() {
@@ -289,50 +316,75 @@ public class CasoDeUso implements Serializable, Exportavel {
 			List<RequisitoNaoFuncional> requisitosNaoFuncionais) {
 		this.requisitosNaoFuncionais = requisitosNaoFuncionais;
 	}
+	
+	
+	
+	
+	/**
+	 * Métodos auxiliares utilizados nos métodos anteriores
+	 */
 
-	public void addAtor(Ator ator) {
-		if (atores == null)
-			atores = new ArrayList<Ator>();
-		atores.add(ator);
-
-	}
-
-	public void addCasosDeUsoAtor(CasoDeUsoAtor casoDeUsoAtor) {
-		if (casosDeUsoAtor == null)
-			casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
-		casosDeUsoAtor.add(casoDeUsoAtor);
-
-	}
-
-	public void addFluxos(Fluxo fluxo) {
-		if (fluxos == null)
-			fluxos = new ArrayList<Fluxo>();
-		fluxos.add(fluxo);
-	}
-
-	public void addRegrasDeNegocio(RegraDeNegocio regraDeNegocio) {
-		if (regrasDeNegocio == null)
-			regrasDeNegocio = new ArrayList<RegraDeNegocio>();
-		regrasDeNegocio.add(regraDeNegocio);
-	}
-
-	public void addPreCondicoes(PreCondicao preCondicao) {
-		if (preCondicoes == null)
-			preCondicoes = new ArrayList<PreCondicao>();
-		preCondicoes.add(preCondicao);
-	}
-
-	public void addPosCondicoes(PosCondicao posCondicao) {
-		if (posCondicoes == null)
-			posCondicoes = new ArrayList<PosCondicao>();
-		posCondicoes.add(posCondicao);
-	}
-
-	public void addRequisitosNaoFuncionais(
-			RequisitoNaoFuncional requisitoNaoFuncional) {
-		if (requisitosNaoFuncionais == null)
-			requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
-		requisitosNaoFuncionais.add(requisitoNaoFuncional);
-	}
+//	public void addAtor(Ator ator, String tipoAtor) {
+//
+//		CasoDeUsoAtor associacao = new CasoDeUsoAtor();
+//		associacao.setAtor(ator);
+//		associacao.setCasoDeUso(this);
+//		associacao.setTipoAtor(tipoAtor);
+//
+//		casosDeUsoAtor.add(associacao);
+//	}
+//
+//	public void removeAtor(Ator ator) {
+//		for (CasoDeUsoAtor casoUsoAtor : casosDeUsoAtor)
+//			if (casoUsoAtor.getAtor().equals(ator)) {
+//				casosDeUsoAtor.remove(casoUsoAtor);
+//				break;
+//			}
+//	}
+//	
+////	public void addAtor(Ator ator) {
+////		if (atores == null)
+////			atores = new ArrayList<Ator>();
+////		atores.add(ator);
+////
+////	}
+//
+//	public void addCasosDeUsoAtor(CasoDeUsoAtor casoDeUsoAtor) {
+//		if (casosDeUsoAtor == null)
+//			casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
+//		casosDeUsoAtor.add(casoDeUsoAtor);
+//
+//	}
+//
+//	public void addFluxos(Fluxo fluxo) {
+//		if (fluxos == null)
+//			fluxos = new ArrayList<Fluxo>();
+//		fluxos.add(fluxo);
+//	}
+//
+//	public void addRegrasDeNegocio(RegraDeNegocio regraDeNegocio) {
+//		if (regrasDeNegocio == null)
+//			regrasDeNegocio = new ArrayList<RegraDeNegocio>();
+//		regrasDeNegocio.add(regraDeNegocio);
+//	}
+//
+//	public void addPreCondicoes(PreCondicao preCondicao) {
+//		if (preCondicoes == null)
+//			preCondicoes = new ArrayList<PreCondicao>();
+//		preCondicoes.add(preCondicao);
+//	}
+//
+//	public void addPosCondicoes(PosCondicao posCondicao) {
+//		if (posCondicoes == null)
+//			posCondicoes = new ArrayList<PosCondicao>();
+//		posCondicoes.add(posCondicao);
+//	}
+//
+//	public void addRequisitosNaoFuncionais(
+//			RequisitoNaoFuncional requisitoNaoFuncional) {
+//		if (requisitosNaoFuncionais == null)
+//			requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
+//		requisitosNaoFuncionais.add(requisitoNaoFuncional);
+//	}
 
 }

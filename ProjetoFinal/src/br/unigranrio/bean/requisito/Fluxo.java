@@ -29,6 +29,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 public class Fluxo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@XStreamOmitField
 	private Long id;
 	private String nome;
 	private String tipo;

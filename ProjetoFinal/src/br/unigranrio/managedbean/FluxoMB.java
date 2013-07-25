@@ -57,8 +57,14 @@ public class FluxoMB implements Serializable {
 	}
 	
 	public String atualizar(ActionEvent actionEvent){
-		control.atualizar(fluxo);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Atualizado com Sucesso " + fluxo.getNome(), null));
+		String erro = null;
+		erro = control.atualizar(fluxo);
+		if(erro != null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, null));
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Atualizado com Sucesso " + fluxo.getNome(), null));
+		}
+		fluxo = new Fluxo();
 		return "updateCasos";
 	}
 	

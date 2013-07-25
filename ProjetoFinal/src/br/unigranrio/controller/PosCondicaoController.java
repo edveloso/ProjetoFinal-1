@@ -16,7 +16,7 @@ public class PosCondicaoController {
 		List<PosCondicao> list = dao.retornarTodos();
 		for (PosCondicao posCondicao2 : list){
 			if(posCondicao2.getDescricao().equals(pos.getDescricao())){
-				erro = "Pï¿½s-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
+				erro = "Pós-Condição com a mesma descrição já cadastrada";
 				break;
 			}else{
 				erro = null;
@@ -24,7 +24,7 @@ public class PosCondicaoController {
 		}if (erro == null){
 			int numero = Integer.parseInt(dao.countItensParaCodigo(pos.getCasoDeUso().getId()));
 			numero++;
-			String codigo = "POS"+numero;
+			String codigo = "PoC"+numero;
 			pos.setCodigo(codigo);
 			dao.gravar(pos);	
 		}
@@ -36,7 +36,7 @@ public class PosCondicaoController {
 		List<PosCondicao> list = dao.retornarTodos();
 		for (PosCondicao posCondicao2 : list){
 			if(posCondicao2.getDescricao().equals(pos.getDescricao())){
-				erro = "Pï¿½s-Condiï¿½ï¿½o com a mesma descriï¿½ï¿½o jï¿½ cadastrada";
+				erro = "Pós-Condição com a mesma descrição já cadastrada";
 				break;
 			}else {
 				erro = null;
