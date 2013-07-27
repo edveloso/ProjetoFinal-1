@@ -61,7 +61,7 @@
        					<f:selectItems value="#{passoMB.listAtores}" var="ator" itemLabel="#{ator.ator.nome}" itemValue="#{ator.ator.id}" />
        				</p:selectOneMenu>
 					
-					<p:autoComplete id="compl" value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." scrollHeight = "150" />
+					<p:autoComplete id="compl" value="#{passoMB.passo.acao}" completeMethod="#{passoMB.complete}" minQueryLength="3" forceSelection="true" maxResults="5" cache="false" size="20" required="true" requiredMessage="É necessário preencher a ação do passo." scrollHeight = "150" />
 
 					<p:inputText id="complementoNovo" value="#{passoMB.passo.complemento}" size="40" required="true" requiredMessage="É necessário preencher o complemento do passo." maxlength="100" />
 

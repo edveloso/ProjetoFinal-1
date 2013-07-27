@@ -19,8 +19,6 @@ import br.unigranrio.controller.FluxoController;
 import br.unigranrio.controller.PassoController;
 import br.unigranrio.controller.PosCondicaoController;
 import br.unigranrio.controller.PreCondicaoController;
-import br.unigranrio.controller.RegraDeNegocioController;
-import br.unigranrio.controller.RequisitoNaoFuncionalController;
 
 @ManagedBean
 @SessionScoped
@@ -29,14 +27,11 @@ public class ExportacaoMB {
 	private CasoDeUsoController casoControl = new CasoDeUsoController();
 	private FluxoController fluxoControl = new FluxoController();
 	private PassoController passoControl = new PassoController();
-	private RegraDeNegocioController regraControl = new RegraDeNegocioController();
 	private PosCondicaoController posControl = new PosCondicaoController();
 	private PreCondicaoController preControl = new PreCondicaoController();
-	private RequisitoNaoFuncionalController reqControl = new RequisitoNaoFuncionalController();
 	private CasoDeUso casoDeUso = new CasoDeUso();
 	private ListDataModel<CasoDeUso> listCasoDeUso;
 	private List<Integer> casosDeUsoSelecionados = new ArrayList<Integer>();
-	private String formato;
 	private String link;
 	
 	@ManagedProperty(value="#{projetoMB}")
@@ -64,14 +59,6 @@ public class ExportacaoMB {
 		this.casosDeUsoSelecionados = casosDeUsoSelecionados;
 	}
 
-	public String getFormato() {
-		return formato;
-	}
-
-	public void setFormato(String formato) {
-		this.formato = formato;
-	}
-
 	public void setLink(String link) {
 		this.link = link;
 	}
@@ -80,58 +67,19 @@ public class ExportacaoMB {
 		return link;
 	}
 
-	/*public String novo() {
-
-		String mensagem = "Exporta��es";
-		this.casoDeUso = new CasoDeUso();
-
-		// Pega o ID do projeto
-		ProjetoMB projetoMB = (ProjetoMB) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("projetoMB");
-
-		boolean temProjeto = false;
-
-		if (projetoMB != null) {
-			casoDeUso.setProjeto(projetoMB.getProjeto());
-
-			if (casoDeUso.getProjeto().getId() != null) {
-				mensagem = casoDeUso.getProjeto().getNome() + " >> Exporta��es";
-
-				this.listCasoDeUso = (ListDataModel<CasoDeUso>) casoControl.selecionarTodosProjeto(casoDeUso.getProjeto().getId());
-				temProjeto = true;
-			}
-		}
-
-		// Muda o texto do Cabe�alho
-		MensagemMB principal = (MensagemMB) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("principalMB");
-
-		if (principal != null)
-			principal.setMensagem(mensagem);
-
-		if (!temProjeto)
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Projeto n�o selecionado!", null));
-
-		return "novaExportacao";
-	}*/
-
 	public String exportar() {
 
 		Exportador exportador = null;
+		casoDeUso = casoMB.getCasosDeUso().getRowData();
 
-		if (formato.equals("xml")) {
+		if (casoMB.getFormato().equals("xml")) {
 			exportador = new ExportadorXml();
 			
-			casoDeUso = casoMB.getCasosDeUso().getRowData();
-			//casoDeUso = listCasoDeUso.getRowData();
 			List<Fluxo> fluxos = fluxoControl.selecionarTodosCaso(casoDeUso.getId());
 			for (Fluxo fluxo : fluxos) {
 				List<Passo> passos = passoControl.selecionarTodosFluxo(fluxo.getId());
 				fluxo.setPassosParaXML(passos);
-//				System.out.println(fluxo.getNome());
-//				for (Passo passo : passos) {
-//					System.out.println(passo.getPassoAsString());
-//				}
 			}
-			
 
 			CasoDeUso ucExp = new CasoDeUso();
 			
@@ -139,7 +87,6 @@ public class ExportacaoMB {
 			ucExp.setCodigo(casoDeUso.getCodigo());
 			ucExp.setNome(casoDeUso.getNome());
 			ucExp.setObjetivo(casoDeUso.getObjetivo());
-			//ucExp.setFluxosParaXML(fluxoControl.selecionarTodosCaso(casoDeUso.getId()));
 			ucExp.setFluxosParaXML(fluxos);
 			ucExp.setId(casoDeUso.getId());
 			ucExp.setTipo(casoDeUso.getTipo());
@@ -147,12 +94,14 @@ public class ExportacaoMB {
 			ucExp.setPosCondicoesParaXML(posControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
 			ucExp.setRegrasDeNegocioParaXML(casoDeUso.getRegrasDeNegocioParaXML());
 			ucExp.setRequisitosNaoFuncionaisParaXML(casoDeUso.getRequisitosNaoFuncionaisParaXML());
-			//ucExp.setRegrasDeNegocioParaXML(regraControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
-			//ucExp.setRequisitosNaoFuncionais(reqControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
 
-			link = exportador.exportar(ucExp);
+			link = exportador.exportarXML(ucExp);
 		}
 
+		if(casoMB.getFormato().equals("pdf")){
+			
+		}
+		
 		return "exportacoes";
 	}
 

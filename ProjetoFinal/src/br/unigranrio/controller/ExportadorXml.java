@@ -17,14 +17,12 @@ public class ExportadorXml implements Exportador {
 
 	private XStream xstream = new XStream(new DomDriver("UTF-8"));
 
-	public String exportar(Exportavel exCasoDeUso) {
+	public String exportarXML(Exportavel exCasoDeUso) {
 
 		CasoDeUso casoDeUso = (CasoDeUso) exCasoDeUso;
 
 		ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-		String path = context.getRealPath("/");
-		System.out.println(path);
-		//String path = "C:\\Users\\Marcos\\Downloads\\";
+		String path = context.getRealPath(File.separator);
 		String nomeArquivo = path + File.separator + casoDeUso.getCodigo()	+ " - " + casoDeUso.getNome() + ".xml";
 		System.out.println(nomeArquivo);
 		File arquivoXml = new File(nomeArquivo);
@@ -32,7 +30,6 @@ public class ExportadorXml implements Exportador {
 		try {
 
 			FileOutputStream fos = new FileOutputStream(arquivoXml);
-
 			processarAnotacoes();
 			xstream.toXML(casoDeUso, fos);
 
@@ -41,6 +38,10 @@ public class ExportadorXml implements Exportador {
 		}
 
 		return arquivoXml.getAbsolutePath();
+	}
+	
+	public String exportarPDF(Long id){
+		return null;
 	}
 
 	public void processarAnotacoes() {

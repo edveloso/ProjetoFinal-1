@@ -27,6 +27,7 @@ public class CasoDeUsoMB {
 	private VerboController controlVerbo = new VerboController();
 	List<String> verbos = controlVerbo.recuperaVerbos();
 	List<String> possibilidades = new ArrayList<String>();
+	private String formato;
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
@@ -137,6 +138,14 @@ public class CasoDeUsoMB {
 
 	public void setMsgMB(MensagemMB msgMB) {
 		this.msgMB = msgMB;
+	}
+
+	public String getFormato() {
+		return formato;
+	}
+
+	public void setFormato(String formato) {
+		this.formato = formato;
 	}
 	
 }

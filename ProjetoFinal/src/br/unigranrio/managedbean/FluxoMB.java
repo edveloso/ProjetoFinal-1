@@ -37,7 +37,7 @@ public class FluxoMB implements Serializable {
 	public String adicionaPasso(){
 		fluxoEscolhido = fluxos.getRowData();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fluxo Escolhido: " + fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo(), null));
-		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " >> " + fluxoEscolhido.getCodigo() + " " + fluxoEscolhido.getNome() + " " + fluxoEscolhido.getTipo());
+		msgMB.setMensagem("Projeto: " + projetoMB.getProjeto().getId() + " - " + projetoMB.getProjeto().getNome() + " >> Caso de Uso: " + casoMB.getCasoDeUso().getCodigo() + " - " + casoMB.getCasoDeUso().getNome() + " >> Fluxo: " + fluxoEscolhido.getCodigo() + " - " + fluxoEscolhido.getNome() + " - Tipo: " + fluxoEscolhido.getTipo());
 		return "listPassos";
 	}
 	

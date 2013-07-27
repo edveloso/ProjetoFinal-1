@@ -24,8 +24,8 @@
 				<p:column headerText="Tipo" style="width:10%">
 					<h:outputText value="#{caso.tipo}" />
 				</p:column>
-				<p:column>
-					<p:selectOneMenu value="#{exportacaoMB.formato}">
+				<p:column headerText="Formato">
+					<p:selectOneMenu value="#{casoDeUsoMB.formato}">
 						<f:selectItem itemLabel="Selecione" itemValue="" />
 						<f:selectItem itemLabel="XML" itemValue="xml" />
 						<f:selectItem itemLabel="PDF" itemValue="pdf" />
@@ -33,10 +33,18 @@
 					</p:selectOneMenu>
 				</p:column>
 				<p:column>
-					<p:commandButton value="Exportar" id="btnExportar" actionListener="#{exportacaoMB.exportar}" update=":formLista" />
+					<p:commandButton value="Exportar" id="btnExportar" actionListener="#{exportacaoMB.exportar}" update=":formArquivo" oncomplete="modalArquivo.show()" />
 				</p:column>
 			</p:dataTable>
 		</h:form>
+		
+		<p:dialog header="Arquivo" widgetVar="modalArquivo" showEffect="clip" hideEffect="explode">
+			<h:form id="formArquivo">
+				<h:panelGrid columns="1">
+					<h:outputText value="#{exportacaoMB.link}" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
 	</ui:define>
 </ui:decorate>
 </html>
