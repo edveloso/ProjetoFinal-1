@@ -70,10 +70,11 @@ public class ExportacaoMB {
 	public String exportar() {
 
 		Exportador exportador = null;
+		exportador = new ExportadorXml();
 		casoDeUso = casoMB.getCasosDeUso().getRowData();
 
 		if (casoMB.getFormato().equals("xml")) {
-			exportador = new ExportadorXml();
+			
 			
 			List<Fluxo> fluxos = fluxoControl.selecionarTodosCaso(casoDeUso.getId());
 			for (Fluxo fluxo : fluxos) {
@@ -95,11 +96,12 @@ public class ExportacaoMB {
 			ucExp.setRegrasDeNegocioParaXML(casoDeUso.getRegrasDeNegocioParaXML());
 			ucExp.setRequisitosNaoFuncionaisParaXML(casoDeUso.getRequisitosNaoFuncionaisParaXML());
 
-			link = exportador.exportarXML(ucExp);
+			exportador.exportarXML(ucExp);
 		}
 
 		if(casoMB.getFormato().equals("pdf")){
-			
+			System.out.println(casoDeUso.getId());
+			exportador.exportarPDF(casoDeUso.getId(), projetoMB.getProjeto().getId());
 		}
 		
 		return "exportacoes";

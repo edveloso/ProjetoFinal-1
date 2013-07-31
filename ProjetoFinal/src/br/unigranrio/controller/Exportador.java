@@ -2,7 +2,7 @@ package br.unigranrio.controller;
 
 public interface Exportador {
 
-	public String exportarXML(Exportavel exportavel);
-	public String exportarPDF(Long id);
+	public void exportarXML(Exportavel exportavel);
+	public void exportarPDF(Long idCaso, Long idProjeto);
 	
 }
