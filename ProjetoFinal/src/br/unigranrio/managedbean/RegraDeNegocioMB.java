@@ -20,9 +20,6 @@ public class RegraDeNegocioMB {
 	private ListDataModel<RegraDeNegocio> list;
 	private RegraDeNegocioController control = new RegraDeNegocioController();
 	
-	//@ManagedProperty(value="#{casoDeUsoMB}")
-	//private CasoDeUsoMB casoMB;
-	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 	
@@ -38,7 +35,6 @@ public class RegraDeNegocioMB {
 	}
 
 	public ListDataModel<RegraDeNegocio> getList() {
-		//CasoDeUso caso = casoMB.getCasoDeUso();
 		Projeto projeto = projetoMB.getProjeto();
 		if(projeto == null){
 			list = new ListDataModel<RegraDeNegocio>();
@@ -52,18 +48,9 @@ public class RegraDeNegocioMB {
 	public void setList(ListDataModel<RegraDeNegocio> list) {
 		this.list = list;
 	}
-	
-	//public CasoDeUsoMB getCasoMB() {
-		//return casoMB;
-	//}
 
-	//public void setCasoMB(CasoDeUsoMB casoMB) {
-		//this.casoMB = casoMB;
-	//}
-	
 	public String salvar(){
 		String erro = null;
-		//CasoDeUso caso = casoMB.getCasoDeUso();
 		Projeto projeto = projetoMB.getProjeto();
 		erro = control.gravar(projeto, regra);
 		if(erro != null){

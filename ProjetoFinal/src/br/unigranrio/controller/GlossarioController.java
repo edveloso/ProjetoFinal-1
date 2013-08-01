@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.unigranrio.bean.requisito.Glossario;
 import br.unigranrio.bean.requisito.Projeto;
-import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.dao.impl.GlossarioDAO;
 
 public class GlossarioController {
@@ -15,7 +14,6 @@ public class GlossarioController {
 		String erro = null;
 		List<Glossario> glossarios = dao.retornarTodos();
 		for(Glossario glossario2 : glossarios){
-			//Validação de Termo e Definição com o mesmo nome nom cadastro de glossário
 			if(glossario2.getSigla().equals(glossario.getSigla())){
 				erro = "Termo com mesmo nome já cadastrado";
 				break;
@@ -30,8 +28,6 @@ public class GlossarioController {
 			}
 		}
 		if (erro == null){
-		//if (glossario.getDefinicao() != null){
-			//dao.gravar(glossario);
 		glossario.setProjeto(projeto);
 		dao.gravar(glossario);
 		}
@@ -48,7 +44,6 @@ public class GlossarioController {
 		String erro = null;
 		List<Glossario> glossarios = dao.retornarTodos();
 		for (Glossario glossario2 : glossarios){
-			//Validação de Termo e Definição com o mesmo nome nom cadastro de glossário
 			if(glossario2.getSigla().equals(glossario.getSigla())){
 				erro = "Termo com mesmo nome já cadastrado";
 				break;

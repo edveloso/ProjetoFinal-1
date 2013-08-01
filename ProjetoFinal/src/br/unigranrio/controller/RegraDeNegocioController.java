@@ -10,8 +10,7 @@ public class RegraDeNegocioController {
 	
 	private RegraDeNegocioDAO dao = new RegraDeNegocioDAO();
 	
-	public String gravar(/*CasoDeUso caso,*/ Projeto projeto, RegraDeNegocio regra){
-		//regra.setCasoDeUso(caso);
+	public String gravar(Projeto projeto, RegraDeNegocio regra){
 		String erro = null;
 		List<RegraDeNegocio> list = dao.retornarTodos();
 		for (RegraDeNegocio regraDeNegocio2 : list){

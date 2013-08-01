@@ -64,7 +64,6 @@ public class PassoMB implements Serializable {
 		Ator ator = controlAtor.selecionaAtorPorId(atorId);
 		CasoDeUso caso = casoControl.selecionarCaso(casoId);
 		Fluxo fluxo = fluxoMB.getFluxoEscolhido();
-		System.out.println("Fluxo: " + fluxo.getNome());
 		passo.setFluxo(fluxo);
 		passo.setAtor(ator.getNome());
 		passo.setPontoDeExtensao(caso);

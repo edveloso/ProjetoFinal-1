@@ -9,30 +9,19 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
 import br.unigranrio.bean.requisito.CasoDeUso;
-import br.unigranrio.bean.requisito.Fluxo;
-import br.unigranrio.bean.requisito.Passo;
 import br.unigranrio.bean.requisito.Projeto;
 import br.unigranrio.controller.CasoDeUsoController;
-import br.unigranrio.controller.Exportador;
-import br.unigranrio.controller.ExportadorXml;
-import br.unigranrio.controller.FluxoController;
-import br.unigranrio.controller.PassoController;
-import br.unigranrio.controller.PosCondicaoController;
-import br.unigranrio.controller.PreCondicaoController;
+import br.unigranrio.controller.ExportadorFormatos;
 
 @ManagedBean
 @SessionScoped
 public class ExportacaoMB {
 
 	private CasoDeUsoController casoControl = new CasoDeUsoController();
-	private FluxoController fluxoControl = new FluxoController();
-	private PassoController passoControl = new PassoController();
-	private PosCondicaoController posControl = new PosCondicaoController();
-	private PreCondicaoController preControl = new PreCondicaoController();
 	private CasoDeUso casoDeUso = new CasoDeUso();
 	private ListDataModel<CasoDeUso> listCasoDeUso;
 	private List<Integer> casosDeUsoSelecionados = new ArrayList<Integer>();
-	private String link;
+	private String link = null;
 	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
@@ -68,42 +57,9 @@ public class ExportacaoMB {
 	}
 
 	public String exportar() {
-
-		Exportador exportador = null;
-		exportador = new ExportadorXml();
+		ExportadorFormatos exportador = new ExportadorFormatos();
 		casoDeUso = casoMB.getCasosDeUso().getRowData();
-
-		if (casoMB.getFormato().equals("xml")) {
-			
-			
-			List<Fluxo> fluxos = fluxoControl.selecionarTodosCaso(casoDeUso.getId());
-			for (Fluxo fluxo : fluxos) {
-				List<Passo> passos = passoControl.selecionarTodosFluxo(fluxo.getId());
-				fluxo.setPassosParaXML(passos);
-			}
-
-			CasoDeUso ucExp = new CasoDeUso();
-			
-			ucExp.setAtores(casoDeUso.getAtores());
-			ucExp.setCodigo(casoDeUso.getCodigo());
-			ucExp.setNome(casoDeUso.getNome());
-			ucExp.setObjetivo(casoDeUso.getObjetivo());
-			ucExp.setFluxosParaXML(fluxos);
-			ucExp.setId(casoDeUso.getId());
-			ucExp.setTipo(casoDeUso.getTipo());
-			ucExp.setPreCondicoesParaXML(preControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
-			ucExp.setPosCondicoesParaXML(posControl.selecionaTodosPorCasoDeUso(casoDeUso.getId()));
-			ucExp.setRegrasDeNegocioParaXML(casoDeUso.getRegrasDeNegocioParaXML());
-			ucExp.setRequisitosNaoFuncionaisParaXML(casoDeUso.getRequisitosNaoFuncionaisParaXML());
-
-			exportador.exportarXML(ucExp);
-		}
-
-		if(casoMB.getFormato().equals("pdf")){
-			System.out.println(casoDeUso.getId());
-			exportador.exportarPDF(casoDeUso.getId(), projetoMB.getProjeto().getId());
-		}
-		
+		link = exportador.exportar(casoDeUso, projetoMB.getProjeto());
 		return "exportacoes";
 	}
 
@@ -113,7 +69,6 @@ public class ExportacaoMB {
 			listCasoDeUso = new ListDataModel<CasoDeUso>();
 		} else {
 			long id = projeto.getId();
-			System.out.println(id);
 			listCasoDeUso = new ListDataModel<CasoDeUso>(casoControl.selecionarTodosProjeto(id));
 		}
 		return listCasoDeUso;

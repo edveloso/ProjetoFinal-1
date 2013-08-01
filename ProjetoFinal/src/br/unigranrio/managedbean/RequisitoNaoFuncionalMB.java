@@ -20,9 +20,6 @@ public class RequisitoNaoFuncionalMB {
 	private ListDataModel<RequisitoNaoFuncional> list;
 	private RequisitoNaoFuncionalController control = new RequisitoNaoFuncionalController();
 	
-	//@ManagedProperty(value="#{casoDeUsoMB}")
-	//private CasoDeUsoMB casoMB;
-	
 	@ManagedProperty(value="#{projetoMB}")
 	private ProjetoMB projetoMB;
 	
@@ -38,13 +35,10 @@ public class RequisitoNaoFuncionalMB {
 	}
 
 	public ListDataModel<RequisitoNaoFuncional> getList() {
-		//CasoDeUso caso = casoMB.getCasoDeUso();
 		Projeto projeto = projetoMB.getProjeto();
-		//if(caso == null){
 		if(projeto == null){
 			list = new ListDataModel<RequisitoNaoFuncional>();
 		} else {
-			//long id = caso.getId();
 			long id = projeto.getId();
 			list = new ListDataModel<RequisitoNaoFuncional>(control.selecionaTodosPorProjeto(id));
 		}
@@ -54,18 +48,8 @@ public class RequisitoNaoFuncionalMB {
 	public void setList(ListDataModel<RequisitoNaoFuncional> list) {
 		this.list = list;
 	}
-	
-	//public CasoDeUsoMB getCasoMB() {
-		//return casoMB;
-	//}
-
-	//public void setCasoMB(CasoDeUsoMB casoMB) {
-		//this.casoMB = casoMB;
-	//}
 
 	public String salvar(){
-		//CasoDeUso caso = casoMB.getCasoDeUso();
-		//control.gravar(caso, req);
 		String erro = null;
 		Projeto projeto = projetoMB.getProjeto();
 		erro = control.gravar(projeto, req);

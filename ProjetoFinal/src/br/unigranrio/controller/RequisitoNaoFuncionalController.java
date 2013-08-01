@@ -2,9 +2,7 @@ package br.unigranrio.controller;
 
 import java.util.List;
 
-import br.unigranrio.bean.requisito.Ator;
 import br.unigranrio.bean.requisito.Projeto;
-import br.unigranrio.bean.requisito.RegraDeNegocio;
 import br.unigranrio.bean.requisito.RequisitoNaoFuncional;
 import br.unigranrio.dao.impl.RequisitoNaoFuncionalDAO;
 
@@ -13,9 +11,6 @@ public class RequisitoNaoFuncionalController {
 	private RequisitoNaoFuncionalDAO dao = new RequisitoNaoFuncionalDAO();
 	
 	public String gravar(Projeto projeto, RequisitoNaoFuncional req){
-	//public void gravar(CasoDeUso caso, RequisitoNaoFuncional req){
-		//req.setCasoDeUso(caso);
-		//dao.gravar(req);
 		String erro = null;
 		List<RequisitoNaoFuncional> list = dao.retornarTodos();
 		for (RequisitoNaoFuncional requisitoNaoFuncional2 : list){

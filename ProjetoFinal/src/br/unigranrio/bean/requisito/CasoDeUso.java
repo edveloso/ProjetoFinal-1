@@ -66,7 +66,9 @@ public class CasoDeUso implements Serializable, Exportavel {
 	@XStreamOmitField
 	private List<RequisitoNaoFuncional> requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
 
-	
+	@XStreamOmitField
+	@Transient
+	private String formato;
 
 	public CasoDeUso() {
 	}
@@ -201,7 +203,6 @@ public class CasoDeUso implements Serializable, Exportavel {
 	public List<RegraDeNegocio> getRegrasDeNegocioParaXML() {
 		for (CasoDeUsoRegra rn : getCasosDeUsoRegra()) {
 			RegraDeNegocio regra = rn.getRegra();
-			//regra.setDescricao(rn.getDescricao());
 			regrasDeNegocioParaXML.add(regra);
 		}
 
@@ -219,7 +220,6 @@ public class CasoDeUso implements Serializable, Exportavel {
 			RequisitoNaoFuncional req = rnf.getRequisito();
 			req.setCodigo(rnf.getRequisito().getCodigo());
 			req.setDescricao(rnf.getRequisito().getDescricao());
-			//req.setDescricao(rnf.getDescricao());
 			requisitosNaoFuncionaisParaXML.add(req);
 		}
 		return requisitosNaoFuncionaisParaXML;
@@ -316,75 +316,13 @@ public class CasoDeUso implements Serializable, Exportavel {
 			List<RequisitoNaoFuncional> requisitosNaoFuncionais) {
 		this.requisitosNaoFuncionais = requisitosNaoFuncionais;
 	}
-	
-	
-	
-	
-	/**
-	 * Métodos auxiliares utilizados nos métodos anteriores
-	 */
 
-//	public void addAtor(Ator ator, String tipoAtor) {
-//
-//		CasoDeUsoAtor associacao = new CasoDeUsoAtor();
-//		associacao.setAtor(ator);
-//		associacao.setCasoDeUso(this);
-//		associacao.setTipoAtor(tipoAtor);
-//
-//		casosDeUsoAtor.add(associacao);
-//	}
-//
-//	public void removeAtor(Ator ator) {
-//		for (CasoDeUsoAtor casoUsoAtor : casosDeUsoAtor)
-//			if (casoUsoAtor.getAtor().equals(ator)) {
-//				casosDeUsoAtor.remove(casoUsoAtor);
-//				break;
-//			}
-//	}
-//	
-////	public void addAtor(Ator ator) {
-////		if (atores == null)
-////			atores = new ArrayList<Ator>();
-////		atores.add(ator);
-////
-////	}
-//
-//	public void addCasosDeUsoAtor(CasoDeUsoAtor casoDeUsoAtor) {
-//		if (casosDeUsoAtor == null)
-//			casosDeUsoAtor = new ArrayList<CasoDeUsoAtor>();
-//		casosDeUsoAtor.add(casoDeUsoAtor);
-//
-//	}
-//
-//	public void addFluxos(Fluxo fluxo) {
-//		if (fluxos == null)
-//			fluxos = new ArrayList<Fluxo>();
-//		fluxos.add(fluxo);
-//	}
-//
-//	public void addRegrasDeNegocio(RegraDeNegocio regraDeNegocio) {
-//		if (regrasDeNegocio == null)
-//			regrasDeNegocio = new ArrayList<RegraDeNegocio>();
-//		regrasDeNegocio.add(regraDeNegocio);
-//	}
-//
-//	public void addPreCondicoes(PreCondicao preCondicao) {
-//		if (preCondicoes == null)
-//			preCondicoes = new ArrayList<PreCondicao>();
-//		preCondicoes.add(preCondicao);
-//	}
-//
-//	public void addPosCondicoes(PosCondicao posCondicao) {
-//		if (posCondicoes == null)
-//			posCondicoes = new ArrayList<PosCondicao>();
-//		posCondicoes.add(posCondicao);
-//	}
-//
-//	public void addRequisitosNaoFuncionais(
-//			RequisitoNaoFuncional requisitoNaoFuncional) {
-//		if (requisitosNaoFuncionais == null)
-//			requisitosNaoFuncionais = new ArrayList<RequisitoNaoFuncional>();
-//		requisitosNaoFuncionais.add(requisitoNaoFuncional);
-//	}
+	public String getFormato() {
+		return formato;
+	}
 
+	public void setFormato(String formato) {
+		this.formato = formato;
+	}
+	
 }
