@@ -86,7 +86,8 @@ public class ExportadorFormatos implements Exportador {
 
 		try {
 
-			nomeArquivo = "C:\\Export\\" + ucExp.getCodigo()	+ " - " + ucExp.getNome() + ".xml";
+			File[] paths = File.listRoots();
+			nomeArquivo = paths[0].toString() + File.separator + "Export" + File.separator + ucExp.getCodigo()	+ " - " + ucExp.getNome() + ".xml";
 			File arquivoXml = new File(nomeArquivo);
 			FileOutputStream fos = new FileOutputStream(arquivoXml);
 			processarAnotacoes();
@@ -117,12 +118,13 @@ public class ExportadorFormatos implements Exportador {
 		parametros.put("idCaso", caso.getId());
 		parametros.put("idProjeto", idProjeto);
 		
-		String jrxml = "C:\\Export\\export_caso_de_uso.jrxml";
-		String jasper = "C:\\Export\\export_caso_de_uso.jasper";
+		File[] paths = File.listRoots();
+		String jrxml = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jrxml";
+		String jasper = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jasper";
 		String arquivo = null;
 		
 		try {
-			arquivo = "C:\\Export\\" + caso.getCodigo()	+ " - " + caso.getNome() + ".pdf";
+			arquivo = paths[0].toString() + File.separator + "Export" + File.separator + caso.getCodigo() + " - " + caso.getNome() + ".pdf";
 			
 			JasperCompileManager.compileReportToFile(jrxml, jasper);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, parametros, con);
@@ -157,12 +159,13 @@ public class ExportadorFormatos implements Exportador {
 		parametros.put("idCaso", caso.getId());
 		parametros.put("idProjeto", idProjeto);
 		
-		String jrxml = "C:\\Export\\export_caso_de_uso.jrxml";
-		String jasper = "C:\\Export\\export_caso_de_uso.jasper";
+		File[] paths = File.listRoots();
+		String jrxml = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jrxml";
+		String jasper = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jasper";
 		String arquivo = null;
 		
 		try {
-			arquivo = "C:\\Export\\" + caso.getCodigo()	+ " - " + caso.getNome() + ".docx";
+			arquivo = paths[0].toString() + File.separator + "Export" + File.separator + caso.getCodigo()	+ " - " + caso.getNome() + ".docx";
 			
 			JasperCompileManager.compileReportToFile(jrxml, jasper);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, parametros, con);
@@ -197,12 +200,13 @@ public class ExportadorFormatos implements Exportador {
 		parametros.put("idCaso", caso.getId());
 		parametros.put("idProjeto", idProjeto);
 		
-		String jrxml = "C:\\Export\\export_caso_de_uso.jrxml";
-		String jasper = "C:\\Export\\export_caso_de_uso.jasper";
+		File[] paths = File.listRoots();
+		String jrxml = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jrxml";
+		String jasper = paths[0].toString() + File.separator + "Export" + File.separator + "export_caso_de_uso.jasper";
 		String arquivo = null;
 		
 		try {
-			arquivo = "C:\\Export\\" + caso.getCodigo()	+ " - " + caso.getNome() + ".odt";
+			arquivo = paths[0].toString() + File.separator + "Export" + File.separator + caso.getCodigo()	+ " - " + caso.getNome() + ".odt";
 			
 			JasperCompileManager.compileReportToFile(jrxml, jasper);
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, parametros, con);
