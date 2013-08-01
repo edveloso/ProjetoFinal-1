@@ -58,8 +58,10 @@ public class ExportacaoMB {
 
 	public String exportar() {
 		ExportadorFormatos exportador = new ExportadorFormatos();
-		casoDeUso = casoMB.getCasosDeUso().getRowData();
-		link = exportador.exportar(casoDeUso, projetoMB.getProjeto());
+		casoDeUso = listCasoDeUso.getRowData();
+		Projeto projeto = projetoMB.getProjeto();
+		link = exportador.exportar(casoDeUso, projeto);
+		casoDeUso = new CasoDeUso();
 		return "exportacoes";
 	}
 
